@@ -1,9 +1,5 @@
-<button class="btn btn-{{variant}} {{#if disabled}}btn--disabled{{/if}}" 
+<button class="btn {{#if disabled}}btn--disabled{{/if}}"
         {{#if disabled}}disabled{{/if}}
-        data-component="button"
-        data-testid="button-{{id}}">
+        data-component="button">
     {{text}}
-    {{#if loading}}
-        <span class="btn__spinner"></span>
-    {{/if}}
 </button>

@@ -1,76 +1,80 @@
-import template from "./Form.precompiled.js";
-import "./Form.css";
+import template from './Form.precompiled.js';
 
 /**
- * Компонент формы, собирающий список инпутов и кнопок.
- */
+ * Класс Form — управляет набором полей ввода и кнопкой. Поддерживает отображение ошибок от сервера.
+ * Использует precompiled Handlebars-шаблон. 
+*/
 export class Form {
-    /**
-     * @param {Array} inputs - список Input-компонентов
-     * @param {Array} buttons - список Button-компонентов
-     * @param {Function} onSubmit - обработчик сабмита (получает значения)
-     * @param {string} [title] - заголовок формы
-     */
-    constructor(inputs, buttons, onSubmit, title = "") {
-        this.inputs = inputs;
-        this.buttons = buttons;
-        this.onSubmit = onSubmit;
-        this.title = title;
+  /**
+   * @param {Input[]} inputs - массив компонентов полей ввода
+   * @param {Button} button - кнопка отправки формы
+   * @param {(values: Object) => void} onSubmit - обработка отправки формы
+   * @param {string} [title=''] - заголовок
+   */
+  constructor(inputs, button, onSubmit, title = '') {
+    this.inputs = inputs;
+    this.button = button;
+    this.onSubmit = onSubmit;
+    this.title = title;
+  }
+
+  /**
+   * Проверяет валидность всех полей формы.
+   * @returns {boolean} true, если все поля валидны
+   */
+  validate() {
+    let isValid = true;
+    for (const input of this.inputs) {
+      if (!input.validate()) {
+        isValid = false;
+      }
     }
+    return isValid;
+  }
 
-    validate() {
-        let isValid = true;
+  /**
+   * Отображает ошибку от сервера
+   * @param {string} message - текст ошибки
+   */
+  setServerError(message) {
+    if (!this.element) return;
+    const errorContainer = this.element.querySelector('.form__error');
+    errorContainer.textContent = message;
+  }
 
-        for (const input of this.inputs) {
-            if (!input.validate()) {
-                isValid = false;
-            }
-        }
+  /**
+   * Рендер формы на основе шаблона. Обработка отправки формы
+   * @returns {HTMLElement}
+   */
+  render() {
+    const html = template({ title: this.title });
+    const div = document.createElement('div');
+    div.innerHTML = html;
+    this.element = div.firstElementChild;
 
-        this.buttons.forEach((btn) => {
-            btn.element.disabled = !isValid;
+    this.inputsContainer = this.element.querySelector('.form__inputs');
+    this.inputs.forEach(input => {
+      const el = input.render();
+      this.inputsContainer.appendChild(el);
+    });
+
+    this.actionsContainer = this.element.querySelector('.form__actions');
+    this.actionsContainer.appendChild(this.button.render());
+
+    this.element.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      this.setServerError('');
+
+      if (this.validate()) {
+        const values = {};
+        this.inputs.forEach(input => {
+          values[input.type] = input.getValue();
         });
+        this.onSubmit(values);
+      }
+    });
 
-        return isValid;
-    }
-
-    render() {
-        // рендерим hbs
-        const html = template({ title: this.title });
-        const div = document.createElement("div");
-        div.innerHTML = html;
-        this.element = div.firstElementChild;
-
-        this.inputsContainer = this.element.querySelector(".form__inputs");
-        this.actionsContainer = this.element.querySelector(".form__actions");
-
-        // вставляем инпуты
-        this.inputs.forEach((input) => {
-            const el = input.render();
-            this.inputsContainer.appendChild(el);
-
-            el.addEventListener("input", () => this.validate());
-            el.addEventListener("blur", () => this.validate());
-        });
-
-        // вставляем кнопки
-        this.buttons.forEach((btn) => {
-            this.actionsContainer.appendChild(btn.render());
-        });
-
-        this.element.addEventListener("submit", (e) => {
-            e.preventDefault();
-
-            if (this.validate()) {
-                const values = {};
-                this.inputs.forEach((input) => {
-                    values[input.type] = input.getValue();
-                });
-                this.onSubmit(values);
-            }
-        });
-
-        this.validate(); // начальное состояние
-        return this.element;
-    }
+    return this.element;
+  }
 }

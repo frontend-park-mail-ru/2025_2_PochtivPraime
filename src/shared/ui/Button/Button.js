@@ -1,21 +1,23 @@
 import template from './Button.precompiled.js';
 
 /**
- * Класс компонента - кнопки. Имеется обработка клика и рендеринг через шаблон.
+ * Класс компонента - кнопки. Имеется обработка клика.
+ * Использует precompiled Handlebars-шаблон. 
  */
 export class Button {
     /**
-     * @param {string} text - Текст на кнопке
-     * @param {() => void} onClick - Обработчик нажатия
-     * @param {boolean} [disabled=false] - Флаг статуса кнопки (активная/отключенная)
+     * @param {string} text - текст на кнопке
+     * @param {() => void} onClick - обработчик нажатия
+     * @param {boolean} [disabled=false] - статус кнопки (активная/отключенная)
      */
     constructor(text, onClick, disabled = false) {
         this.text = text;
         this.onClick = onClick;
         this.disabled = disabled;
     }
+
     /**
-     * Рендер DOM-элемента кнопки. Обработчик клика.
+     * Рендер компонент на основе шаблона и добавляет реакцию на клик
      * @returns {HTMLElement}
      */
     render() {
