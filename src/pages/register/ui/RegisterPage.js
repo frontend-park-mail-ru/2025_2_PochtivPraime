@@ -1,45 +1,54 @@
-// RegisterPage.js
-import { Form } from '../shared/ui/Form/Form.js';
-import { Input } from '../shared/ui/Input/Input.js';
-import { Button } from '../shared/ui/Button/Button.js';
+import { Form } from '../../../shared/ui/Form/Form.js';
+import { Input } from '../../../shared/ui/Input/Input.js';
+import { Button } from '../../../shared/ui/Button/Button.js';
 
+/**
+ * Класс страницы регистрации
+ */
 export class RegisterPage {
-    constructor(onRegister) {
-        // Функция, которую вызываем после регистрации
-        // Обычно здесь сразу логиним пользователя
+    /**
+     * @param {function(Object):void} onRegister - отправка формы регистрации
+     * @param {function():void} onGoToLoginPage - переход на страницу авторизации по ссылке
+     */
+    constructor(onRegister, onGoToLoginPage) {
         this.onRegister = onRegister;
+        this.onGoToLoginPage = onGoToLoginPage;
     }
-
+    
+    /** 
+     * Рендеринг страницы регистрации
+     * @returns {HTMLElement}
+     */
     render() {
-        const usernameInput = new Input('Username', 'username', 'text');
-        const emailInput = new Input('Email', 'email', 'email');
-        const passwordInput = new Input('Password', 'password', 'password');
-        const confirmPasswordInput = new Input('Confirm Password', 'confirmPassword', 'password');
+        const loginInput = new Input('login', 'Имя пользователя');
+        const emailInput = new Input('email', 'Email');
+        const passwordInput = new Input('password', 'Пароль');
 
-        const submitButton = new Button('Register', () => {
-            const values = form.getValues();
-
-            if (values.password !== values.confirmPassword) {
-                alert('Passwords do not match');
-                return;
+        const submitButton = new Button('Зарегистрироваться', () => {
+            if (form.validate()) {
+                this.onRegister({
+                    login: loginInput.getValue(),
+                    email: emailInput.getValue(),
+                    password: passwordInput.getValue()
+                });
             }
+        });
 
+        const form = new Form([loginInput, emailInput, passwordInput], submitButton,(values) => {
             this.onRegister(values);
+        },"Регистрация");
+
+        const pageContainer = document.createElement('div');
+        pageContainer.appendChild(form.render());
+
+        const link = document.createElement('p');
+        link.innerHTML = `<a href="#">Уже есть аккаунт? Войти</a>`;
+        link.querySelector('a').addEventListener('click', (e) => {
+            e.preventDefault();
+            this.onGoToLoginPage();
         });
+        pageContainer.appendChild(link);
 
-        const form = new Form({
-            inputs: [usernameInput, emailInput, passwordInput, confirmPasswordInput],
-            submitButton: submitButton,
-            onSubmit: (values) => {
-                if (values.password !== values.confirmPassword) {
-                    alert('Passwords do not match');
-                    return;
-                }
-
-                this.onRegister(values);
-            }
-        });
-
-        return form.render();
+        return pageContainer;
     }
 }

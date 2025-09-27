@@ -1,29 +1,52 @@
-// LoginPage.js
-import { Form } from '../shared/ui/Form/Form.js';
-import { Input } from '../shared/ui/Input/Input.js';
-import { Button } from '../shared/ui/Button/Button.js';
+import { Form } from '../../../shared/ui/Form/Form.js';
+import { Input } from '../../../shared/ui/Input/Input.js';
+import { Button } from '../../../shared/ui/Button/Button.js';
 
+/**
+ * Класс страницы входа в аккаунт
+ */
 export class LoginPage {
-    constructor(onLogin) {
+    /**
+     * @param {({login: string, password: string}) => void} onLogin - отправка формы авторизации
+     * @param {() => void} onGoToRegisterPage - переход на страницу регистрации по ссылке
+     */
+    constructor(onLogin, onGoToRegisterPage) {
         this.onLogin = onLogin;
+        this.onGoToRegisterPage = onGoToRegisterPage;
     }
 
+    /** 
+     * Рендеринг страницы логина
+     * @returns {HTMLElement}
+     */
     render() {
-        const usernameInput = new Input('Username', 'username', 'text');
-        const passwordInput = new Input('Password', 'password', 'password');
-        const submitButton = new Button('Login', () => {
-            const values = form.getValues();
-            this.onLogin(values);
-        });
+        const loginInput = new Input('login', 'Имя пользователя');
+        const passwordInput = new Input('password', 'Пароль');
 
-        const form = new Form({
-            inputs: [usernameInput, passwordInput],
-            submitButton: submitButton,
-            onSubmit: (values) => {
-                this.onLogin(values);
+        const submitButton = new Button('Войти', () => {
+            if (form.validate()) {
+                this.onLogin({
+                    login: loginInput.getValue(),
+                    password: passwordInput.getValue()
+                });
             }
         });
 
-        return form.render();
+        const form = new Form([loginInput, passwordInput], submitButton, (values) => {
+            this.onLogin(values);
+        }, "Вход");
+
+        const pageContainer = document.createElement('div');
+        pageContainer.appendChild(form.render());
+
+        const link = document.createElement('p');
+        link.innerHTML = `<a href="#">Создать аккаунт</a>`;
+        link.querySelector('a').addEventListener('click', (e) => {
+            e.preventDefault();
+            this.onGoToRegisterPage();
+        });
+        pageContainer.appendChild(link);
+
+        return pageContainer;
     }
 }
