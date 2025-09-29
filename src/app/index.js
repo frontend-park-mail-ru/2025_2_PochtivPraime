@@ -19,7 +19,7 @@ async function loadPage() {
                 const loginPage = new LoginPage(
                     async (data) => {
                         const errorMessage = await handleLogin(data);
-                        loginPage.setServerError(errorMessage);
+                        loginPage.form.setServerError(errorMessage);
                     },
                     () => router.navigate('/register')
                 );
@@ -33,7 +33,7 @@ async function loadPage() {
                 const registerPage = new RegisterPage(
                     async (data) => {
                         const errorMessage = await handleRegister(data);
-                        registerPage.setServerError(errorMessage);
+                        registerPage.form.setServerError(errorMessage);
                     },
                     () => router.navigate('/login')
                 );

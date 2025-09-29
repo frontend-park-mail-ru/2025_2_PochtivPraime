@@ -13,6 +13,7 @@ export class LoginPage {
     constructor(onLogin, onGoToRegisterPage) {
         this.onLogin = onLogin;
         this.onGoToRegisterPage = onGoToRegisterPage;
+        this.form = null;
     }
 
     /** 
@@ -27,7 +28,7 @@ export class LoginPage {
 
         const submitButton = new Button('Войти', () => {});
 
-        const form = new Form(
+        this.form = new Form(
             [loginInput, passwordInput],
             submitButton,
             (values) => this.onLogin(values),

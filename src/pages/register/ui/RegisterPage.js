@@ -13,6 +13,7 @@ export class RegisterPage {
     constructor(onRegister, onGoToLoginPage) {
         this.onRegister = onRegister;
         this.onGoToLoginPage = onGoToLoginPage;
+        this.form = null;
     }
 
     /**
@@ -29,7 +30,7 @@ export class RegisterPage {
 
         const submitButton = new Button('Зарегистрироваться', () => {});
 
-        const form = new Form(
+        this.form = new Form(
             [loginInput, emailInput, passwordInput, confirmPasswordInput],
             submitButton,
             (values) => this.onRegister(values),
