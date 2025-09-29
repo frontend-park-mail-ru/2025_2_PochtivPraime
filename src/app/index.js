@@ -101,9 +101,10 @@ async function handleLogin(loginData) {
         if (response.ok) {
             router.navigate('/boards');
             loadPage();
+            return null;
         } else {
             const error = await response.json();
-            return error.message;
+            return error.message || 'Ошибка входа';;
         }
     } catch (error) {
         console.error('Login error:', error);
@@ -128,9 +129,10 @@ async function handleRegister(registerData) {
         if (response.ok) {
             router.navigate('/boards');
             loadPage();
+            return null;
         } else {
             const error = await response.json();
-            return error.message;
+            return error.message || 'Ошибка регистрации';
         }
     } catch (error) {
         console.error('Registration error:', error);
