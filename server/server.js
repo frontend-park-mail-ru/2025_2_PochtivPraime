@@ -19,7 +19,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 
 app.use(cors({
-  origin: '*',
+  origin: ['http://localhost:3000', 'http://89.208.208.203:8081'],
   methods: ['GET','POST','DELETE','PUT'],
   credentials: true
 }));
