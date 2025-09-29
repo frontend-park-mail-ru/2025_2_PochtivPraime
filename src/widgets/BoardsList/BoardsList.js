@@ -1,8 +1,7 @@
 import template from './BoardsList.precompiled.js';
-import { Button } from '../Button/Button.js';
-import { BoardCard } from '../BoardCard/BoardCard.js';
-import { Pagination } from '../Pagination/Pagination.js';
-
+import { Button } from '../../shared/ui/Button/Button.js';
+import { BoardCard } from '../../entities/Board/ui/BoardCard/BoardCard.js';
+import { Pagination } from '../../shared/ui/Pagination/Pagination.js';
 /**
  * Класс компонента - список досок с пагинацией.
  * Использует precompiled Handlebars-шаблон.

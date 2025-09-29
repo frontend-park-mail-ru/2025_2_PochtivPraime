@@ -1,6 +1,6 @@
 import template from './BoardCard.precompiled.js';
-import { Button } from '../Button/Button.js';
-import { Modal } from '../Modal/Modal.js';
+import { Button } from '../../../../shared/ui/Button/Button.js';
+import { Modal } from '../../../../shared/ui/Modal/Modal.js';
 
 /**
  * Класс компонента - карточка доски. Имеет два состояния: активная и архивная.
@@ -30,7 +30,7 @@ export class BoardCard {
         const html = template({
             id: this.boardData.id,
             title: this.boardData.title,
-            image: this.boardData.image,
+            image: this.boardData.image || "/images/default-board-bg.jpg",
             archived: this.boardData.archived
         });
         

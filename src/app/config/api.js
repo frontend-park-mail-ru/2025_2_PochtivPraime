@@ -1,10 +1,4 @@
-// тестовые данные пользователя
-export const mockUser = {
-    id: 1,
-    name: 'Test User', 
-    email: 'test@example.com',
-    avatar: '/images/default-avatar.png' 
-};
+
 
 // тестовые данные для досок
 export const mockBoards = [
@@ -12,7 +6,7 @@ export const mockBoards = [
         id: 'board_1',
         ownerId: 1,
         title: 'Планы на год',
-        image: '/images/default-board-bg.jpg',
+        image: '',
         archived: false,
         createdAt: new Date().toISOString()
     },
