@@ -17,10 +17,7 @@ async function loadPage() {
             case '/login': {
                 const { LoginPage } = await import('../pages/login/ui/LoginPage.js');
                 const loginPage = new LoginPage(
-                    async (data) => {
-                        const errorMessage = await handleLogin(data);
-                        loginPage.setServerError(errorMessage);
-                    },
+                    (data) => handleLogin(data),
                     () => router.navigate('/register')
                 );
                 appElement.innerHTML = '';
@@ -31,10 +28,7 @@ async function loadPage() {
             case '/register': {
                 const { RegisterPage } = await import('../pages/register/ui/RegisterPage.js');
                 const registerPage = new RegisterPage(
-                    async (data) => {
-                        const errorMessage = await handleRegister(data);
-                        registerPage.setServerError(errorMessage);
-                    },
+                    (data) => handleRegister(data),
                     () => router.navigate('/login')
                 );
                 appElement.innerHTML = '';
