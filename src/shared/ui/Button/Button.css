@@ -1,0 +1,20 @@
+/* Яркие стили для тестирования */
+.btn {
+    background-color: #273A52; /* Тёмно-серая кнопка */
+    border: none;
+    border-radius: 6px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    color: floralwhite;
+    font-size: 16px;
+    font-family:  Tahoma;
+}
+
+.btn:hover {
+    background-color: #45475a; /* При наведении чуть светлее */
+}
+
+.btn--disabled {
+    background-color: gray !important;
+    cursor: not-allowed !important;
+}

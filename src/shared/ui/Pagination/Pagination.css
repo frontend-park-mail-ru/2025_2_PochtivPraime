@@ -1,0 +1,23 @@
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 16px 0;
+    width: 100%;
+}
+
+.pagination__info {
+    font-size: 14px;
+    color: #fffdfd;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.pagination__btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 80px;
+}

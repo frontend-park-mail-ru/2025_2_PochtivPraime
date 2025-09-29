@@ -1,0 +1,42 @@
+.boards-list {
+    margin-bottom: 2rem;
+    background: rgba(113, 138, 177, 0.5); 
+    backdrop-filter: blur(4px); 
+    border-radius: 16px;
+    padding: 24px;
+}
+
+
+.boards-list__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+
+.boards-list__header-actions {
+    display: flex;
+    align-items: center;
+}
+
+.boards-list__content {
+    transition: all 0.3s ease;
+}
+
+.boards-list__content--hidden {
+    display: none;
+}
+
+.boards-list__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.boards-list__pagination {
+    margin-top: 24px;
+}

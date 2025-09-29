@@ -1,22 +1,46 @@
-const fs = require("fs");
-const path = require("path");
-const Handlebars = require("handlebars");
+// precompile_hbs.js
+import fs from 'fs';
+import path from 'path';
+import Handlebars from 'handlebars';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 
-/**
- * Предкомпиляция Handlebars-шаблонов.
- * Для каждой папки в src/shared/ui ищем файл Сomponent/Сomponent.hbs и компилирум его
- *  в JS-модуль Сomponent/Сomponent.precompiled.js
- */
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
-const componentsPath = path.join(__dirname, "src/shared/ui");
+function precompileTemplates(relativePath) {
+    const componentsPath = path.join(__dirname, 'src', relativePath);
 
-for (const dir of fs.readdirSync(componentsPath)) {
-  const componentDir = path.join(componentsPath, dir);
-  const hbsFile = path.join(componentDir, `${dir}.hbs`);
-  const precompiledFile = path.join(componentDir, `${dir}.precompiled.js`);
-  
-  const templateSource = fs.readFileSync(hbsFile, "utf8");
-  const precompiled = Handlebars.precompile(templateSource);
-  const moduleContent = `export default Handlebars.template(${precompiled});\n`;
-  fs.writeFileSync(precompiledFile, moduleContent, "utf8");
+    if (!fs.existsSync(componentsPath)) {
+        console.warn(`Папка ${relativePath} не найдена, пропускаем`);
+        return;
+    }
+
+    for (const dir of fs.readdirSync(componentsPath)) {
+        const componentDir = path.join(componentsPath, dir);
+        
+        if (!fs.statSync(componentDir).isDirectory()) {
+            continue;
+        }
+
+        const hbsFile = path.join(componentDir, `${dir}.hbs`);
+        const precompiledFile = path.join(componentDir, `${dir}.precompiled.js`);
+
+        if (!fs.existsSync(hbsFile)) {
+            console.warn(`Файл ${hbsFile} не найден, пропускаем`);
+            continue;
+        }
+
+        const templateSource = fs.readFileSync(hbsFile, 'utf8');
+        const precompiled = Handlebars.precompile(templateSource);
+        
+        // Убираем импорт, используем глобальный Handlebars
+        const moduleContent = `export default Handlebars.template(${precompiled});\n`;
+
+        fs.writeFileSync(precompiledFile, moduleContent, 'utf8');
+    }
 }
+
+precompileTemplates('shared/ui');
+precompileTemplates('widgets');
+precompileTemplates('entities/Board/ui');

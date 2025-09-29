@@ -10,12 +10,14 @@ export class Form {
    * @param {Button} button - кнопка отправки формы
    * @param {(values: Object) => void} onSubmit - обработка отправки формы
    * @param {string} [title=''] - заголовок
+   * @param {boolean} [display_logo=false] - отображать лого или нет
    */
-  constructor(inputs, button, onSubmit, title = '') {
+  constructor(inputs, button, onSubmit, title = '',display_logo= false) {
     this.inputs = inputs;
     this.button = button;
     this.onSubmit = onSubmit;
     this.title = title;
+    this.display_logo = display_logo;
   }
 
   /**
@@ -29,6 +31,15 @@ export class Form {
         isValid = false;
       }
     }
+    const passwordInput = this.inputs.find(i => i.name === 'new-password');
+    const confirmPasswordInput = this.inputs.find(i => i.name === 'confirm-password');
+
+    if (passwordInput && confirmPasswordInput) {
+      if (passwordInput.getValue() !== confirmPasswordInput.getValue()) {
+        confirmPasswordInput.setError('Пароли не совпадают');
+        isValid = false;
+      }
+    }
     return isValid;
   }
 
@@ -39,42 +50,54 @@ export class Form {
   setServerError(message) {
     if (!this.element) return;
     const errorContainer = this.element.querySelector('.form__error');
-    errorContainer.textContent = message;
-  }
+    
+    if (message) {
+        errorContainer.textContent = message;
+        errorContainer.hidden = false;
+    } else {
+        errorContainer.textContent = '';
+        errorContainer.hidden = true;
+    }
+}
 
   /**
    * Рендер формы на основе шаблона. Обработка отправки формы
    * @returns {HTMLElement}
    */
   render() {
-    const html = template({ title: this.title });
+    const html = template({
+       title: this.title,
+       display_logo: this.display_logo
+      });
     const div = document.createElement('div');
     div.innerHTML = html;
-    this.element = div.firstElementChild;
+    this.element = div.firstElementChild; // ← это .form-container
 
-    this.inputsContainer = this.element.querySelector('.form__inputs');
+    // Находим форму внутри контейнера
+    const form = this.element.querySelector('.form');
+    this.inputsContainer = form.querySelector('.form__inputs');
+    this.actionsContainer = form.querySelector('.form__actions');
+
+    // Рендерим инпуты и кнопку
     this.inputs.forEach(input => {
-      const el = input.render();
-      this.inputsContainer.appendChild(el);
+        this.inputsContainer.appendChild(input.render());
     });
-
-    this.actionsContainer = this.element.querySelector('.form__actions');
     this.actionsContainer.appendChild(this.button.render());
 
-    this.element.addEventListener('submit', (e) => {
-      e.preventDefault();
+    // Обработчик отправки
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        this.setServerError('');
 
-      this.setServerError('');
-
-      if (this.validate()) {
-        const values = {};
-        this.inputs.forEach(input => {
-          values[input.type] = input.getValue();
-        });
-        this.onSubmit(values);
-      }
+        if (this.validate()) {
+            const values = {};
+            this.inputs.forEach(input => {
+                values[input.type] = input.getValue();
+            });
+            this.onSubmit(values);
+        }
     });
 
-    return this.element;
-  }
+    return this.element; // возвращаем .form-container
+    }
 }

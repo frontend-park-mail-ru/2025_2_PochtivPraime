@@ -1,8 +1,17 @@
-<form class="form">
-  {{#if title}}
-    <h2 class="form__title">{{title}}</h2>
-  {{/if}}
-  <div class="form__inputs"></div>
-  <div class="form__error"></div>
-  <div class="form__actions"></div>
-</form>
+<div class="form-container">
+  
+  <form class="form">
+    {{#if display_logo}}
+      <div class="logo">
+        <img src="/images/logo.svg" alt="Логотип" class="logo-img">
+      </div>
+    {{/if}}
+    {{#if title}}
+      <h2 class="title form__title">{{title}}</h2>
+    {{/if}}
+    <div class="form__inputs"></div>
+    <div class="form__error" hidden></div>
+    
+    <div class="form__actions"></div>
+  </form>
+</div>

@@ -7,47 +7,52 @@ import { Button } from '../../../shared/ui/Button/Button.js';
  */
 export class RegisterPage {
     /**
-     * @param {function(Object):void} onRegister - отправка формы регистрации
-     * @param {function():void} onGoToLoginPage - переход на страницу авторизации по ссылке
+     * @param {(values: {login: string, password: string, confirmPassword: string}) => void} onRegister - обработчик отправки формы
+     * @param {() => void} onGoToLoginPage - переход на страницу логина по ссылке
      */
     constructor(onRegister, onGoToLoginPage) {
         this.onRegister = onRegister;
         this.onGoToLoginPage = onGoToLoginPage;
     }
-    
-    /** 
+
+    /**
      * Рендеринг страницы регистрации
      * @returns {HTMLElement}
      */
     render() {
-        const loginInput = new Input('login', 'Имя пользователя');
-        const emailInput = new Input('email', 'Email');
-        const passwordInput = new Input('password', 'Пароль');
+        document.body.className = 'register-page';
 
-        const submitButton = new Button('Зарегистрироваться', () => {
-            if (form.validate()) {
-                this.onRegister({
-                    login: loginInput.getValue(),
-                    email: emailInput.getValue(),
-                    password: passwordInput.getValue()
-                });
-            }
-        });
+        const loginInput = new Input('login', 'Имя пользователя', '', 'login');
+        const emailInput = new Input('email', 'Почта', '', 'email');
+        const passwordInput = new Input('password', 'Пароль', '', 'new-password');
+        const confirmPasswordInput = new Input('password', 'Подтвердите пароль', '', 'confirm-password');
 
-        const form = new Form([loginInput, emailInput, passwordInput], submitButton,(values) => {
-            this.onRegister(values);
-        },"Регистрация");
+        const submitButton = new Button('Зарегистрироваться', () => {});
+
+        const form = new Form(
+            [loginInput, emailInput, passwordInput, confirmPasswordInput],
+            submitButton,
+            (values) => this.onRegister(values),
+            "Регистрация",
+            true
+        );
 
         const pageContainer = document.createElement('div');
-        pageContainer.appendChild(form.render());
+        pageContainer.className = 'register-page-wrapper';
+        const registerWrapper = document.createElement('div');
+        registerWrapper.className = 'register-wrapper';
+
+        pageContainer.appendChild(registerWrapper);
+        registerWrapper.appendChild(form.render());
 
         const link = document.createElement('p');
-        link.innerHTML = `<a href="#">Уже есть аккаунт? Войти</a>`;
+        link.className = 'register-page__link';
+        link.innerHTML = `<a href="#">Уже есть аккаунт?</a>`;
         link.querySelector('a').addEventListener('click', (e) => {
             e.preventDefault();
             this.onGoToLoginPage();
         });
-        pageContainer.appendChild(link);
+        registerWrapper.appendChild(link);
 
         return pageContainer;
     }
