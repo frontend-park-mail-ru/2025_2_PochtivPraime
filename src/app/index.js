@@ -41,8 +41,8 @@ async function loadPage() {
 
                 try {
                     const [userResponse, boardsResponse] = await Promise.all([
-                        fetch('/api/auth/me'),
-                        fetch('/api/boards')
+                        fetch(`${API_BASE}/api/auth/me`),
+                        fetch(`${API_BASE}/api/boards`)
                     ]);
 
                     if (!userResponse.ok || !boardsResponse.ok) {

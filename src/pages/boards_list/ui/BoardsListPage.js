@@ -20,7 +20,6 @@ export class BoardsListPage {
         const container = document.createElement('div');
         container.className = 'boards-list-page';
         
-        console.log(this.userData.name)
         const header = new Header(this.userData, this.onLogout);
         container.appendChild(header.render());
         const content = document.createElement('main');
