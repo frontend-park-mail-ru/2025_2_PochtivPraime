@@ -81,100 +81,111 @@ async function loadPage() {
     }
 }
 
-//требуется переделать на работу с бэкэнд
-// /**
-//  * Обработка входа пользователя.
-//  * @param {Object} loginData - данные логина
-//  */
-// function handleLogin(loginData) {
-//     console.log('Login data:', loginData);
+/**
+ * Обработка регистрации пользователя.
+ * @param {Object} registerData - данные регистрации
+ */
+async function handleRegister(registerData) {
+    try {
+        const response = await fetch('/api/auth/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(registerData),
+        });
 
-//     // TODO: заменить на реальный API вызов
-//     setAuthData(mockUser);
+        if (response.ok) {
+            router.navigate('/boards');
+            loadPage();
+        } else {
+            const error = await response.json();
+            alert(`Registration failed: ${error.message}`);
+        }
+    } catch (error) {
+        console.error('Registration error:', error);
+        alert('Network error during registration');
+    }
+}
 
-//     router.navigate('/boards');
-//     loadPage();
-// }
+/**
+ * Выход пользователя.
+ */
+async function handleLogout() {
+    try {
+        await fetch('/api/auth/logout', { method: 'POST' });
+        router.navigate('/login');
+        loadPage();
+    } catch (error) {
+        console.error('Logout error:', error);
+        router.navigate('/login');
+        loadPage();
+    }
+}
 
-// /**
-//  * Обработка регистрации пользователя.
-//  * @param {Object} registerData - данные регистрации
-//  */
-// function handleRegister(registerData) {
-//     console.log('Register data:', registerData);
+/**
+ * Восстановление архивной доски.
+ * @param {string} boardId - ID доски
+ */
+async function handleRestoreBoard(boardId) {
+    try {
+        const response = await fetch(`/api/boards/${boardId}/restore`, { 
+            method: 'POST' 
+        });
 
-//     // TODO: заменить на реальный API вызов
-//     setAuthData({
-//         ...mockUser,
-//         name: registerData.name,
-//         email: registerData.email
-//     });
+        if (response.ok) {
+            loadPage();
+        } else {
+            console.error('Failed to restore board');
+        }
+    } catch (error) {
+        console.error('Restore board error:', error);
+    }
+}
 
-//     router.navigate('/boards');
-//     loadPage();
-// }
+/**
+ * Удаление доски.
+ * @param {string} boardId - ID доски
+ */
+async function handleDeleteBoard(boardId) {
+    try {
+        const response = await fetch(`/api/boards/${boardId}`, { 
+            method: 'DELETE' 
+        });
 
-// /**
-//  * Выход пользователя.
-//  */
-// function handleLogout() {
-//     clearAuthData();
-//     router.navigate('/login');
-//     loadPage();
-// }
+        if (response.ok) {
+            loadPage();
+        } else {
+            console.error('Failed DELETE');
+        }
+    } catch (error) {
+        console.error('Delete board error:', error);
+    }
+}
 
-// /**
-//  * Восстановление архивной доски.
-//  * @param {string} boardId - ID доски
-//  */
-// function handleRestoreBoard(boardId) {
-//     console.log('Restore board:', boardId);
+/**
+ * Создание новой доски.
+ * @param {string} boardName - название доски
+ */
+async function handleCreateBoard(boardName) {
+    try {
+        const response = await fetch('/api/boards', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ title: boardName }),
+        });
 
-//     const boardIndex = mockBoards.findIndex(board => board.id === boardId);
-//     if (boardIndex !== -1) {
-//         mockBoards[boardIndex].archived = false;
-//         console.log('Board restored:', mockBoards[boardIndex]);
-//     }
-//     loadPage();
-// }
-
-// /**
-//  * Удаление доски.
-//  * @param {string} boardId - ID доски
-//  */
-// function handleDeleteBoard(boardId) {
-//     console.log('Delete board:', boardId);
-
-//     const boardIndex = mockBoards.findIndex(board => board.id === boardId);
-//     if (boardIndex !== -1) {
-//         const deletedBoard = mockBoards.splice(boardIndex, 1)[0];
-//         console.log('Board deleted:', deletedBoard);
-//     }
-//     loadPage();
-// }
-
-// /**
-//  * Создание новой доски.
-//  * @param {string} boardName - название доски
-//  */
-// function handleCreateBoard(boardName) {
-//     console.log('Create new board:', boardName);
-
-//     const userData = getUserData();
-//     if (!userData) return console.error('Ошибка создания. Пользователь не найден.');
-
-//     const newBoard = {
-//         id: 'board_' + Date.now(),
-//         ownerId: userData.id,
-//         title: boardName,
-//         image: '/images/default-board-bg.jpg',
-//         archived: false,
-//         createdAt: new Date().toISOString()
-//     };
-
-//     mockBoards.push(newBoard);
-//     loadPage();
-// }
+        if (response.ok) {
+            loadPage();
+        } else {
+            console.error('Failed CREATE');
+        }
+    } catch (error) {
+        console.error('Create board error:', error);
+    }
+}
 
 // Инициализация приложения
 document.addEventListener('DOMContentLoaded', () => {
