@@ -1,5 +1,6 @@
 import { Router } from './router.js';
 import { mockBoards } from './config/api.js';
+const API_BASE = 'http://89.208.208.203:8080';
 
 const router = new Router();
 
@@ -87,7 +88,7 @@ async function loadPage() {
  */
 async function handleRegister(registerData) {
     try {
-        const response = await fetch('/api/auth/register', {
+        const response = await fetch('${API_BASE}/api/auth/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -108,12 +109,12 @@ async function handleRegister(registerData) {
     }
 }
 
-/**
+/*
  * Выход пользователя.
  */
 async function handleLogout() {
     try {
-        await fetch('/api/auth/logout', { method: 'POST' });
+        await fetch('${API_BASE}/api/auth/logout', { method: 'POST' });
         router.navigate('/login');
         loadPage();
     } catch (error) {
@@ -129,7 +130,7 @@ async function handleLogout() {
  */
 async function handleRestoreBoard(boardId) {
     try {
-        const response = await fetch(`/api/boards/${boardId}/restore`, { 
+        const response = await fetch(`${API_BASE}/api/boards/${boardId}/restore`, { 
             method: 'POST' 
         });
 
@@ -149,7 +150,7 @@ async function handleRestoreBoard(boardId) {
  */
 async function handleDeleteBoard(boardId) {
     try {
-        const response = await fetch(`/api/boards/${boardId}`, { 
+        const response = await fetch(`${API_BASE}/api/boards/${boardId}`, { 
             method: 'DELETE' 
         });
 
@@ -169,7 +170,7 @@ async function handleDeleteBoard(boardId) {
  */
 async function handleCreateBoard(boardName) {
     try {
-        const response = await fetch('/api/boards', {
+        const response = await fetch('${API_BASE}/api/boards', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
