@@ -1,6 +1,7 @@
 {
   "name": "2025_2_pochtivpraime",
   "version": "1.0.0",
+  "type": "module", 
   "description": "Репозиторий фронтенда команды \"Почти в Прайме\"",
   "main": "index.js",
   "scripts": {
