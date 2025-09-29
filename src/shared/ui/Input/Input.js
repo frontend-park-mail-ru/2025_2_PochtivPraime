@@ -7,7 +7,7 @@ import template from './Input.precompiled.js';
 export class Input {
   /**
    * Поле ввода
-   * @param {'text'|'email'|'password'|'login'} [type='text'] - тип поля
+   * @param {'text'|'email'|'password'|'username'} [type='text'] - тип поля
    * @param {string} [placeholder=''] - текст по умолчанию
    * @param {string} [value=''] - значение поля
    * @param {string} [name=''] - имя поля для формы и автозаполнения
@@ -39,7 +39,7 @@ export class Input {
       if (this.value.length < 6) {
         this.error = 'Пароль должен быть не менее 6 символов';
       }
-    } else if (this.type === 'login') {
+    } else if (this.type === 'username') {
       if (this.value.length < 3) {
         this.error = 'Имя пользователя должно быть не менее 3 символов';
       } else if (!/^[a-zA-Z0-9_]+$/.test(this.value)) {

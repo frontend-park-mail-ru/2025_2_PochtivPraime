@@ -8,7 +8,7 @@ import { Button } from '../Button/Button.js';
 export class Header {
     /**
      * @param {Object} userData - данные пользователя
-     * @param {string} userData.name - имя пользователя
+     * @param {string} userData.username - имя пользователя
      * @param {string} userData.avatar - URL аватарки
      * @param {() => void} onLogout - обработчик выхода
      */
@@ -23,10 +23,9 @@ export class Header {
      */
     render() {
         const html = template({
-            username: this.userData.name,
-            avatar: this.userData.avatar
+            username: this.userData.username,
+            avatar: this.userData.avatar || "/images/default-avatar.png"
         });
-        console.log(this.userData.name)
         const div = document.createElement('div');
         div.innerHTML = html;
         this.element = div.firstElementChild;
