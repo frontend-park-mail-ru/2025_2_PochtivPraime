@@ -94,8 +94,7 @@ export class Form {
             this.inputs.forEach(input => {
                 values[input.type] = input.getValue();
             });
-            const errorMessage = this.onSubmit(values);
-            this.setServerError(errorMessage);
+            this.onSubmit(values);
         }
     });
 
