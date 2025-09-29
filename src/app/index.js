@@ -103,11 +103,11 @@ async function handleLogin(loginData) {
             loadPage();
         } else {
             const error = await response.json();
-            alert(`Login failed: ${error.message}`);
+            return error.message;
         }
     } catch (error) {
         console.error('Login error:', error);
-        alert('Network error during login');
+        return 'Ошибка сети во время входа';
     }
 }
 
@@ -130,11 +130,11 @@ async function handleRegister(registerData) {
             loadPage();
         } else {
             const error = await response.json();
-            alert(`Registration failed: ${error.message}`);
+            return error.message;
         }
     } catch (error) {
         console.error('Registration error:', error);
-        alert('Network error during registration');
+        return 'Ошибка сети во время регистрации';
     }
 }
 
