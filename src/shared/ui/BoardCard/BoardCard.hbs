@@ -1,0 +1,12 @@
+<div class="board-card {{#if archived}}board-card--archived{{/if}}" data-board-id="{{id}}">
+    <div class="board-card__image">
+        <img src="{{image}}" alt="{{title}}">
+    </div>
+    <div class="board-card__content">
+        <h3 class="title board-card__title">{{title}}</h3>
+        {{#if archived}}
+        <div class="board-card__actions" id="board-actions-container">
+        </div>
+        {{/if}}
+    </div>
+</div>

@@ -1,0 +1,59 @@
+/* === Общий контейнер формы === */
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.logo {
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.logo-img {
+    height: 60px; /* или width: 200px — под ваш дизайн */
+    display: inline-block;
+}
+
+/* === Форма === */
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    gap: 20px; /* отступы между элементами */
+}
+
+
+.form__title {
+    text-align: center;
+}
+
+/* === Контейнеры инпутов и действий — уже используют gap, но можно уточнить */
+.form__inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.form__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* === Ошибка от сервера === */
+.form__error {
+    display: none;
+    padding: 10px;
+    background: rgba(244, 67, 54, 0.15);
+    color: #f44336;
+    border-radius: 6px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.form__error:not([hidden]) {
+    display: block;
+}

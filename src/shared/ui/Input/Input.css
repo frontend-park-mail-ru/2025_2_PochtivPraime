@@ -1,0 +1,48 @@
+.input-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 400px;
+    gap: 4px;
+}
+
+.input {
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: 2px solid var(--secondary-color);
+    background-color: var(--standart-bg-color);
+    color: var(--standart-text-color);
+    font-size: 16px;
+    outline: none;
+    box-sizing: border-box;
+    font-family: Tahoma;
+}
+
+.input:focus {
+    border-color: var(--focus-color);
+}
+
+.input.is-invalid {
+    border-color: var(--warning-color);
+}
+
+.input.is-valid {
+    border-color: var(--correct-color);
+}
+
+/* не выводится зелёный ободок у confirm-password */
+.input[name="confirm-password"].is-valid {
+  border-color: var(--secondary-color);
+}
+
+.error {
+    display: none;
+    color:var(--warning-color);
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.error:not(:empty) {
+    display: block;
+}

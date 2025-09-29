@@ -1,0 +1,16 @@
+<div class="boards-list {{#if isArchived}}boards-list--archived{{/if}}">
+    <div class="boards-list__header">
+        <h2 class="title boards-list__title">{{title}}</h2>
+        <div class="boards-list__header-actions" id="header-actions-container">
+        </div>
+    </div>
+    
+    <div class="boards-list__content {{#if isArchived}}{{#unless isExpanded}}boards-list__content--hidden{{/unless}}{{/if}}">
+        <div class="boards-list__grid" id="boards-grid-container">
+        </div>
+        
+        {{#if showPagination}}
+        <div class="boards-list__pagination" id="pagination-container"></div>
+        {{/if}}
+    </div>
+</div>

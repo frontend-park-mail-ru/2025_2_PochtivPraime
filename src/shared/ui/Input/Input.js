@@ -10,14 +10,16 @@ export class Input {
    * @param {'text'|'email'|'password'|'login'} [type='text'] - тип поля
    * @param {string} [placeholder=''] - текст по умолчанию
    * @param {string} [value=''] - значение поля
+   * @param {string} [name=''] - имя поля для формы и автозаполнения
    */
-  constructor(type = 'text', placeholder = '', value = '') {
+  constructor(type = 'text', placeholder = '', value = '', name='') {
     this.type = type;
     this.placeholder = placeholder;
     this.value = value;
     this.error = '';
     this.wrapper = null;
     this.element = null;
+    this.name = name;
   }
 
   /**
@@ -45,8 +47,32 @@ export class Input {
       }
     }
 
+    this.element.classList.remove('is-valid', 'is-invalid');
+    if (this.error) {
+        this.element.classList.add('is-invalid');
+    } else {
+        this.element.classList.add('is-valid');
+    }
+
     this.update();
     return this.error === '';
+  }
+
+  /**
+   * Добавить ошибку
+   * @param {string} message - текст ошибки
+   */
+  setError(message) {
+    this.error = message;
+    if (this.element) {
+      this.element.classList.remove('is-valid', 'is-invalid');
+      if (this.error) {
+        this.element.classList.add('is-invalid');
+      } else {
+        this.element.classList.add('is-valid');
+      }
+    }
+    this.update();
   }
 
   /**
@@ -67,6 +93,7 @@ export class Input {
       placeholder: this.placeholder,
       value: this.value,
       error: this.error,
+      name: this.name
     });
 
     const div = document.createElement('div');
@@ -83,19 +110,17 @@ export class Input {
     return this.wrapper;
   }
 
-  /**
-   * Обновляет текст и отображение элемента .error
-   */
-  update() {
+ /**
+ * Обновление ошибки
+ */
+update() {
     if (!this.wrapper) return;
 
     const errorSpan = this.wrapper.querySelector('.error');
     if (this.error) {
-      errorSpan.textContent = this.error;
-      errorSpan.hidden = false;
+        errorSpan.textContent = this.error;
     } else {
-      errorSpan.textContent = '';
-      errorSpan.hidden = true;
+        errorSpan.textContent = '';
     }
   }
 }
