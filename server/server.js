@@ -8,7 +8,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const app = express();
-const PORT = 8080;
+const PORT = 8081;
 
 // Раздаём статику
 app.use('/src', express.static(path.join(__dirname, '../src')));
