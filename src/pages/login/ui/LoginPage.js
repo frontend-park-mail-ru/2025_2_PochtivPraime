@@ -20,32 +20,37 @@ export class LoginPage {
      * @returns {HTMLElement}
      */
     render() {
-        const loginInput = new Input('login', 'Имя пользователя');
-        const passwordInput = new Input('password', 'Пароль');
+        document.body.className = 'login-page';
 
-        const submitButton = new Button('Войти', () => {
-            if (form.validate()) {
-                this.onLogin({
-                    login: loginInput.getValue(),
-                    password: passwordInput.getValue()
-                });
-            }
-        });
+        const loginInput = new Input('login', 'Имя пользователя', '', 'login');
+        const passwordInput = new Input('password', 'Пароль', '', 'password');
 
-        const form = new Form([loginInput, passwordInput], submitButton, (values) => {
-            this.onLogin(values);
-        }, "Вход");
+        const submitButton = new Button('Войти', () => {});
+
+        const form = new Form(
+            [loginInput, passwordInput],
+            submitButton,
+            (values) => this.onLogin(values),
+            "Вход",
+            true
+        );
 
         const pageContainer = document.createElement('div');
-        pageContainer.appendChild(form.render());
+        pageContainer.className = 'login-page-wrapper';
+        const loginWrapper = document.createElement('div');
+        loginWrapper.className = 'login-wrapper';
+
+        pageContainer.appendChild(loginWrapper);
+        loginWrapper.appendChild(form.render());
 
         const link = document.createElement('p');
+        link.className = 'login-page__link';
         link.innerHTML = `<a href="#">Создать аккаунт</a>`;
         link.querySelector('a').addEventListener('click', (e) => {
             e.preventDefault();
             this.onGoToRegisterPage();
         });
-        pageContainer.appendChild(link);
+        loginWrapper.appendChild(link);
 
         return pageContainer;
     }
