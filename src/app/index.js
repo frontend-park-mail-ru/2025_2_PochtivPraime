@@ -82,13 +82,42 @@ async function loadPage() {
     }
 }
 
+
+
+/**
+ * Обработка входа пользователя.
+ * @param {Object} loginData - { email: string, password: string }
+ */
+async function handleLogin(loginData) {
+    try {
+        const response = await fetch(`${API_BASE}/api/auth/login`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(loginData),
+        });
+
+        if (response.ok) {
+            router.navigate('/boards');
+            loadPage();
+        } else {
+            const error = await response.json();
+            alert(`Login failed: ${error.message}`);
+        }
+    } catch (error) {
+        console.error('Login error:', error);
+        alert('Network error during login');
+    }
+}
+
 /**
  * Обработка регистрации пользователя.
  * @param {Object} registerData - данные регистрации
  */
 async function handleRegister(registerData) {
     try {
-        const response = await fetch('${API_BASE}/api/auth/register', {
+        const response = await fetch(`${API_BASE}/api/auth/register`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -114,7 +143,7 @@ async function handleRegister(registerData) {
  */
 async function handleLogout() {
     try {
-        await fetch('${API_BASE}/api/auth/logout', { method: 'POST' });
+        await fetch(`${API_BASE}/api/auth/logout`, { method: 'POST' });
         router.navigate('/login');
         loadPage();
     } catch (error) {
@@ -170,7 +199,7 @@ async function handleDeleteBoard(boardId) {
  */
 async function handleCreateBoard(boardName) {
     try {
-        const response = await fetch('${API_BASE}/api/boards', {
+        const response = await fetch(`${API_BASE}/api/boards`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
