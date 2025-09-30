@@ -4,6 +4,19 @@ const API_BASE = 'http://89.208.208.203:8080';
 
 const router = new Router();
 
+async function apiFetch(url, options = {}) {
+    const token = localStorage.getItem('jwt');
+    const headers = {
+        ...(options.headers || {}),
+        'Authorization': token ? `Bearer ${token}` : '',
+    };
+
+    return fetch(url, {
+        ...options,
+        headers,
+    });
+}
+
 /**
  * Загружает страницу в зависимости от маршрута.
  */
@@ -41,8 +54,8 @@ async function loadPage() {
 
                 try {
                     const [userResponse, boardsResponse] = await Promise.all([
-                        fetch(`${API_BASE}/api/auth/me`),
-                        fetch(`${API_BASE}/api/boards`)
+                        apiFetch(`${API_BASE}/api/auth/me`),
+                        apiFetch(`${API_BASE}/api/boards`)
                     ]);
 
                     if (!userResponse.ok || !boardsResponse.ok) {
@@ -90,7 +103,7 @@ async function loadPage() {
  */
 async function handleLogin(loginData) {
     try {
-        const response = await fetch(`${API_BASE}/api/auth/login`, {
+        const response = await apiFetch(`${API_BASE}/api/auth/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -99,6 +112,10 @@ async function handleLogin(loginData) {
         });
 
         if (response.ok) {
+            const data = await response.json();
+            const token = data.token;
+            localStorage.setItem('jwt', token);
+
             router.navigate('/boards');
             loadPage();
             return null;
@@ -118,7 +135,7 @@ async function handleLogin(loginData) {
  */
 async function handleRegister(registerData) {
     try {
-        const response = await fetch(`${API_BASE}/api/auth/register`, {
+        const response = await apiFetch(`${API_BASE}/api/auth/register`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -145,7 +162,7 @@ async function handleRegister(registerData) {
  */
 async function handleLogout() {
     try {
-        await fetch(`${API_BASE}/api/auth/logout`, { method: 'POST' });
+        await apiFetch(`${API_BASE}/api/auth/logout`, { method: 'POST' });
         router.navigate('/login');
         loadPage();
     } catch (error) {
@@ -161,7 +178,7 @@ async function handleLogout() {
  */
 async function handleRestoreBoard(boardId) {
     try {
-        const response = await fetch(`${API_BASE}/api/boards/${boardId}/restore`, { 
+        const response = await apiFetch(`${API_BASE}/api/boards/${boardId}/restore`, { 
             method: 'POST' 
         });
 
@@ -181,7 +198,7 @@ async function handleRestoreBoard(boardId) {
  */
 async function handleDeleteBoard(boardId) {
     try {
-        const response = await fetch(`${API_BASE}/api/boards/${boardId}`, { 
+        const response = await apiFetch(`${API_BASE}/api/boards/${boardId}`, { 
             method: 'DELETE' 
         });
 
@@ -201,7 +218,7 @@ async function handleDeleteBoard(boardId) {
  */
 async function handleCreateBoard(boardName) {
     try {
-        const response = await fetch(`${API_BASE}/api/boards`, {
+        const response = await apiFetch(`${API_BASE}/api/boards`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
