@@ -96,14 +96,14 @@ export class BoardsListPage {
     /**
      * Обработчик подтверждения создания доски
      */
-    handleCreateBoardConfirm(modal) {
+    async handleCreateBoardConfirm(modal) {
         if (!this.boardNameInput) return;
         
         const isValid = this.boardNameInput.validate();
         const boardName = this.boardNameInput.getValue().trim();
         
         if (isValid && boardName) {
-            const err = this.onCreateBoard(boardName)
+            const error = await this.onCreateBoard(boardName);
             if (!err){
                 modal.close();
             } else {

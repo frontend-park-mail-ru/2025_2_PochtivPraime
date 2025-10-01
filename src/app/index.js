@@ -231,8 +231,11 @@ async function handleCreateBoard(boardName) {
 
         if (response.ok) {
             loadPage();
+            return null;
         } else {
+            const errorText = await response.text();
             console.error('Failed CREATE');
+            return errorText || 'Ошибка при создании доски';
         }
     } catch (error) {
         console.error('Create board error:', error);
