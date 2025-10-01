@@ -103,7 +103,7 @@ export class BoardsListPage {
         const boardName = this.boardNameInput.getValue().trim();
         
         if (isValid && boardName) {
-            const error = await this.onCreateBoard(boardName);
+            const err = await this.onCreateBoard(boardName);
             if (!err){
                 modal.close();
             } else {
