@@ -5,15 +5,9 @@ const API_BASE = 'http://89.208.208.203:8080';
 const router = new Router();
 
 async function apiFetch(url, options = {}) {
-    const token = localStorage.getItem('jwt');
-    const headers = {
-        ...(options.headers || {}),
-        'Authorization': token ? `Bearer ${token}` : '',
-    };
-
     return fetch(url, {
         ...options,
-        headers,
+        credentials: 'include',
     });
 }
 
@@ -112,10 +106,6 @@ async function handleLogin(loginData) {
         });
 
         if (response.ok) {
-            const data = await response.json();
-            const token = data.token;
-            localStorage.setItem('jwt', token);
-
             router.navigate('/boards');
             loadPage();
             return null;
@@ -144,9 +134,6 @@ async function handleRegister(registerData) {
         });
 
         if (response.ok) {
-            const data = await response.json();
-            const token = data.token;
-            localStorage.setItem('jwt', token);
             router.navigate('/boards');
             loadPage();
             return null;
