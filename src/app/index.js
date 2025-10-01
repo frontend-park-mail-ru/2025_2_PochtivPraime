@@ -144,6 +144,9 @@ async function handleRegister(registerData) {
         });
 
         if (response.ok) {
+            const data = await response.json();
+            const token = data.token;
+            localStorage.setItem('jwt', token);
             router.navigate('/boards');
             loadPage();
             return null;
