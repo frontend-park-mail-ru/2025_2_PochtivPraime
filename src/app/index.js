@@ -110,8 +110,9 @@ async function handleLogin(loginData) {
             loadPage();
             return null;
         } else {
-            const error = await response.json();
-            return error.message || 'Ошибка входа';;
+            const errorText = await response.text();
+            const cleanMessage = errorText.includes(":") ? errorText.split(":").slice(1).join(":").trim() : errorText;
+            return cleanMessage || 'Ошибка входа';
         }
     } catch (error) {
         console.error('Login error:', error);
@@ -138,8 +139,9 @@ async function handleRegister(registerData) {
             loadPage();
             return null;
         } else {
-            const error = await response.json();
-            return error.message || 'Ошибка регистрации';
+            const errorText = await response.text();
+            const cleanMessage = errorText.includes(":") ? errorText.split(":").slice(1).join(":").trim() : errorText;
+            return cleanMessage || 'Ошибка регистрации';
         }
     } catch (error) {
         console.error('Registration error:', error);

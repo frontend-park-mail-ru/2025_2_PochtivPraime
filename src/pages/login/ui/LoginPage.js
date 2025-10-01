@@ -30,7 +30,12 @@ export class LoginPage {
         const form = new Form(
             [loginInput, passwordInput],
             submitButton,
-            (values) => this.onLogin(values),
+            async (values) => {
+                const errorMessage = await this.onLogin(values);
+                if (errorMessage) {
+                    form.setServerError(errorMessage);
+                }
+            },
             "Вход",
             true
         );

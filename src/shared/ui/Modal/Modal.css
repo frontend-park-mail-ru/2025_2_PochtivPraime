@@ -14,7 +14,7 @@
 
 
 .modal {
-    background: rgba(31, 31, 31, 0.95); 
+    background: 222222; 
     backdrop-filter: blur(10px); 
     border-radius: 16px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);

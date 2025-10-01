@@ -32,7 +32,12 @@ export class RegisterPage {
         const form = new Form(
             [loginInput, emailInput, passwordInput, confirmPasswordInput],
             submitButton,
-            (values) => this.onRegister(values),
+            async (values) => {
+                const errorMessage = await this.onRegister(values);
+                if (errorMessage) {
+                    form.setServerError(errorMessage);
+                }
+            },
             "Регистрация",
             true
         );
