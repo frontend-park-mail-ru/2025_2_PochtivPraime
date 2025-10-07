@@ -78,10 +78,10 @@
     justify-content: center;
 }
 
-.button--danger {
+.button-danger {
     background-color: var(--warning-color);
 }
 
-.button--agreement {
+.button-agreement {
     background-color: var(--correct-color);
 }
