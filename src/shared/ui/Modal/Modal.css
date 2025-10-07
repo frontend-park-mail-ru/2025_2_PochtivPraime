@@ -17,14 +17,13 @@
     background: var(--standart-bg-color); 
     backdrop-filter: blur(10px); 
     border-radius: 16px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     width: 90%;
     max-width: 500px;
     max-height: 90vh;
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    color: #f7f8f9;
+    color: var(--standart-text-color);
     animation: slideIn 0.2s ease;
 }
 
@@ -40,17 +39,12 @@
 .modal-close {
     background: none;
     border: none;
-    color: #aaa;
+    color: var(--secondary-text-color);
     font-size: 1.5rem;
     cursor: pointer;
     padding: 4px;
     border-radius: 4px;
     transition: color 0.2s, background 0.2s;
-}
-
-.modal-close:hover {
-    color: #f7f8f9;
-    background: rgba(255, 255, 255, 0.1);
 }
 
 

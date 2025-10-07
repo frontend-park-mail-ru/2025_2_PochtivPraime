@@ -1,5 +1,5 @@
 .header {
-    background-color: rgb(34, 34, 34, 0.7);
+    background-color: var(--second-transparent-bg-color);
     padding: 0.75rem 1.5rem;
     display: flex;
     align-items: center;
@@ -30,7 +30,7 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    color: #7BB2D1;
+    color: var(--focus-color);
 }
 
 .username {
@@ -47,6 +47,8 @@
 .logout-button {
     background-image: url('/images/logout_button.svg');
     background-size: 24px 24px;
+    width: 32px;
+    height: 32px;
     background-repeat: no-repeat;
     background-position: center;
 }

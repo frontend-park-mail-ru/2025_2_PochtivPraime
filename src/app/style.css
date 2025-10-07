@@ -6,7 +6,9 @@ html {
 :root {
     --correct-color: #448558;
     --standart-text-color: #FFFFFF;
+    --secondary-text-color: #ADABAB;
     --focus-color: #7BB2D1;
+    --secondary-focus-color: #595A65;
     --warning-color: red;
     --standart-bg-color: #222222;
     --secondary-color: #273A52;

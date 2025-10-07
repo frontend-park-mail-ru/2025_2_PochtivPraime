@@ -10,7 +10,7 @@
 
 .pagination__info {
     font-size: 14px;
-    color: #fffdfd;
+    color: var(--standart-text-color);
     white-space: nowrap;
     flex-shrink: 0;
 }
