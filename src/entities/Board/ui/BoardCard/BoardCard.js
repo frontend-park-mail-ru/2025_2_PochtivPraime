@@ -81,7 +81,7 @@ export class BoardCard {
                 {
                     text: 'Нет',
                     onClick: () => modal.close(),
-                    type: 'secondary'
+                    type: 'danger'
                 },
                 {
                     text: 'Да',
@@ -91,7 +91,7 @@ export class BoardCard {
                         }
                         modal.close();
                     },
-                    type: 'danger'
+                    type: 'agreement'
                 }
             ],
             onClose: () => console.log('Модальное окно удаления закрыто')

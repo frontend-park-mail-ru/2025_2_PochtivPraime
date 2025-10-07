@@ -43,3 +43,8 @@
     border-radius: 50%;
     object-fit: cover;
 }
+
+.logout-button {
+    background-image: url('/images/logout_button.svg');
+    background-size: contain;
+}

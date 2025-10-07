@@ -77,3 +77,11 @@
 .input_wrapper{
     justify-content: center;
 }
+
+.modal-button--danger {
+    background-color: var(--warning-color);
+}
+
+.modal-button--agreement {
+    background-color: var(--correct-color);
+}

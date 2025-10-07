@@ -64,12 +64,12 @@ export class BoardsListPage {
                 {
                     text: 'Отмена',
                     onClick: () => modal.close(),
-                    type: 'secondary'
+                    type: 'danger'
                 },
                 {
                     text: 'Создать',
                     onClick: () => this.handleCreateBoardConfirm(modal),
-                    type: 'primary'
+                    type: 'agreement'
                 }
             ],
             onClose: () => {

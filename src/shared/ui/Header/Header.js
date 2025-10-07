@@ -30,9 +30,9 @@ export class Header {
         div.innerHTML = html;
         this.element = div.firstElementChild;
         
-        const logoutButton = new Button('Выйти', this.onLogout);
+        const logoutButton = new Button('', this.onLogout);
         const logoutButtonElement = logoutButton.render();
-        
+        logoutButtonElement.classList.add('logout-button');
         const buttonContainer = this.element.querySelector('#logout-button-container');
         buttonContainer.appendChild(logoutButtonElement);
         
