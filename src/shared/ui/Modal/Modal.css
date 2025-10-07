@@ -78,10 +78,10 @@
     justify-content: center;
 }
 
-.modal-button--danger {
+.button--danger {
     background-color: var(--warning-color);
 }
 
-.modal-button--agreement {
+.button--agreement {
     background-color: var(--correct-color);
 }

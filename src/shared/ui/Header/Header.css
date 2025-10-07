@@ -47,4 +47,6 @@
 .logout-button {
     background-image: url('/images/logout_button.svg');
     background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 }
