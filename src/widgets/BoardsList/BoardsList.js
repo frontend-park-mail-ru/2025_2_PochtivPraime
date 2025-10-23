@@ -120,18 +120,13 @@ export class BoardsList {
      * Переключение состояния развернуто/свернуто для архивных досок
      */
     toggleExpanded() {
-        console.log('toggleExpanded called, current state:', this.isExpanded);
         
         this.isExpanded = !this.isExpanded;
         
         const content = this.element.querySelector('.boards-list__content');
         const headerButton = this.element.querySelector('.boards-list__header-actions button');
         
-        console.log('Content element found:', !!content);
-        console.log('Header button found:', !!headerButton);
-        
         if (this.isExpanded) {
-            console.log('Expanding content');
             content.classList.remove('boards-list__content--hidden');
             headerButton.textContent = 'Свернуть';
             this.renderBoards();
@@ -139,12 +134,10 @@ export class BoardsList {
                 this.renderPagination();
             }
         } else {
-            console.log('Collapsing content');
             content.classList.add('boards-list__content--hidden');
             headerButton.textContent = 'Развернуть';
         }
         
-        console.log('New state:', this.isExpanded);
     }
         
     /**

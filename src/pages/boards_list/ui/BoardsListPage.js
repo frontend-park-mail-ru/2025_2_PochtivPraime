@@ -1,4 +1,4 @@
-import { Header } from '../../../shared/ui/Header/Header.js';
+import { Header } from '../../../widgets/Header/Header.js';
 import { BoardsList } from '../../../widgets/BoardsList/BoardsList.js';
 import { Modal } from '../../../shared/ui/Modal/Modal.js';
 import { Input } from '../../../shared/ui/Input/Input.js';

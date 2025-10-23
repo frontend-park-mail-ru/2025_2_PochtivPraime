@@ -19,7 +19,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 
 app.use(cors({
-  origin: ['http://localhost:3000', 'http://89.208.208.203:8081'],
+  origin: ['http://localhost:8081', 'http://89.208.208.203:8081'],
   methods: ['GET','POST','DELETE','PUT'],
   credentials: true
 }));
@@ -28,7 +28,7 @@ app.use(cors({
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/index.html'));
 });
-
+// 'localhost', '0.0.0.0'
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server running at http://0.0.0.0:${PORT}`);
 });
