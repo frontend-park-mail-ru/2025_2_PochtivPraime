@@ -1,4 +1,3 @@
-/* === Общий контейнер формы === */
 .form-container {
     display: flex;
     flex-direction: column;
@@ -13,16 +12,15 @@
 }
 
 .logo-img {
-    height: 60px; /* или width: 200px — под ваш дизайн */
+    height: 60px;
     display: inline-block;
 }
 
-/* === Форма === */
 .form {
     display: flex;
     flex-direction: column;
     width: 300px;
-    gap: 20px; /* отступы между элементами */
+    gap: 20px;
 }
 
 
@@ -30,7 +28,6 @@
     text-align: center;
 }
 
-/* === Контейнеры инпутов и действий — уже используют gap, но можно уточнить */
 .form__inputs {
     display: flex;
     flex-direction: column;
@@ -43,12 +40,11 @@
     gap: 12px;
 }
 
-/* === Ошибка от сервера === */
 .form__error {
     display: none;
     padding: 10px;
     background: rgba(244, 67, 54, 0.15);
-    color: #f44336;
+    color: var(--warning-color);
     border-radius: 6px;
     font-size: 14px;
     text-align: center;

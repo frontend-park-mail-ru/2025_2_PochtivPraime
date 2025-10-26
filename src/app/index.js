@@ -1,8 +1,8 @@
 import { Router } from './router.js';
-import { mockBoards } from './config/api.js';
+import * as AuthHandlers from '../features/auth/model/AuthHandlers.js';
+import * as BoardsHandlers from '../features/boards/model/BoardsHandlers.js';
 
 const router = new Router();
-
 /**
  * Загружает страницу в зависимости от маршрута.
  */
@@ -16,7 +16,7 @@ async function loadPage() {
             case '/login': {
                 const { LoginPage } = await import('../pages/login/ui/LoginPage.js');
                 const loginPage = new LoginPage(
-                    (data) => handleLogin(data),
+                    handleLoginAndRedirect,
                     () => router.navigate('/register')
                 );
                 appElement.innerHTML = '';
@@ -27,7 +27,7 @@ async function loadPage() {
             case '/register': {
                 const { RegisterPage } = await import('../pages/register/ui/RegisterPage.js');
                 const registerPage = new RegisterPage(
-                    (data) => handleRegister(data),
+                    handleRegisterAndRedirect,
                     () => router.navigate('/login')
                 );
                 appElement.innerHTML = '';
@@ -39,28 +39,24 @@ async function loadPage() {
                 const { BoardsListPage } = await import('../pages/boards_list/ui/BoardsListPage.js');
 
                 try {
-                    const [userResponse, boardsResponse] = await Promise.all([
-                        fetch('/api/auth/me'),
-                        fetch('/api/boards')
+                    const [userData, boardsData] = await Promise.all([
+                        AuthHandlers.handleCurrentUser(),
+                        BoardsHandlers.handleGetBoards()
                     ]);
 
-                    if (!userResponse.ok || !boardsResponse.ok) {
-                        // Если не авторизован - редирект на логин
+                    if (!userData || !boardsData) {
                         router.navigate('/login');
                         return;
                     }
-
-                    const userData = await userResponse.json();
-                    const boardsData = await boardsResponse.json();
 
                     const boardsPage = new BoardsListPage(
                         userData,
                         boardsData.activeBoards || [],
                         boardsData.archivedBoards || [],
-                        () => handleLogout(),
-                        (boardId) => handleRestoreBoard(boardId),
-                        (boardId) => handleDeleteBoard(boardId),
-                        (boardName) => handleCreateBoard(boardName)
+                        handleLogoutAndRedirect,
+                        (boardId) => handleActionWithReload(BoardsHandlers.handleRestoreBoard(boardId)),
+                        (boardId) => handleActionWithReload(BoardsHandlers.handleDeleteBoard(boardId)),
+                        (boardName) => handleActionWithReload(BoardsHandlers.handleCreateBoard(boardName))
                     );
                         appElement.innerHTML = '';
                         appElement.appendChild(boardsPage.render());
@@ -81,111 +77,40 @@ async function loadPage() {
     }
 }
 
-/**
- * Обработка регистрации пользователя.
- * @param {Object} registerData - данные регистрации
- */
-async function handleRegister(registerData) {
-    try {
-        const response = await fetch('/api/auth/register', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(registerData),
-        });
-
-        if (response.ok) {
-            router.navigate('/boards');
-            loadPage();
-        } else {
-            const error = await response.json();
-            alert(`Registration failed: ${error.message}`);
-        }
-    } catch (error) {
-        console.error('Registration error:', error);
-        alert('Network error during registration');
+async function handleLoginAndRedirect(data) {
+    const errorMessage = await AuthHandlers.handleLogin(data);
+    if (!errorMessage) {
+        router.navigate('/boards');
     }
+    return errorMessage;
 }
 
-/**
- * Выход пользователя.
- */
-async function handleLogout() {
-    try {
-        await fetch('/api/auth/logout', { method: 'POST' });
+async function handleRegisterAndRedirect(data) {
+    const errorMessage = await AuthHandlers.handleRegister(data);
+    if (!errorMessage) {
         router.navigate('/login');
-        loadPage();
-    } catch (error) {
-        console.error('Logout error:', error);
+    }
+    return errorMessage;
+}
+
+async function handleLogoutAndRedirect() {
+    const errorMessage = await AuthHandlers.handleLogout();
+    if (!errorMessage) {
         router.navigate('/login');
-        loadPage();
     }
+    return errorMessage;
 }
 
-/**
- * Восстановление архивной доски.
- * @param {string} boardId - ID доски
- */
-async function handleRestoreBoard(boardId) {
+async function handleActionWithReload(actionPromise) {
     try {
-        const response = await fetch(`/api/boards/${boardId}/restore`, { 
-            method: 'POST' 
-        });
-
-        if (response.ok) {
-            loadPage();
-        } else {
-            console.error('Failed to restore board');
-        }
+        await actionPromise;
+        const currentPath = window.location.pathname;
+        await loadPage(currentPath);
     } catch (error) {
-        console.error('Restore board error:', error);
+        console.error('Action failed:', error);
     }
 }
 
-/**
- * Удаление доски.
- * @param {string} boardId - ID доски
- */
-async function handleDeleteBoard(boardId) {
-    try {
-        const response = await fetch(`/api/boards/${boardId}`, { 
-            method: 'DELETE' 
-        });
-
-        if (response.ok) {
-            loadPage();
-        } else {
-            console.error('Failed DELETE');
-        }
-    } catch (error) {
-        console.error('Delete board error:', error);
-    }
-}
-
-/**
- * Создание новой доски.
- * @param {string} boardName - название доски
- */
-async function handleCreateBoard(boardName) {
-    try {
-        const response = await fetch('/api/boards', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ title: boardName }),
-        });
-
-        if (response.ok) {
-            loadPage();
-        } else {
-            console.error('Failed CREATE');
-        }
-    } catch (error) {
-        console.error('Create board error:', error);
-    }
-}
 
 // Инициализация приложения
 document.addEventListener('DOMContentLoaded', () => {

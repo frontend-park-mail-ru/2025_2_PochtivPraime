@@ -1,5 +1,6 @@
 import express from 'express';
 import path from 'path';
+import cors from 'cors';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 
@@ -7,7 +8,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const app = express();
-const PORT = 3000;
+const PORT = 8081;
 
 // Раздаём статику
 app.use('/src', express.static(path.join(__dirname, '../src')));
@@ -17,11 +18,17 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(express.json());
 
-// SPA fallback
+app.use(cors({
+  origin: ['http://localhost:8081', 'http://89.208.208.203:8081'],
+  methods: ['GET','POST','DELETE','PUT'],
+  credentials: true
+}));
+
+// SPA
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/index.html'));
 });
-
-app.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}`);
+// 'localhost', '0.0.0.0'
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Server running at http://0.0.0.0:${PORT}`);
 });

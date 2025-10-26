@@ -22,7 +22,7 @@ export class LoginPage {
     render() {
         document.body.className = 'login-page';
 
-        const loginInput = new Input('login', 'Имя пользователя', '', 'login');
+        const loginInput = new Input('username', 'Имя пользователя', '', 'login');
         const passwordInput = new Input('password', 'Пароль', '', 'password');
 
         const submitButton = new Button('Войти', () => {});
@@ -30,7 +30,12 @@ export class LoginPage {
         const form = new Form(
             [loginInput, passwordInput],
             submitButton,
-            (values) => this.onLogin(values),
+            async (values) => {
+                const errorMessage = await this.onLogin(values);
+                if (errorMessage) {
+                    form.setServerError(errorMessage);
+                }
+            },
             "Вход",
             true
         );

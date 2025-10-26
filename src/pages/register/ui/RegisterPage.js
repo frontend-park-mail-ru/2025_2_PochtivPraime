@@ -22,7 +22,7 @@ export class RegisterPage {
     render() {
         document.body.className = 'register-page';
 
-        const loginInput = new Input('login', 'Имя пользователя', '', 'login');
+        const loginInput = new Input('username', 'Имя пользователя', '', 'login');
         const emailInput = new Input('email', 'Почта', '', 'email');
         const passwordInput = new Input('password', 'Пароль', '', 'new-password');
         const confirmPasswordInput = new Input('password', 'Подтвердите пароль', '', 'confirm-password');
@@ -32,7 +32,12 @@ export class RegisterPage {
         const form = new Form(
             [loginInput, emailInput, passwordInput, confirmPasswordInput],
             submitButton,
-            (values) => this.onRegister(values),
+            async (values) => {
+                const errorMessage = await this.onRegister(values);
+                if (errorMessage) {
+                    form.setServerError(errorMessage);
+                }
+            },
             "Регистрация",
             true
         );

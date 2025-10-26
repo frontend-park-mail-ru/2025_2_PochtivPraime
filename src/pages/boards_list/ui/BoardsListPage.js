@@ -1,4 +1,4 @@
-import { Header } from '../../../shared/ui/Header/Header.js';
+import { Header } from '../../../widgets/Header/Header.js';
 import { BoardsList } from '../../../widgets/BoardsList/BoardsList.js';
 import { Modal } from '../../../shared/ui/Modal/Modal.js';
 import { Input } from '../../../shared/ui/Input/Input.js';
@@ -20,7 +20,6 @@ export class BoardsListPage {
         const container = document.createElement('div');
         container.className = 'boards-list-page';
         
-        console.log(this.userData.name)
         const header = new Header(this.userData, this.onLogout);
         container.appendChild(header.render());
         const content = document.createElement('main');
@@ -65,12 +64,12 @@ export class BoardsListPage {
                 {
                     text: 'Отмена',
                     onClick: () => modal.close(),
-                    type: 'secondary'
+                    type: 'danger'
                 },
                 {
                     text: 'Создать',
                     onClick: () => this.handleCreateBoardConfirm(modal),
-                    type: 'primary'
+                    type: 'agreement'
                 }
             ],
             onClose: () => {
@@ -97,14 +96,14 @@ export class BoardsListPage {
     /**
      * Обработчик подтверждения создания доски
      */
-    handleCreateBoardConfirm(modal) {
+    async handleCreateBoardConfirm(modal) {
         if (!this.boardNameInput) return;
         
         const isValid = this.boardNameInput.validate();
         const boardName = this.boardNameInput.getValue().trim();
         
         if (isValid && boardName) {
-            const err = this.onCreateBoard(boardName)
+            const err = await this.onCreateBoard(boardName);
             if (!err){
                 modal.close();
             } else {
