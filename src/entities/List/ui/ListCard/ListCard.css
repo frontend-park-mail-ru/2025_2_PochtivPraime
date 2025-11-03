@@ -1,0 +1,117 @@
+.list-card {
+    background: #32769D;
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    color: var(--standart-text-color);
+    flex: 0 0 calc((100vw - 120px) / 5); /* 5 списков в ширину с учётом отступов */
+    max-width: 300px;
+}
+
+.list-card__header {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    position: relative;
+    flex: 1;
+}
+
+.list-card__title-editing {
+    display: flex;
+    align-items: flex-start;
+    gap: 5px;
+    flex: 1;
+    min-width: 0;
+    max-width: calc(100% - 15px); 
+}
+
+.list-card__title {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+    flex: 1;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    min-width: 0;
+
+}
+
+.list-card__title-input {
+    flex: 1;
+    background: transparent;
+    border: 2px solid var(--focus-color);
+    border-radius: 8px;
+    padding: 8px 12px;
+    color: var(--standart-text-color);
+    font-size: 1.2rem;
+    outline: none;
+    resize: none;
+    min-height: 1.3em;
+    line-height: 1.3;
+}
+
+.list-card__title-input:focus {
+    border-color: var(--focus-color);
+}
+
+.list-card__edit-title-btn,
+.list-card__delete-btn,
+.list-card__save-title-btn {
+    flex: 0 0 auto;
+    background: none;
+    border: none;
+    color: var(--secondary-text-color);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+}
+
+.list-card__edit-title-btn:hover,
+.list-card__delete-btn:hover,
+.list-card__save-title-btn:hover {
+    color: var(--standart-text-color);
+}
+
+.list-card__delete-btn:hover {
+    color: var(--warning-color);
+}
+
+.list-card__header:hover .list-card__edit-title-btn {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+.list-card__edit-title-btn {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.list-card__tasks {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.list-card__footer {
+    margin-top: auto;
+}
+
+.list-card__add-task-btn {
+    width: 100%;
+    background-color: var(--secondary-color);
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    cursor: pointer;
+    color: var(--standart-text-color);
+    font-size: 1rem;
+}
+
+.list-card__add-task-btn:hover {
+    background-color: var(--secondary-focus-color);
+}
+
