@@ -1,5 +1,6 @@
 import template from './Menu.precompiled.js';
 import { Button } from '../Button/Button.js';
+import './Menu.css';
 
 /**
  * Класс компонента - всплывающее меню с действиями.

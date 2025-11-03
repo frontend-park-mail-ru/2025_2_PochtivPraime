@@ -1,4 +1,5 @@
-export default Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
+import Handlebars from 'handlebars/runtime.js';
+    export default Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
     return "task-card--completed";
 },"3":function(container,depth0,helpers,partials,data) {
     return "task-card--editing";

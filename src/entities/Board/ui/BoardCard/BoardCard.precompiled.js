@@ -1,4 +1,5 @@
-export default Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
+import Handlebars from 'handlebars/runtime.js';
+    export default Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
     return "board-card--archived";
 },"3":function(container,depth0,helpers,partials,data) {
     return "    <button class=\"board-card__menu-button\" type=\"button\" aria-label=\"Действия\">\n        <img src=\"images/menu-icon.svg\" alt=\"Меню\" class=\"menu-icon\">\n    </button>\n";

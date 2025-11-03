@@ -1,4 +1,5 @@
 import template from './BoardHeader.precompiled.js';
+import './BoardHeader.css';
 import { Menu } from '../../shared/ui/Menu/Menu.js';
 import { Modal } from '../../shared/ui/Modal/Modal.js';
 import { Input } from '../../shared/ui/Input/Input.js';

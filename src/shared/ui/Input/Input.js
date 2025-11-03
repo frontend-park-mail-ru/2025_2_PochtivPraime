@@ -1,4 +1,5 @@
 import template from './Input.precompiled.js';
+import './Input.css';
 
 /**
  * Класс Input — Компонент для текстовых полей с валидацией и отображением ошибок.

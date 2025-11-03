@@ -1,5 +1,5 @@
 import template from './BoardCard.precompiled.js';
-import { Button } from '../../../../shared/ui/Button/Button.js';
+import './BoardCard.css';
 import { Modal } from '../../../../shared/ui/Modal/Modal.js';
 import { Menu } from '../../../../shared/ui/Menu/Menu.js';
 

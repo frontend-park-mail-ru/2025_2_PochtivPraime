@@ -1,4 +1,5 @@
-export default Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
+import Handlebars from 'handlebars/runtime.js';
+    export default Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
     var helper, lookupProperty = container.lookupProperty || function(parent, propertyName) {
         if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
           return parent[propertyName];

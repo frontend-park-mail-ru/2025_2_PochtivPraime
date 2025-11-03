@@ -1,4 +1,5 @@
 import template from './TaskCard.precompiled.js';
+import './TaskCard.css';
 import { TaskWindow } from '../../../../widgets/TaskWindow/TaskWindow.js';
 
 /**

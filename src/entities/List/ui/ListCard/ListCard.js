@@ -1,4 +1,5 @@
 import template from './ListCard.precompiled.js';
+import './ListCard.css';
 import { Modal } from '../../../../shared/ui/Modal/Modal.js';
 import { TaskCard } from '../../../../entities/Task/ui/TaskCard/TaskCard.js';
 

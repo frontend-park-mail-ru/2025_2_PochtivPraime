@@ -1,5 +1,6 @@
 import template from './Modal.precompiled.js';
 import { Button } from '../Button/Button.js';
+import './Modal.css';
 
 /**
  * Класс компонента - модальное окно. Содержит заголовок, текст и кнопки действий.

@@ -1,4 +1,5 @@
 import template from './BoardsList.precompiled.js';
+import './BoardsList.css';
 import { Button } from '../../shared/ui/Button/Button.js';
 import { BoardCard } from '../../entities/Board/ui/BoardCard/BoardCard.js';
 import { Pagination } from '../../shared/ui/Pagination/Pagination.js';

@@ -62,7 +62,7 @@
     flex: 0 0 auto;
     background: none;
     border: none;
-    color: var(--secondary-text-color);
+    color: var(--standart-text-color);
     font-size: 1.2rem;
     cursor: pointer;
     padding: 4px;

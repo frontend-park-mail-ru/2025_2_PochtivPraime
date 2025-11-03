@@ -1,5 +1,5 @@
 import template from './Button.precompiled.js';
-
+import './Button.css';
 /**
  * Класс компонента - кнопки. Имеется обработка клика.
  * Использует precompiled Handlebars-шаблон. 
