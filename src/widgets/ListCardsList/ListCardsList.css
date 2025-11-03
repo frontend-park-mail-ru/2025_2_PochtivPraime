@@ -1,0 +1,69 @@
+.list-cards-list {
+    flex: 1 0 auto; /* чтобы растягивалось по высоте main */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    margin: 0 10px;
+    border-radius: 0 0 8px 8px;
+    overflow: hidden;
+    box-sizing: border-box;
+    max-width: calc(100% - 20px);
+}
+
+.list-cards-list__container {
+    flex: 1;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 0 16px 16px 16px;
+    overflow-x: auto;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
+.list-cards-list__container::-webkit-scrollbar {
+    height: 8px;
+}
+
+.list-cards-list__container::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.list-cards-list__container::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+}
+
+.list-cards-list__container::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.list-cards-list__add-column {
+    flex: 0 0 auto; /* фиксированная ширина */
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.list-cards-list__add-btn {
+    flex: 0 0 calc((100vw - 120px) / 5); /* 5 списков в ширину с учётом отступов */
+    max-width: 300px;
+    height: 90px;
+    background-color: var(--secondary-color);
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    cursor: pointer;
+    color: var(--standart-text-color);
+    font-size: 1rem;
+    text-align: center;
+}
+
+.list-cards-list__add-btn:hover {
+    background-color: var(--secondary-focus-color);
+}

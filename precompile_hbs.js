@@ -44,3 +44,5 @@ function precompileTemplates(relativePath) {
 precompileTemplates('shared/ui');
 precompileTemplates('widgets');
 precompileTemplates('entities/Board/ui');
+precompileTemplates('entities/List/ui');
+precompileTemplates('entities/Task/ui');

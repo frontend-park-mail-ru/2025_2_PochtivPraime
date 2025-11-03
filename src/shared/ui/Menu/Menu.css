@@ -1,0 +1,79 @@
+
+
+.menu {
+    position: fixed;
+    background: var(--standart-bg-color);
+    border-radius: 12px;
+    width: 280px;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    color: var(--standart-text-color);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    z-index: 1002;
+    pointer-events: auto;
+    animation: fadeIn 0.15s ease;
+}
+
+
+.menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.menu-title {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.menu-close {
+    background: none;
+    border: none;
+    color: var(--secondary-text-color);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+}
+
+.menu-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 12px 16px;
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.menu-actions .btn {
+    width: 100%;
+    text-align: left;
+    padding: 10px 14px;
+    font-size: 0.95rem;
+    border-radius: 6px;
+    background-color: transparent;
+    color: var(--standart-text-color);
+    border: 1px solid transparent;
+}
+
+.menu-actions .btn:hover:not(.btn--disabled) {
+    background-color: var(--secondary-focus-color);
+    color: var(--standart-text-color);
+}
+
+.menu-actions .btn--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.menu-actions .button-danger {
+    color: var(--warning-color);
+}
+.menu-actions .button-danger:hover:not(.btn--disabled) {
+    background: rgba(255, 80, 80, 0.15);
+    color: var(--warning-color);
+}
