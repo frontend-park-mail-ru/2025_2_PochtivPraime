@@ -11,10 +11,12 @@ export class Header {
      * @param {string} userData.username - имя пользователя
      * @param {string} userData.avatar - URL аватарки
      * @param {() => void} onLogout - обработчик выхода
+     * @param {() => void} onNavigate - обработчик навигации
      */
-    constructor(userData, onLogout) {
+    constructor(userData, onLogout, onNavigate) {
         this.userData = userData;
         this.onLogout = onLogout;
+        this.onNavigate = onNavigate;
     }
 
     /**
@@ -36,6 +38,20 @@ export class Header {
         const buttonContainer = this.element.querySelector('#logout-button-container');
         buttonContainer.appendChild(logoutButtonElement);
         
+        const logo = this.element.querySelector('.logo-img');
+        const username = this.element.querySelector('.username');
+        const avatar = this.element.querySelector('.avatar');
+
+        if (logo) {
+            logo.addEventListener('click', () => this.onNavigate('/'));
+        }
+        if (username) {
+            username.addEventListener('click', () => this.onNavigate('/profile'));
+        }
+        if (avatar) {
+            avatar.addEventListener('click', () => this.onNavigate('/profile'));
+        }
+
         return this.element;
     }
 }

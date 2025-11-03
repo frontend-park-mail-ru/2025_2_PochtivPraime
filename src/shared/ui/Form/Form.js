@@ -61,6 +61,23 @@ export class Form {
 }
 
   /**
+   * Отображает успех от сервера
+   * @param {string} message - текст успеха
+   */
+  setServerSucess(message) {
+    if (!this.element) return;
+    const sucessContainer = this.element.querySelector('.form__sucess');
+    
+    if (message) {
+        sucessContainer.textContent = message;
+        sucessContainer.hidden = false;
+    } else {
+        sucessContainer.textContent = '';
+        sucessContainer.hidden = true;
+    }
+}
+
+  /**
    * Рендер формы на основе шаблона. Обработка отправки формы
    * @returns {HTMLElement}
    */

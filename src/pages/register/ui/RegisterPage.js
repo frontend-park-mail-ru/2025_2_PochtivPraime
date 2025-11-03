@@ -32,8 +32,8 @@ export class RegisterPage {
         const form = new Form(
             [loginInput, emailInput, passwordInput, confirmPasswordInput],
             submitButton,
-            async (values) => {
-                const errorMessage = await this.onRegister(values);
+            (values) => {
+                const errorMessage = this.onRegister(values);
                 if (errorMessage) {
                     form.setServerError(errorMessage);
                 }

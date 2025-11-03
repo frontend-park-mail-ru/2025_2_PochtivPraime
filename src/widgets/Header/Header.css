@@ -20,6 +20,11 @@
     gap: 0.75rem;
 }
 
+.header-logo-img {
+    display: block;
+    height: 32px;
+}
+
 .header-right {
     display: flex;
     align-items: center;

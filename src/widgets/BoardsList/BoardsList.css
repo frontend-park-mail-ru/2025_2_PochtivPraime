@@ -40,3 +40,9 @@
 .boards-list__pagination {
     margin-top: 24px;
 }
+
+.boards-list__empty {
+    text-align: center;
+    font-size: 1.2rem;
+    color: var(--standart-text-color);
+}
