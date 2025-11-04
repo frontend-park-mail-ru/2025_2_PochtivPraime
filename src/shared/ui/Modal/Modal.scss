@@ -1,3 +1,4 @@
+@use '../../../app/style.scss' as *;
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -5,9 +6,7 @@
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.7);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include flex-center();
     z-index: 1000; 
     animation: fadeIn 0.2s ease;
 }
@@ -24,53 +23,42 @@
     display: flex;
     flex-direction: column;
     color: var(--standart-text-color);
-    animation: slideIn 0.2s ease;
-}
 
+    &-header {
+        @include flex-between();
+        padding: 20px 24px 16px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
 
-.modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 24px 16px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
+    &-body {
+        padding: 24px;
+        overflow-y: auto;
+        flex: 1;
+        width:auto;
+    }
 
-.modal__close {
-    background: none;
-    border: none;
-    color: var(--secondary-text-color);
-    font-size: 1.5rem;
-    cursor: pointer;
-    padding: 4px;
-    border-radius: 4px;
-}
+    &-text {
+        @include text(16px);
+    }
+    
+    &__close {
+        background: none;
+        border: none;
+        color: var(--secondary-text-color);
+        font-size: 1.5rem;
+        cursor: pointer;
+        padding: 4px;
+        border-radius: 4px;
+    }
 
+    &__buttons {
+        display: flex;
+        gap: 12px;
+        padding: 0 24px 24px;
+        justify-content: flex-end;
+    }
 
-.modal-body {
-    padding: 24px;
-    overflow-y: auto;
-    flex: 1;
-    width:auto;
-}
-
-.modal-text {
-    margin: 0;
-    line-height: 1.6;
-    font-size: 1rem;
-}
-
-.modal__buttons {
-    display: flex;
-    gap: 12px;
-    padding: 0 24px 24px;
-    justify-content: flex-end;
-}
-
-
-.modal__title {
-    margin: 0;
-    font-size: 24px;
-    color: var(--standart-text-color);
-    font-family: Verdana;
+    &__title {
+        @include heading(24px);
+    }
 }

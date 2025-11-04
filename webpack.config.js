@@ -35,6 +35,7 @@ export default {
                 url: false
             },
           },
+          'postcss-loader',
           'sass-loader'
         ]
       }

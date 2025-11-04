@@ -1,19 +1,19 @@
+@use '../../../app/style.scss' as *;
 .form-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 20px;
     box-sizing: border-box;
-}
 
-.form-container__logo {
-  text-align: center;
-  margin-bottom: 8px;
-}
-
-.form-container__logo-img {
-  height: 60px;
-  display: inline-block;
+    &__logo{
+        text-align: center;
+        margin-bottom: 8px;
+    }
+    &__logo-img {
+        height: 60px;
+        display: inline-block;
+    }
 }
 
 .form {
@@ -21,43 +21,42 @@
     flex-direction: column;
     width: 300px;
     gap: 20px;
-}
 
-
-.form__title {
-    text-align: center;
-}
-
-.form__inputs {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
-.form__actions {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.form__error,
-.form__success {
-    display: none;
-    padding: 10px;
+    &__title {
+        text-align: center;
+        @include heading();
+    }
     
-    border-radius: 6px;
-    font-size: 14px;
-    text-align: center;
-}
+    &__inputs {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
 
-.form__error:not([hidden]) {
-    display: block;
-    background: rgba(244, 67, 54, 0.15);
-    color: var(--warning-color);
-}
+    &__actions {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
 
-.form__sucess:not([hidden]) {
-    display: block;
-    background: rgba(54, 244, 86, 0.15);
-    color: var(--correct-color);
+    &__error,
+    &__success {
+        display: none;
+        padding: 10px;
+        border-radius: 6px;
+        font-size: 14px;
+        text-align: center;
+    }
+
+    &__error:not([hidden]) {
+        display: block;
+        background: rgba(244, 67, 54, 0.15);
+        color: var(--warning-color);
+    }
+
+    &__sucess:not([hidden]) {
+        display: block;
+        background: rgba(54, 244, 86, 0.15);
+        color: var(--correct-color);
+    }
 }

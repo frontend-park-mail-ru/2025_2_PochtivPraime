@@ -1,34 +1,30 @@
+@use '../../app/style.scss' as *;
 .board-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    @include flex-between();
     background-color: var(--standart-bg-color);
     padding: 16px 20px;
     border-radius: 8px 8px 0 0;
     color: var(--standart-text-color);
     margin: 0 10px 0 10px;
-}
 
-.board-header__title {
-    margin: 0;
-    font-size: 1.2rem;
-    font-weight: 600;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
+    &__title {
+        @include heading(1.2rem, 600);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
 
-.board-header__menu-btn {
-    background: none;
-    border: none;
-    color: var(--secondary-text-color);
-    cursor: pointer;
-    padding: 8px;
-    border-radius: 4px;
-    transition: background 0.2s;
-}
-
-.board-header__menu-btn:hover {
-    background: rgba(255, 255, 255, 0.05);
-    color: var(--standart-text-color);
+    &__menu-btn {
+        background: none;
+        border: none;
+        color: var(--secondary-text-color);
+        cursor: pointer;
+        padding: 8px;
+        border-radius: 4px;
+        
+        &:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--standart-text-color);
+        }
+    }
 }

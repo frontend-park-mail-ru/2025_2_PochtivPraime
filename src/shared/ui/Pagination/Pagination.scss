@@ -1,24 +1,18 @@
-
+@use '../../../app/style.scss' as *;
 .pagination {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 16px;
+    @include flex-center(row, 16px);
     padding: 16px 0;
     width: 100%;
-}
 
-.pagination__info {
-    font-size: 14px;
-    color: var(--standart-text-color);
-    white-space: nowrap;
-    flex-shrink: 0;
-}
+    &__info {
+        @include text(14px);
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
 
-.pagination__prev,
-.pagination__next {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-width: 80px;
+    &__prev,
+    &__next {
+        @include flex-center();
+        min-width: 80px;
+    }
 }
