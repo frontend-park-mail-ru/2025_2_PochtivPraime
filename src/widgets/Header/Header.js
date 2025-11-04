@@ -1,6 +1,6 @@
 import template from './Header.precompiled.js';
 import { Button } from '../../shared/ui/Button/Button.js';
-import './Header.css';
+import './Header.scss';
 
 /**
  * Класс компонента - хедер. Содержит информацию о пользователе и кнопку выхода.

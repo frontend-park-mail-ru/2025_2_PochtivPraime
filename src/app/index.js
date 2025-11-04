@@ -1,5 +1,5 @@
 import { Router } from './router.js';
-import './style.css';
+import './style.scss';
 import * as AuthHandlers from '../features/auth/model/AuthHandlers.js';
 import * as BoardsHandlers from '../features/boards/model/BoardsHandlers.js';
 import * as ProfileHandlers from '../features/profile/model/ProfileHandlers.js';

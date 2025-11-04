@@ -1,5 +1,5 @@
 import template from './TaskWindow.precompiled.js';
-import './TaskWindow.css';
+import './TaskWindow.scss';
 import { Menu } from '../../shared/ui/Menu/Menu.js';
 
 /**

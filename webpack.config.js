@@ -26,15 +26,16 @@ export default {
         }
       },
       {
-        test: /\.css$/i,
+        test: /\.scss$/i,
         use: [
-            'style-loader',
-            {
+          'style-loader',
+          {
             loader: 'css-loader',
             options: {
                 url: false
-            }
-            }
+            },
+          },
+          'sass-loader'
         ]
       }
     ]

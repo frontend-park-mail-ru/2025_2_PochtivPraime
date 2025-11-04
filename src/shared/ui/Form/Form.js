@@ -1,5 +1,5 @@
 import template from './Form.precompiled.js';
-import './Form.css';
+import './Form.scss';
 
 /**
  * Класс Form — управляет набором полей ввода и кнопкой. Поддерживает отображение ошибок от сервера.

@@ -1,5 +1,5 @@
 import template from './Pagination.precompiled.js';
-import './Pagination.css';
+import './Pagination.scss';
 import { Button } from '../Button/Button.js';
 
 /**

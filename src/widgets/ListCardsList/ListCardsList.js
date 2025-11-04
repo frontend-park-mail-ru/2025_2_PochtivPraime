@@ -1,5 +1,5 @@
 import template from './ListCardsList.precompiled.js';
-import './ListCardsList.css';
+import './ListCardsList.scss';
 import { ListCard } from '../../entities/List/ui/ListCard/ListCard.js';
 
 /**
