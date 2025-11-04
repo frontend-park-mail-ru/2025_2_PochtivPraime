@@ -67,7 +67,7 @@ export class TaskCard {
         }
 
         // кнопка сохранить
-        const saveButton = this.element.querySelector('.task-card__save-button-container');
+        const saveButton = this.element.querySelector('.task-card__save');
         if (saveButton) {
             saveButton.addEventListener('click', (e) => {
                 e.stopPropagation();
@@ -76,7 +76,7 @@ export class TaskCard {
         }
 
         // кнопка удалить
-        const deleteButton = this.element.querySelector('.task-card__delete-button-container');
+        const deleteButton = this.element.querySelector('.task-card__delete');
         if (deleteButton) {
             deleteButton.addEventListener('click', (e) => {
                 e.stopPropagation();
@@ -85,7 +85,7 @@ export class TaskCard {
         }
 
         // кнопка редактирования
-        const editButton = this.element.querySelector('.task-card__edit-button-container');
+        const editButton = this.element.querySelector('.task-card__edit');
         if (editButton) {
             editButton.addEventListener('click', (e) => {
                 e.stopPropagation();

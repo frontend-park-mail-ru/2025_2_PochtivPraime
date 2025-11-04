@@ -23,21 +23,16 @@ export class EditProfilePage {
     }
 
     render() {
-        document.body.className = 'edit-profile-page';
-
         const pageContainer = document.createElement('div');
-        pageContainer.className = 'edit-profile-page-container';
-
-        const header = new Header(this.userData, this.onLogout, this.onNavigate);
-        pageContainer.appendChild(header.render());
+        pageContainer.className = 'edit-profile-page';
 
         const content = document.createElement('main');
         content.className = 'edit-profile-page__content';
-        pageContainer.appendChild(content);
 
-        const contentWrapper = document.createElement('div');
-        contentWrapper.className = 'edit-profile-wrapper';
-        content.appendChild(contentWrapper);
+        const formCard = document.createElement('div');
+        formCard.className = 'edit-profile-page__form-card';
+        
+        const header = new Header(this.userData, this.onLogout, this.onNavigate);
 
         const usernameInput = new Input('text', 'Имя пользователя', this.userData.username || '', 'username');
         const emailInput = new Input('email', 'Почта', this.userData.email || '', 'email');
@@ -61,8 +56,6 @@ export class EditProfilePage {
             true
         );
 
-        contentWrapper.appendChild(form.render());
-        
         const link = document.createElement('p');
         link.className = 'edit-profile-page__link';
         link.innerHTML = `<a href="#">Изменить пароль</a>`;
@@ -70,7 +63,12 @@ export class EditProfilePage {
             e.preventDefault();
             this.onGoToChangePassword();
         });
-        contentWrapper.appendChild(link);
+        
+        formCard.appendChild(form.render());
+        formCard.appendChild(link);
+        content.appendChild(formCard);
+        pageContainer.appendChild(header.render());
+        pageContainer.appendChild(content);
 
         return pageContainer;
     }

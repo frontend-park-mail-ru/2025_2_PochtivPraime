@@ -34,6 +34,7 @@ async function loadPage() {
                     handleLoginAndRedirect,
                     () => router.navigate('/register')
                 );
+                document.body.className = 'page--login';
                 appElement.innerHTML = '';
                 appElement.appendChild(loginPage.render());
                 break;
@@ -45,6 +46,7 @@ async function loadPage() {
                     handleRegisterAndRedirect,
                     () => router.navigate('/login')
                 );
+                document.body.className = 'page--register';
                 appElement.innerHTML = '';
                 appElement.appendChild(registerPage.render());
                 break;
@@ -67,6 +69,7 @@ async function loadPage() {
                     handleLogoutAndRedirect,
                     (path) => router.navigate(path)
                 );
+                document.body.className = 'page--profile';
                 appElement.innerHTML = '';
                 appElement.appendChild(profilePage.render());
                 break;
@@ -89,6 +92,7 @@ async function loadPage() {
                     handleLogoutAndRedirect,
                     (path) => router.navigate(path)
                 );
+                document.body.className = 'page--edit-profile';
                 appElement.innerHTML = '';
                 appElement.appendChild(editProfilePage.render());
                 break;
@@ -111,6 +115,7 @@ async function loadPage() {
                     handleLogoutAndRedirect,
                     (path) => router.navigate(path)
                 );
+                document.body.className = 'page--edit-password';
                 appElement.innerHTML = '';
                 appElement.appendChild(editPasswordPage.render());
                 break;
@@ -141,13 +146,14 @@ async function loadPage() {
                         (boardName) => handleActionWithReload(BoardsHandlers.handleCreateBoard(boardName)),
                         (path) => router.navigate(path)
                     );
-                        appElement.innerHTML = '';
-                        appElement.appendChild(boardsPage.render());
-                    } catch (error) {
-                        console.error('Error loading boards:', error);
-                        router.navigate('/login');
-                    }
-                    break;
+                    document.body.className = 'page--boards';
+                    appElement.innerHTML = '';
+                    appElement.appendChild(boardsPage.render());
+                } catch (error) {
+                    console.error('Error loading boards:', error);
+                    router.navigate('/login');
+                }
+                break;
             }
             case path.match(/^\/board\/[^/]+/)?.[0]:
             case path.match(/^\/board\/[^/]+\/task\/[^/]+/)?.[0]: {
@@ -176,6 +182,7 @@ async function loadPage() {
                     onNavigate: (path) => router.navigate(path)
                 });
 
+                document.body.className = 'page--board';
                 appElement.innerHTML = '';
                 appElement.appendChild(boardPage.render());
                 break;

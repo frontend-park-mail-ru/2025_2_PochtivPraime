@@ -18,15 +18,14 @@ export class BoardsListPage {
     }
 
     render() {
-        document.body.className = 'boards-list-page';
-        const container = document.createElement('div');
-        container.className = 'boards-list-page';
-        
-        const header = new Header(this.userData, this.onLogout, this.onNavigate);
-        container.appendChild(header.render());
+        const pageContainer = document.createElement('div');
+        pageContainer.className = 'board-list-page';
+
         const content = document.createElement('main');
         content.className = 'boards-list-page__content';
         
+        const header = new Header(this.userData, this.onLogout, this.onNavigate);
+
         const activeBoardsList = new BoardsList({
             title: 'Мои доски',
             boards: this.activeBoards,
@@ -50,8 +49,9 @@ export class BoardsListPage {
             content.appendChild(archivedBoardsList.render());
         }
         
-        container.appendChild(content);
-        return container;
+        pageContainer.appendChild(header.render());
+        pageContainer.appendChild(content);
+        return pageContainer;
     }
 
     /**
@@ -67,13 +67,12 @@ export class BoardsListPage {
             buttons: [
                 {
                     text: 'Отмена',
-                    onClick: () => modal.close(),
-                    type: 'danger'
+                    onClick: () => modal.close()
                 },
                 {
                     text: 'Создать',
                     onClick: () => this.handleCreateBoardConfirm(modal),
-                    type: 'agreement'
+                    type: 'success'
                 }
             ],
             onClose: () => {

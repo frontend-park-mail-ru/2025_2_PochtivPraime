@@ -3,26 +3,26 @@
         {{#if isEditingTitle}}
             <div class="list-card__title-editing">
                 <textarea class="list-card__title-input" placeholder="Введите название списка...">{{title}}</textarea>
-                <button class="list-card__save-title-btn" type="button" aria-label="Сохранить">
+                <button class="list-card__save" type="button" aria-label="Сохранить">
                     ✓
                 </button>
             </div>
         {{else}}
-            <h3 class="title list-card__title">{{title}}</h3>
-            <button class="list-card__edit-title-btn" type="button" aria-label="Редактировать название">
-                <img src="/images/edit-icon.svg" alt="Редактировать" class="menu-icon">
+            <h3 class="list-card__title">{{title}}</h3>
+            <button class="list-card__edit" type="button" aria-label="Редактировать название">
+                <img src="/images/edit-icon.svg" alt="Редактировать" />
             </button>
         {{/if}}
-        <button class="list-card__delete-btn" type="button" aria-label="Удалить список">
+        <button class="list-card__delete" type="button" aria-label="Удалить список">
             ×
         </button>
     </div>
 
-    <div class="list-card__tasks" id="tasks-container">
+    <div class="list-card__tasks">
     </div>
 
     <div class="list-card__footer">
-        <button class="list-card__add-task-btn" type="button">
+        <button class="list-card__add" type="button">
             Добавить карточку +
         </button>
     </div>

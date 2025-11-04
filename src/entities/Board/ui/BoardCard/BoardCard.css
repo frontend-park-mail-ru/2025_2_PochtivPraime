@@ -46,6 +46,9 @@
 }
 
 .board-card__title {
+    margin: 0;
+    color: var(--standart-text-color);
+    font-family: Verdana;
     font-size: 20px;
     display: -webkit-box;
     -webkit-box-orient: vertical;

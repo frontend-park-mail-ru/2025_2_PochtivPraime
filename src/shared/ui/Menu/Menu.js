@@ -62,7 +62,7 @@ export class Menu {
         }
 
         // убираем отдельный wrapper — используем элемент из шаблона напрямую
-        const actionsContainer = this.element.querySelector('#menu-actions-container');
+        const actionsContainer = this.element.querySelector('.menu__actions');
         if (!actionsContainer) {
             return this.element;
         }
@@ -70,12 +70,15 @@ export class Menu {
         this.actions.forEach(action => {
             const button = new Button(action.text, action.onClick, action.disabled);
             const buttonEl = button.render();
-            if (action.type) buttonEl.classList.add(`button-${action.type}`);
+            buttonEl.classList.add('btn--menu');
+            if (action.type) {
+                buttonEl.classList.add(`btn--${action.type}`);
+            }
             actionsContainer.appendChild(buttonEl);
         });
         
         // обработчик закрытия
-        const closeButton = this.element.querySelector('.menu-close');
+        const closeButton = this.element.querySelector('.menu__close');
         if (closeButton) {
             closeButton.addEventListener('click', () => this.close());
         }

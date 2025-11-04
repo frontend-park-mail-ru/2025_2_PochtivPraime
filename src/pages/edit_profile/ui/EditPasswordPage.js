@@ -23,21 +23,18 @@ export class EditPasswordPage {
     }
 
     render() {
-        document.body.className = 'edit-password-page';
 
         const pageContainer = document.createElement('div');
-        pageContainer.className = 'edit-password-page-container';
-
-        const header = new Header(this.userData, this.onLogout, this.onNavigate);
-        pageContainer.appendChild(header.render());
+        pageContainer.className = 'edit-password-page';
 
         const content = document.createElement('main');
         content.className = 'edit-password-page__content';
-        pageContainer.appendChild(content);
 
-        const contentWrapper = document.createElement('div');
-        contentWrapper.className = 'edit-password-wrapper';
-        content.appendChild(contentWrapper);
+        const formCard = document.createElement('div');
+        formCard.className = 'edit-password-page__form-card';
+
+
+        const header = new Header(this.userData, this.onLogout, this.onNavigate);
 
         const oldPasswordInput = new Input('password', 'Старый пароль', '', 'old-password');
         const newPasswordInput = new Input('password', 'Новый пароль', '', 'new-password');
@@ -60,8 +57,6 @@ export class EditPasswordPage {
             true
         );
 
-        contentWrapper.appendChild(form.render());
-
         const link = document.createElement('p');
         link.className = 'edit-password-page__link';
         link.innerHTML = `<a href="#">Вернуться к редактированию профиля</a>`;
@@ -69,7 +64,12 @@ export class EditPasswordPage {
             e.preventDefault();
             this.onGoBack();
         });
-        contentWrapper.appendChild(link);
+
+        formCard.appendChild(form.render());
+        formCard.appendChild(link);
+        content.appendChild(formCard);
+        pageContainer.appendChild(header.render());
+        pageContainer.appendChild(content);
 
         return pageContainer;
     }

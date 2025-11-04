@@ -1,6 +1,6 @@
 import Handlebars from 'handlebars/runtime.js';
     export default Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
-    return "      <div class=\"logo\">\n        <img src=\"/images/logo.svg\" alt=\"Логотип\" class=\"logo-img\">\n      </div>\n";
+    return "      <div class=\"form-container__logo\">\n        <img src=\"/images/logo.svg\" alt=\"Логотип\" class=\"form-container__logo-img\">\n      </div>\n";
 },"3":function(container,depth0,helpers,partials,data) {
     var helper, lookupProperty = container.lookupProperty || function(parent, propertyName) {
         if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {

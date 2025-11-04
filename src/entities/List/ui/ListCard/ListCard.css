@@ -56,9 +56,9 @@
     border-color: var(--focus-color);
 }
 
-.list-card__edit-title-btn,
-.list-card__delete-btn,
-.list-card__save-title-btn {
+.list-card__edit,
+.list-card__delete,
+.list-card__save {
     flex: 0 0 auto;
     background: none;
     border: none;
@@ -69,23 +69,23 @@
     border-radius: 4px;
 }
 
-.list-card__edit-title-btn:hover,
-.list-card__delete-btn:hover,
-.list-card__save-title-btn:hover {
+.list-card__edit:hover,
+.list-card__delete:hover,
+.list-card__save:hover {
     color: var(--standart-text-color);
 }
 
-.list-card__delete-btn:hover {
+.list-card__delete:hover {
     color: var(--warning-color);
 }
 
-.list-card__header:hover .list-card__edit-title-btn {
+.list-card__header:hover .list-card__edit {
     opacity: 1;
     visibility: visible;
 }
 
 
-.list-card__edit-title-btn {
+.list-card__edit {
     opacity: 0;
     visibility: hidden;
 }
@@ -100,7 +100,7 @@
     margin-top: auto;
 }
 
-.list-card__add-task-btn {
+.list-card__add {
     width: 100%;
     background-color: var(--secondary-color);
     border: none;
@@ -111,7 +111,8 @@
     font-size: 1rem;
 }
 
-.list-card__add-task-btn:hover {
+.list-card__add:hover {
     background-color: var(--secondary-focus-color);
 }
+
 

@@ -4,18 +4,18 @@
         {{#if isEditing}}
             <textarea class="task-card__input" placeholder="Введите задачу...">{{title}}</textarea>
             <div class="task-card__actions">
-                <span class="task-card__save-button-container">
+                <span class="task-card__save">
                     ✓
                 </span>
             </div>
         {{else}}
-            <span class="task-card__checkbox {{#if isCompleted}}task-card__checkbox--filled{{else}}task-card__checkbox--empty{{/if}}"></span>
+            <span class="task-card__checkbox"></span>
             <span class="task-card__title">{{title}}</span>
             <div class="task-card__actions">
-                <span class="task-card__edit-button-container">
-                    <img src="/images/edit-icon.svg" alt="Редактировать" class="menu-icon">
+                <span class="task-card__edit">
+                    <img src="/images/edit-icon.svg" alt="Редактировать" />
                 </span>
-                <span class="task-card__delete-button-container">
+                <span class="task-card__delete">
                     ✕
                 </span>
             </div>

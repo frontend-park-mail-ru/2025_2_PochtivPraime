@@ -6,14 +6,14 @@
     box-sizing: border-box;
 }
 
-.logo {
-    text-align: center;
-    margin-bottom: 8px;
+.form-container__logo {
+  text-align: center;
+  margin-bottom: 8px;
 }
 
-.logo-img {
-    height: 60px;
-    display: inline-block;
+.form-container__logo-img {
+  height: 60px;
+  display: inline-block;
 }
 
 .form {
@@ -40,11 +40,11 @@
     gap: 12px;
 }
 
-.form__error {
+.form__error,
+.form__success {
     display: none;
     padding: 10px;
-    background: rgba(244, 67, 54, 0.15);
-    color: var(--warning-color);
+    
     border-radius: 6px;
     font-size: 14px;
     text-align: center;
@@ -52,18 +52,12 @@
 
 .form__error:not([hidden]) {
     display: block;
-}
-
-.form__sucess {
-    display: none;
-    padding: 10px;
     background: rgba(244, 67, 54, 0.15);
-    color: var(--correct-color);
-    border-radius: 6px;
-    font-size: 14px;
-    text-align: center;
+    color: var(--warning-color);
 }
 
 .form__sucess:not([hidden]) {
     display: block;
+    background: rgba(54, 244, 86, 0.15);
+    color: var(--correct-color);
 }

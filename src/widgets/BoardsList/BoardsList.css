@@ -46,3 +46,10 @@
     font-size: 1.2rem;
     color: var(--standart-text-color);
 }
+
+.boards-list__title {
+    margin: 0;
+    font-size: 24px;
+    color: var(--standart-text-color);
+    font-family: Verdana;
+}

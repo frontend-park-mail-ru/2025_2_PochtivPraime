@@ -73,7 +73,7 @@ export class BoardsList {
      * Добавление кнопки в заголовок
      */
     addHeaderButton() {
-        const headerActionsContainer = this.element.querySelector('#header-actions-container');
+        const headerActionsContainer = this.element.querySelector('.boards-list__header-actions');
         
         let buttonText, buttonType;
         
@@ -96,7 +96,7 @@ export class BoardsList {
         });
         
         const buttonElement = headerButton.render();
-        buttonElement.classList.add(`button-${buttonType}`);
+        buttonElement.classList.add(`btn-${buttonType}`);
         headerActionsContainer.appendChild(buttonElement);
     }
     
@@ -104,7 +104,7 @@ export class BoardsList {
      * Рендер карточек досок
      */
     renderBoards() {
-        const boardsGridContainer = this.element.querySelector('#boards-grid-container');
+        const boardsGridContainer = this.element.querySelector('.boards-list__grid');
         boardsGridContainer.innerHTML = '';
         
         const startIndex = (this.currentPage - 1) * this.boardsPerPage;
@@ -150,7 +150,7 @@ export class BoardsList {
      * Рендер пагинации через компонент Pagination
      */
     renderPagination() {
-        const paginationContainer = this.element.querySelector('#pagination-container');
+        const paginationContainer = this.element.querySelector('.boards-list__pagination');
         if (!paginationContainer) return;
 
         // Удаляем старую пагинацию (если есть)

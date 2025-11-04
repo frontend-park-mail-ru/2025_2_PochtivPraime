@@ -36,7 +36,7 @@
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.modal-close {
+.modal__close {
     background: none;
     border: none;
     color: var(--secondary-text-color);
@@ -44,7 +44,6 @@
     cursor: pointer;
     padding: 4px;
     border-radius: 4px;
-    transition: color 0.2s, background 0.2s;
 }
 
 
@@ -61,21 +60,17 @@
     font-size: 1rem;
 }
 
-.modal-footer {
+.modal__buttons {
     display: flex;
     gap: 12px;
     padding: 0 24px 24px;
     justify-content: flex-end;
 }
 
-.input_wrapper{
-    justify-content: center;
-}
 
-.button-danger {
-    background-color: var(--warning-color);
-}
-
-.button-agreement {
-    background-color: var(--correct-color);
+.modal__title {
+    margin: 0;
+    font-size: 24px;
+    color: var(--standart-text-color);
+    font-family: Verdana;
 }

@@ -19,42 +19,45 @@ body {
     margin: 0;
     padding: 0;
     min-height: 100%;
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
     font-family: Tahoma;
     color: var(--standart-text-color);
     line-height: 1.6;
     font-size: 16px;
 }
 
-.title {
-    margin: 0;
-    font-size: 24px;
-    color: var(--standart-text-color);
-    font-family: Verdana;
+body.page--login {
+  background-image: url('/images/login-page-background.jpg');
 }
 
-.login-page {
-    background-image: url('/images/login-page-background.jpg') !important;
+body.page--register {
+  background-image: url('/images/register-page-background.jpg');
 }
 
-.register-page {
-    background-image: url('/images/register-page-background.jpg') !important;
+body.page--boards,
+body.page--profile,
+body.page--edit-profile,
+body.page--edit-password,
+body.page--board {
+  background-image: url('/images/boards-page-background.jpg');
 }
 
-.boards-list-page,
-.profile-page,
-.edit-profile-page,
-.edit-password-page {
-    background-image: url('/images/boards-page-background.jpg') !important;
+body.page--login,
+body.page--register,
+body.page--boards,
+body.page--profile,
+body.page--edit-profile,
+body.page--edit-password,
+body.page--board {
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
 }
 
-.login-page-wrapper,
-.register-page-wrapper,
-.edit-profile-page-wrapper,
-.edit-password-page-wrapper {
+
+.login-page__wrapper,
+.register-page__wrapper,
+.edit-password-page__wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -64,15 +67,14 @@ body {
     box-sizing: border-box;
 }
 
-.edit-profile-page-wrapper,
-.edit-password-page-wrapper {
+.edit-password-page__wrapper {
     margin-top: 80px;
 }
 
-.login-wrapper,
-.register-wrapper,
-.edit-profile-wrapper,
-.edit-password-wrapper {
+.login-page__form-card,
+.register-page__form-card,
+.edit-profile-page__form-card,
+.edit-password-page__form-card {
     background: var(--second-transparent-bg-color);
     padding: 20px;
     backdrop-filter: blur(8px);
@@ -107,7 +109,7 @@ body {
     background-color: var(--secondary-color);
 }
 
-.board-page__main {
+.board-page__content {
     flex: 1;
     display: flex;
     overflow: hidden;
@@ -122,13 +124,6 @@ body {
     padding-top: 80px;
 }
 
-.edit-profile-page-container,
-.edit-password-page-container {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-}
-
 .profile-page__content {
     display: flex;
     justify-content: center;
@@ -139,7 +134,7 @@ body {
     box-sizing: border-box;
 }
 
-.profile-wrapper {
+.profile-page__wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -151,7 +146,7 @@ body {
     backdrop-filter: blur(8px);
 }
 
-.profile-avatar {
+.profile-page__avatar {
     width: 120px;
     height: 120px;
     border-radius: 50%;
@@ -159,13 +154,13 @@ body {
     margin-bottom: 20px;
 }
 
-.profile-username {
+.profile-page__username {
     margin: 0 0 10px;
     font-size: 24px;
     color: var(--standart-text-color);
 }
 
-.profile-email {
+.profile-page__email {
     margin: 0 0 20px;
     font-size: 16px;
     color: var(--secondary-text-color);

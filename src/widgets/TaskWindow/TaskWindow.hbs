@@ -1,9 +1,9 @@
 <div class="task-window">
     <div class="task-window__header">
-        <button class="task-window__menu-btn" type="button" aria-label="Меню">
+        <button class="task-window__menu" type="button" aria-label="Меню">
             <img src="/images/menu-icon.svg" alt="Меню">
         </button>
-        <button class="task-window__close-btn" type="button" aria-label="Закрыть">
+        <button class="task-window__close" type="button" aria-label="Закрыть">
             ✕
         </button>
     </div>
@@ -11,10 +11,10 @@
         {{#if isEditing}}
             <textarea class="task-window__input">{{title}}</textarea>
             <div class="task-window__actions">
-                <span class="task-window__save-btn">✓</span>
+                <span class="task-window__save">✓</span>
             </div>
         {{else}}
-            <span class="task-window__checkbox {{#if isCompleted}}task-window__checkbox--filled{{else}}task-window__checkbox--empty{{/if}}"></span>
+            <span class="task-window__checkbox {{#if isCompleted}}task-window__checkbox--filled{{/if}}"></span>
             <span class="task-window__title">{{title}}</span>
         {{/if}}
     </div>

@@ -18,13 +18,15 @@ export class BoardPage {
     }
 
     render() {
-        document.body.className = 'board-page';
-        const container = document.createElement('div');
-        container.className = 'board-page';
+
+        const pageContainer = document.createElement('div');
+        pageContainer.className = 'board-page';
+
+        const content = document.createElement('main');
+        content.className = 'board-page__content';
 
         const header = new Header(this.userData, this.options.onLogout, this.options.onNavigate);
-        container.appendChild(header.render());
-
+        
         const listsContainer = new ListCardsList(
             this.boardData,
             (boardId, newList) => this.options.onAddList(boardId, newList),
@@ -41,13 +43,13 @@ export class BoardPage {
             (boardId, newName) => this.options.onRenameBoard(boardId, newName),
             (boardId) => this.options.onCloseBoard(boardId)
         );
-        container.appendChild(boardHeader.render());
+        
+        
+        content.appendChild(listsContainer.render());
+        pageContainer.appendChild(header.render());
+        pageContainer.appendChild(boardHeader.render());
+        pageContainer.appendChild(content);
 
-        const main = document.createElement('main');
-        main.className = 'board-page__main';
-        main.appendChild(listsContainer.render());
-        container.appendChild(main);
-
-        return container;
+        return pageContainer;
     }
 }

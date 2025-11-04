@@ -18,6 +18,7 @@ export class Input {
     this.placeholder = placeholder;
     this.value = value;
     this.error = '';
+    this.touched = false;
     this.wrapper = null;
     this.element = null;
     this.name = name;
@@ -48,14 +49,7 @@ export class Input {
       }
     }
 
-    this.element.classList.remove('is-valid', 'is-invalid');
-    if (this.error) {
-        this.element.classList.add('is-invalid');
-    } else {
-        this.element.classList.add('is-valid');
-    }
-
-    this.update();
+    this.setError(this.error);
     return this.error === '';
   }
 
@@ -65,13 +59,9 @@ export class Input {
    */
   setError(message) {
     this.error = message;
-    if (this.element) {
-      this.element.classList.remove('is-valid', 'is-invalid');
-      if (this.error) {
-        this.element.classList.add('is-invalid');
-      } else {
-        this.element.classList.add('is-valid');
-      }
+    if (this.element && this.touched) {
+      this.element.classList.remove('input-wrapper__input--valid', 'input-wrapper__input--invalid');
+      this.element.classList.add( this.error === '' ? 'input-wrapper__input--valid' : 'input-wrapper__input--invalid' );
     }
     this.update();
   }
@@ -94,7 +84,10 @@ export class Input {
       placeholder: this.placeholder,
       value: this.value,
       error: this.error,
-      name: this.name
+      name: this.name,
+      isValid: this.error === '',
+      isInvalid: this.error !== '',
+      isConfirmPassword: this.name === 'confirm-password'
     });
 
     const div = document.createElement('div');
@@ -105,6 +98,11 @@ export class Input {
 
     this.element.addEventListener('input', (e) => {
       this.value = e.target.value;
+      this.touched = true;
+      this.validate();
+    });
+    this.element.addEventListener('blur', () => {
+      this.touched = true;
       this.validate();
     });
 
@@ -117,7 +115,7 @@ export class Input {
 update() {
     if (!this.wrapper) return;
 
-    const errorSpan = this.wrapper.querySelector('.error');
+    const errorSpan = this.wrapper.querySelector('.input-wrapper__error');
     if (this.error) {
         errorSpan.textContent = this.error;
     } else {

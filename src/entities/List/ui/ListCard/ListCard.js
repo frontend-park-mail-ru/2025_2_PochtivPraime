@@ -57,9 +57,9 @@ export class ListCard {
 
         // Используем делегирование для кнопок так как они меняются при редактировании заголовка
         header.addEventListener('click', (e) => {
-            const editBtn = e.target.closest('.list-card__edit-title-btn');
-            const saveBtn = e.target.closest('.list-card__save-title-btn');
-            const deleteBtn = e.target.closest('.list-card__delete-btn');
+            const editBtn = e.target.closest('.list-card__edit');
+            const saveBtn = e.target.closest('.list-card__save');
+            const deleteBtn = e.target.closest('.list-card__delete');
 
             if (editBtn) {
                 this.startEditTitle();
@@ -80,7 +80,7 @@ export class ListCard {
         }
 
         //кнопка добавления задачи
-        const addTaskBtn = this.element.querySelector('.list-card__add-task-btn');
+        const addTaskBtn = this.element.querySelector('.list-card__add');
         if (addTaskBtn) {
             addTaskBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
@@ -93,7 +93,7 @@ export class ListCard {
      * Рендерит задачи внутри списка.
      */
     renderTasks() {
-        const container = this.element.querySelector('#tasks-container');
+        const container = this.element.querySelector('.list-card__tasks');
         if (!container) return;
 
         container.innerHTML = '';
@@ -179,7 +179,7 @@ export class ListCard {
                     if (this.onDelete) this.onDelete(this.listData.id);
                     modal.close();
                     this.element.remove();
-                }, type: 'agreement' }
+                }, type: 'success' }
             ]
         });
         modal.show();
@@ -196,10 +196,10 @@ export class ListCard {
 
         // автоматически включаем редактирование
         setTimeout(() => {
-            const tasksContainer = this.element.querySelector('#tasks-container');
+            const tasksContainer = this.element.querySelector('.list-card__tasks');
             const lastTaskCard = tasksContainer.lastElementChild;
             if (lastTaskCard) {
-                const editBtn = lastTaskCard.querySelector('.task-card__edit-button-container img');
+                const editBtn = lastTaskCard.querySelector('.task-card__edit img');
                 if (editBtn) editBtn.click();
             }
         }, 0);

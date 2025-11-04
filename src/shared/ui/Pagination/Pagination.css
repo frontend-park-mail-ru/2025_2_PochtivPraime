@@ -15,7 +15,8 @@
     flex-shrink: 0;
 }
 
-.pagination__btn-container {
+.pagination__prev,
+.pagination__next {
     display: flex;
     justify-content: center;
     align-items: center;

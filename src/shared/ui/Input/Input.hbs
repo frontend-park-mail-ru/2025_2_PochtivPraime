@@ -1,10 +1,10 @@
-<div class="input-wrapper">
+<div class="input-wrapper{{#if isConfirmPassword}} input-wrapper--confirm-password{{/if}}">
   <input 
     type="{{type}}"
-    class="input"
+    class="input-wrapper__input"
     placeholder="{{placeholder}}"
     value="{{value}}"
     name="{{name}}"
   />
-  <span class="error"></span>
+  <span class="input-wrapper__error">{{error}}</span>
 </div>

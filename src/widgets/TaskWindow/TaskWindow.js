@@ -58,13 +58,13 @@ export class TaskWindow {
         }
 
         //кнопка закрытия
-        const closeBtn = this.element.querySelector('.task-window__close-btn');
+        const closeBtn = this.element.querySelector('.task-window__close');
         if (closeBtn) {
             closeBtn.addEventListener('click', () => this.close());
         }
 
         //кнопка сохранения
-        const saveBtn = this.element.querySelector('.task-window__save-btn');
+        const saveBtn = this.element.querySelector('.task-window__save');
         if (saveBtn) {
             saveBtn.addEventListener('click', () => this.saveEdit());
         }
@@ -86,7 +86,7 @@ export class TaskWindow {
         }
 
         //кнопки меню
-        const menuBtn = this.element.querySelector('.task-window__menu-btn');
+        const menuBtn = this.element.querySelector('.task-window__menu');
         if (menuBtn) {
             menuBtn.addEventListener('click', (e) => {
                 e.stopPropagation();

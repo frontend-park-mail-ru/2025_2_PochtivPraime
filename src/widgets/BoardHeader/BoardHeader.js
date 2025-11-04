@@ -120,13 +120,12 @@ export class BoardHeader {
             buttons: [
                 {
                     text: 'Отмена',
-                    onClick: () => modal.close(),
-                    type: 'danger'
+                    onClick: () => modal.close()
                 },
                 {
                     text: 'Сохранить',
                     onClick: () => this.handleRenameConfirm(modal),
-                    type: 'agreement'
+                    type: 'success'
                 }
             ],
             onClose: () => {
@@ -193,7 +192,7 @@ export class BoardHeader {
                         }
                         modal.close();
                     },
-                    type: 'agreement'
+                    type: 'success'
                 }
             ],
             onClose: () => {}

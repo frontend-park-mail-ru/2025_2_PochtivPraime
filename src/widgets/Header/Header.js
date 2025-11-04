@@ -35,13 +35,13 @@ export class Header {
         
         const logoutButton = new Button('', this.onLogout);
         const logoutButtonElement = logoutButton.render();
-        logoutButtonElement.classList.add('logout-button');
-        const buttonContainer = this.element.querySelector('#logout-button-container');
+        logoutButtonElement.classList.add('btn--logout');
+        const buttonContainer = this.element.querySelector('.header__actions');
         buttonContainer.appendChild(logoutButtonElement);
         
-        const logo = this.element.querySelector('.logo-img');
-        const username = this.element.querySelector('.username');
-        const avatar = this.element.querySelector('.avatar');
+        const logo = this.element.querySelector('.header__logo-img');
+        const username = this.element.querySelector('.header__username');
+        const avatar = this.element.querySelector('.header__avatar');
 
         if (logo) {
             logo.addEventListener('click', () => this.onNavigate('/'));

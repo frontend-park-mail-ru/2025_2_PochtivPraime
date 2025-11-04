@@ -6,7 +6,7 @@
     cursor: pointer;
     color: var(--standart-text-color);
     font-size: 16px;
-    font-family:  Tahoma;
+    font-family: Tahoma;
 }
 
 .btn:hover {
@@ -14,7 +14,35 @@
 }
 
 .btn--disabled {
-    background-color: var(--standart-bg-color) !important;
+    background-color: var(--standart-bg-color);
     color: var(--secondary-focus-color);
-    cursor: not-allowed !important;
+    cursor: not-allowed;
+}
+
+.btn--danger {
+    background-color: var(--warning-color);
+}
+
+.btn--success {
+    background-color: var(--correct-color);
+}
+
+.btn--menu {
+  width: 100%;
+  text-align: left;
+  padding: 10px 14px;
+  font-size: 0.95rem;
+  border-radius: 6px;
+  background-color: transparent;
+  color: var(--standart-text-color);
+  border: 1px solid transparent;
+}
+
+.btn--logout {
+    background-image: url('/images/logout_button.svg');
+    background-size: 20px 20px;
+    width: 32px;
+    height: 32px;
+    background-repeat: no-repeat;
+    background-position: center;
 }

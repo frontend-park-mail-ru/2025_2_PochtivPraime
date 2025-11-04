@@ -147,7 +147,7 @@ export class BoardCard {
                         }
                         modal.close();
                     },
-                    type: 'agreement'
+                    type: 'success'
                 }
             ],
             onClose: () => {}

@@ -68,7 +68,7 @@ export class ListCardsList {
      * Рендер всех списков внутри компонента
      */
     renderLists() {
-        const listsContainer = this.element.querySelector('#lists-container');
+        const listsContainer = this.element.querySelector('.list-cards-list__container');
         if (!listsContainer) return;
 
         listsContainer.innerHTML = ''; // очищаем старые списки

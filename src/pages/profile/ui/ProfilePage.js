@@ -19,42 +19,43 @@ export class ProfilePage {
     }
 
     render() {
-        document.body.className = 'profile-page';
-
         const pageContainer = document.createElement('div');
-        pageContainer.className = 'profile-page-container';
-
-        const header = new Header(this.userData, this.onLogout, this.onNavigate);
-        pageContainer.appendChild(header.render());
+        pageContainer.className = 'profile-page';
 
         const content = document.createElement('main');
         content.className = 'profile-page__content';
-        pageContainer.appendChild(content);
 
         const profileWrapper = document.createElement('div');
-        profileWrapper.className = 'profile-wrapper';
-        content.appendChild(profileWrapper);
+        profileWrapper.className = 'profile-page__wrapper';
+
+        const header = new Header(this.userData, this.onLogout, this.onNavigate);
 
         const avatar = document.createElement('img');
-        avatar.className = 'profile-avatar';
+        avatar.className = 'profile-page__avatar';
         avatar.src = this.userData.avatarUrl || '/images/default-avatar.png';
         avatar.alt = 'Avatar';
-        profileWrapper.appendChild(avatar);
-
+        
         const username = document.createElement('h2');
-        username.className = 'profile-username';
+        username.className = 'profile-page__username';
         username.textContent = this.userData.username || 'Имя пользователя';
-        profileWrapper.appendChild(username);
-
+        
         const email = document.createElement('p');
-        email.className = 'profile-email';
+        email.className = 'profile-page__email';
         email.textContent = this.userData.email || 'example@mail.com';
-        profileWrapper.appendChild(email);
-
+        
         const editButton = new Button('Редактировать профиль', () => {
             this.onEditProfile();
         });
+        
+
+        profileWrapper.appendChild(avatar);
+        profileWrapper.appendChild(username);
+        profileWrapper.appendChild(email);
         profileWrapper.appendChild(editButton.render());
+
+        content.appendChild(profileWrapper);
+        pageContainer.appendChild(header.render());
+        pageContainer.appendChild(content);
 
         return pageContainer;
     }

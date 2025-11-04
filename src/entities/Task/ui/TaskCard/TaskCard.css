@@ -85,9 +85,9 @@
     visibility: visible;
 }
 
-.task-card__save-button-container,
-.task-card__delete-button-container,
-.task-card__edit-button-container {
+.task-card__save,
+.task-card__delete,
+.task-card__edit {
     cursor: pointer;
     font-size: 1.2rem;
     user-select: none;
@@ -98,11 +98,11 @@
     transition: color 0.2s ease;
 }
 
-.task-card__save-button-container:hover,
-.task-card__edit-button-container:hover {
+.task-card__save:hover,
+.task-card__edit:hover {
     color: var(--focus-color);
 }
 
-.task-card__delete-button-container:hover {
+.task-card__delete:hover {
     color: var(--warning-color);
 }
