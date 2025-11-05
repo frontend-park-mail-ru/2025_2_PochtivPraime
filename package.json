@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npm run build && node server/server.js",
+    "start": "node server/server.js",
     "precompile:hbs": "node precompile_hbs.js",
     "build": "npm run precompile:hbs && webpack --mode production",
     "dev": "npm run precompile:hbs && webpack serve"

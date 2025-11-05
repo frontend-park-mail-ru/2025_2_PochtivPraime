@@ -32,7 +32,7 @@ export class BoardCard {
         const html = template({
             id: this.boardData.id,
             title: this.boardData.title,
-            image: this.boardData.image || "/images/default-board-bg.jpg",
+            image:  "/images/default-board-bg.jpg", //временно без this.boardData.image ||
             archived: this.boardData.archived
         });
         
