@@ -35,7 +35,7 @@ export default {
                 url: false
             },
           },
-          'postcss-loader',
+          //'postcss-loader',
           'sass-loader'
         ]
       }
@@ -45,6 +45,9 @@ export default {
     extensions: ['.js']
   },
   devServer: {
+    client: {
+      overlay: false
+    },
     static: {
         directory: path.join(__dirname, 'public'),
     },

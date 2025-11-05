@@ -137,7 +137,6 @@ $title-font-family: Verdana;
   font-size: $fontSize;
 }
 
-
 body {
     margin: 0;
     padding: 0;
@@ -146,6 +145,10 @@ body {
     color: var(--standart-text-color);
     line-height: 1.6;
     font-size: 16px;
+}
+
+[style*="pointer-events"] {
+  pointer-events: auto !important;
 }
 
 body.page--login {
