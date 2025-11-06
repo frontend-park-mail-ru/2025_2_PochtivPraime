@@ -9,7 +9,7 @@ import { TasksApi } from '../api/TasksApi.js';
  */
 export async function handleCreateTask(boardId, listId, taskName) {
     try {
-        const createdTask = await TasksApi.createTask(boardId, listId, taskName);
+        const createdTask = await TasksApi.createTask(boardId, listId, { content: taskName });
         return createdTask;
     } catch (error) {
         console.error('Create task error:', error);

@@ -8,7 +8,7 @@ import { ListsApi } from '../api/ListsApi.js';
  */
 export async function handleCreateList(boardId, listName) {
     try {
-        const createdList = await ListsApi.createList(boardId, listName);
+        const createdList = await ListsApi.createList(boardId, { title: listName });
         return createdList;
     } catch (error) {
         console.error('Create task error:', error);

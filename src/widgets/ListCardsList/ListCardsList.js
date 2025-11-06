@@ -134,11 +134,20 @@ export class ListCardsList {
             title: 'Новый список',
             tasks: []
         };
-
         this.lists.push(newList);
-        if (this.onAddList) this.onAddList(this.boardData.id, newList); // дальше в хендлер
         this.rerender();
 
+        if (this.onAddList) {
+            const created = this.onAddList(this.boardData.id, newList);
+            if (created && created.id) {
+                const listIndex = this.lists.findIndex(l => l.id === newList.id);
+                if (listIndex !== -1) {
+                    this.lists[listIndex].id = created.id;
+                    console.log(`Обновлен ID списка: ${newList.id} -> ${created.id}`);
+                }
+            }
+        }
+        
         // Прокрутка к новому списку
         setTimeout(() => {
             const listsContainer = this.element.querySelector('#lists-container');
@@ -146,6 +155,14 @@ export class ListCardsList {
                 listsContainer.scrollLeft = listsContainer.scrollWidth;
             }
         }, 0);
+    }
+
+    updateListId(tempId, newId) {
+        const list = this.lists.find(l => l.id === tempId);
+        if (list) {
+            list.id = newId;
+            this.rerender();
+        }
     }
 
     /**

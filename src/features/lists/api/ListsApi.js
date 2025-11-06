@@ -2,11 +2,11 @@ import { apiClient } from '../../../shared/api/ApiClient.js';
 
 export const ListsApi = {
     async getLists(boardId) {
-        return apiClient.get(`board/${boardId}/lists`);
+        return apiClient.get(`/board/${boardId}/lists`);
     },
 
     async getList(boardId, listId) {
-        return apiClient.get(`board/${boardId}/lists/${listId}`);
+        return apiClient.get(`/board/${boardId}/lists/${listId}`);
     },
 
     async createList(boardId, title) {

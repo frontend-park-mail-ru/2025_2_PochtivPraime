@@ -243,26 +243,24 @@ async function handleActionWithReload(actionPromise) {
 }
 
 async function handleAddListWithSync(boardId, newList) {
-    const tempId = newList.id;
     const created = await ListsHandlers.handleCreateList(boardId, newList.title);
-
     if (created && created.id) {
-        const boardData = await BoardHandlers.handleGetBoard(boardId);
         console.log(`Список создан на сервере: ${created.id}`);
+        return created;
     } else {
         console.warn('Ошибка при создании списка, останется локально');
+        return null;
     }
 }
 
 async function handleAddTaskWithSync(boardId, listId, newTask) {
-    const tempId = newTask.id;
     const created = await TasksHandlers.handleCreateTask(boardId, listId, newTask.title);
-
     if (created && created.id) {
-        const boardData = await BoardHandlers.handleGetBoard(boardId);
         console.log(`Задача синхронизирована: ${created.id}`);
+        return created;
     } else {
         console.warn('Ошибка при создании задачи, оффлайн режим');
+        return null;
     }
 }
 

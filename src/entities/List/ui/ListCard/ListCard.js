@@ -191,9 +191,18 @@ export class ListCard {
     addNewTask() {
         const newTask = { id: `temp-${Date.now()}`, title: '', isCompleted: false };
         this.tasks.push(newTask);
-        if (this.onAddTask) this.onAddTask(this.listData.id, newTask);
         this.renderTasks();
 
+        if (this.onAddList) {
+            const created = this.onAddTask(this.listData.id, newTask);
+            if (created && created.id) {
+                const taskIndex = this.tasks.findIndex(t => t.id === newTask.id);
+                if (taskIndex !== -1) {
+                    this.tasks[taskIndex].id = created.id;
+                    console.log(`Обновлен ID списка: ${newTask.id} -> ${created.id}`);
+                }
+            }
+        }
         // автоматически включаем редактирование
         setTimeout(() => {
             const tasksContainer = this.element.querySelector('.list-card__tasks');

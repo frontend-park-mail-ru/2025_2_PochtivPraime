@@ -9,8 +9,8 @@ export const TasksApi = {
         return apiClient.get(`/board/${boardId}/list/${listId}/task/${taskId}`);
     },
 
-    async createTask(boardId, listId, text) {
-        return apiClient.post(`/board/${boardId}/list/${listId}/tasks`, text);
+    async createTask(boardId, listId, content) {
+        return apiClient.post(`/board/${boardId}/list/${listId}/tasks`, content);
     },
 
     async updateTask(boardId, listId, taskId, data) {
