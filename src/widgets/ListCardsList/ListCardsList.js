@@ -129,25 +129,15 @@ export class ListCardsList {
      * Добавление нового списка
      */
     addNewList() {
-        const newList = {
-            id: `temp-${Date.now()}`,
-            title: 'Новый список',
-            tasks: []
-        };
-        this.lists.push(newList);
-        this.rerender();
+        const newList = { title: 'Новый список', tasks: [] };
 
         if (this.onAddList) {
             const created = this.onAddList(this.boardData.id, newList);
-            if (created && created.id) {
-                const listIndex = this.lists.findIndex(l => l.id === newList.id);
-                if (listIndex !== -1) {
-                    this.lists[listIndex].id = created.id;
-                    console.log(`Обновлен ID списка: ${newList.id} -> ${created.id}`);
-                }
-            }
+            if (created && created.id) newList.id = created.id; // присвоение ID от сервера
+            this.lists.push(newList);
+            this.rerender();
         }
-        
+
         // Прокрутка к новому списку
         setTimeout(() => {
             const listsContainer = this.element.querySelector('#lists-container');
