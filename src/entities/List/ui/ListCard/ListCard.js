@@ -103,15 +103,15 @@ export class ListCard {
                 task,
                 (taskDataOrId, title) => {
                     // если задача новая, taskDataOrId это объект
-                    if (!taskDataOrId.id) {
+                    if (typeof taskDataOrId === 'object' && !taskDataOrId.id) {
                         const created = this.onAddTask(this.listData.id, taskDataOrId);
                         if (created && created.id) {
                             taskDataOrId.id = created.id;
                             console.log(`Синхронизировано: ${created.id}`);
                         }
                     } else if (this.onUpdateTask) {
-                        this.onUpdateTask(this.listData.id, taskDataOrId, title);
-                    }
+                    this.onUpdateTask(this.listData.id, taskDataOrId, title);
+                }
                     this.renderTasks();
                 },
                 (taskId) => this.removeTask(taskId),
