@@ -43,15 +43,27 @@ export class EditProfilePage {
             [usernameInput, emailInput],
             submitButton,
             (values) => {
-                const errorMessage = this.onProfileChange(values);
+        this.onProfileChange(values)
+            .then((errorMessage) => {
                 if (errorMessage) {
-                    form.setServerError(errorMessage);
+                    form.setServerError("Ошибка изменения данных пользователя");
                 } else {
                     form.setServerSucess('Профиль успешно обновлён!');
+                    this.userData.username = values.text;
+                    this.userData.email = values.email;
+                    console.log(values)
                     const newHeader = new Header(this.userData, this.onLogout, this.onNavigate);
-                    pageContainer.replaceChild(newHeader.render(), pageContainer.querySelector('.header'));
+                    pageContainer.replaceChild(
+                        newHeader.render(),
+                        pageContainer.querySelector('.header')
+                    );
                 }
-            },
+            })
+            .catch((err) => {
+                console.error("Profile update failed:", err);
+                form.setServerError("Ошибка при изменении профиля");
+            });
+        },
             'Редактирование профиля',
             true
         );

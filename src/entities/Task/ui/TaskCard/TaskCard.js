@@ -116,6 +116,7 @@ export class TaskCard {
         this.isCompleted = !this.isCompleted;
         this.taskData.isCompleted = this.isCompleted;
         if (this.onToggleComplete) {
+            console.log("your", this.task)
             this.onToggleComplete(this.taskData.id, this.isCompleted);
         }
         this.rerender();
@@ -188,7 +189,8 @@ export class TaskCard {
         const taskWindow = new TaskWindow(this.taskData, {
             onClose: (updatedTask) => {
                 console.log(!updatedTask.content==this.taskData.content);
-                if (!(updatedTask==this.taskData)) {
+                if (updatedTask.content !== this.taskData.content ||
+                updatedTask.isCompleted !== this.taskData.isCompleted)  {
                     this.taskData = { ...updatedTask };
                     console.log(this.taskData);
                     console.log(this.taskData.content)

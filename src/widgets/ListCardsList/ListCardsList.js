@@ -135,19 +135,21 @@ export class ListCardsList {
         const newList = { title: 'Новый список', tasks: [] };
 
         if (this.onAddList) {
-            const created = this.onAddList(this.boardData.id, newList);
-            if (created && created.id) newList.id = created.id; // присвоение ID от сервера
-            this.lists.push(newList);
-            this.rerender();
-        }
+            const created = this.onAddList(this.boardData.id, newList)
+            .then((created)=>{
+                if (created && created.id) newList.id = created.id; // присвоение ID от сервера
+                this.lists.push(newList);
+                this.rerender();
 
-        // Прокрутка к новому списку
-        setTimeout(() => {
-            const listsContainer = this.element.querySelector('#lists-container');
-            if (listsContainer) {
-                listsContainer.scrollLeft = listsContainer.scrollWidth;
-            }
-        }, 0);
+                // Прокрутка к новому списку
+                setTimeout(() => {
+                    const listsContainer = this.element.querySelector('#lists-container');
+                    if (listsContainer) {
+                        listsContainer.scrollLeft = listsContainer.scrollWidth;
+                    }
+                }, 0);
+            })
+        }
     }
 
     updateListId(tempId, newId) {

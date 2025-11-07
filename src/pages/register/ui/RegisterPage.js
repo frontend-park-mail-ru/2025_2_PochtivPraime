@@ -39,10 +39,16 @@ export class RegisterPage {
             [loginInput, emailInput, passwordInput, confirmPasswordInput],
             submitButton,
             (values) => {
-                const errorMessage = this.onRegister(values);
-                if (errorMessage) {
-                    form.setServerError(errorMessage);
-                }
+                this.onRegister(values)
+                    .then((errorMessage) => {
+                        if (errorMessage) {
+                            form.setServerError(errorMessage);
+                        }
+                    })
+                    .catch((err) => {
+                        console.error("Registration failed:", err);
+                        form.setServerError("Произошла ошибка при регистрации");
+                    });
             },
             "Регистрация",
             true

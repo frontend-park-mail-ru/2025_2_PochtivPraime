@@ -48,12 +48,14 @@ export class EditPasswordPage {
             (values) => {
                 values.oldPassword = oldPasswordInput.getValue();
                 values.newPassword = newPasswordInput.getValue();
-                const errorMessage = this.onChangePassword(values);
-                if (errorMessage) {
-                    form.setServerError(errorMessage);
-                } else {
-                    form.setServerSucess('Пароль успешно изменён!');
-                }
+                this.onChangePassword(values)
+                .then( (errorMessage)=> {
+                    if (errorMessage) {
+                        form.setServerError(errorMessage);
+                    } else {
+                        form.setServerSucess('Пароль успешно изменён!');
+                    }
+                })
             },
             'Изменение пароля',
             true

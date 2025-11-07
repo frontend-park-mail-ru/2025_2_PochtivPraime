@@ -107,13 +107,13 @@ export class ListCard {
                     if (!taskDataOrId.id) {
                         if (this.onAddTask) {
                             console.log(this.listData.id);
-                            this.onAddTask(this.listData.id, taskDataOrId);
+                            return this.onAddTask(this.listData.id, taskDataOrId);
                         }
                     } else {
                         // существующая задача
                         if (this.onUpdateTask) {
                             console.log("зашло")
-                            this.onUpdateTask(this.listData.id, taskDataOrId.id, { content: taskDataOrId.content });
+                            return this.onUpdateTask(this.listData.id, taskDataOrId.id, { content: taskDataOrId.content });
                         }
                     }
 

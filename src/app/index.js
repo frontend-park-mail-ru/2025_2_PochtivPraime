@@ -224,6 +224,7 @@ async function handleChangePassword(data) {
 async function handleProfileChange(data) {
     const errorMessage = await ProfileHandlers.handleUpdateProfile(data);
     return errorMessage;
+    
 }
 
 async function handleLogoutAndRedirect() {
