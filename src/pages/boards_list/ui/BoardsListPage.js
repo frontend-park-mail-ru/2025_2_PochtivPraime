@@ -4,31 +4,33 @@ import { Modal } from '../../../shared/ui/Modal/Modal.js';
 import { Input } from '../../../shared/ui/Input/Input.js';
 
 export class BoardsListPage {
-    constructor(userData, activeBoards, archivedBoards, onLogout, onRestoreBoard, onDeleteBoard, onCreateBoard) {
+    constructor(userData, activeBoards, archivedBoards, onLogout, onOpen, onRestoreBoard, onDeleteBoard, onCreateBoard, onNavigate) {
         this.userData = userData;
-        this.activeBoards = activeBoards;
-        this.archivedBoards = archivedBoards;
+        this.activeBoards = activeBoards || [];
+        this.archivedBoards = archivedBoards || [];
         this.onLogout = onLogout;
+        this.onOpen = onOpen;
         this.onRestoreBoard = onRestoreBoard;
         this.onDeleteBoard = onDeleteBoard;
         this.onCreateBoard = onCreateBoard;
         this.boardNameInput = null;
+        this.onNavigate = onNavigate;
     }
 
     render() {
-        document.body.className = 'boards-list-page';
-        const container = document.createElement('div');
-        container.className = 'boards-list-page';
-        
-        const header = new Header(this.userData, this.onLogout);
-        container.appendChild(header.render());
+        const pageContainer = document.createElement('div');
+        pageContainer.className = 'board-list-page';
+
         const content = document.createElement('main');
         content.className = 'boards-list-page__content';
         
+        const header = new Header(this.userData, this.onLogout, this.onNavigate);
+        console.log(this.activeBoards, this.activeBoards)
         const activeBoardsList = new BoardsList({
             title: 'Мои доски',
             boards: this.activeBoards,
             isArchived: false,
+            onOpen: this.onOpen,
             onHeaderButtonClick: () => this.showCreateBoardModal(),
             boardsPerPage: 10
         });
@@ -39,6 +41,7 @@ export class BoardsListPage {
                 title: 'Закрытые доски',
                 boards: this.archivedBoards,
                 isArchived: true,
+                onOpen: this.onOpen,
                 onRestoreBoard: this.onRestoreBoard,
                 onDeleteBoard: this.onDeleteBoard,
                 boardsPerPage: 8
@@ -46,8 +49,9 @@ export class BoardsListPage {
             content.appendChild(archivedBoardsList.render());
         }
         
-        container.appendChild(content);
-        return container;
+        pageContainer.appendChild(header.render());
+        pageContainer.appendChild(content);
+        return pageContainer;
     }
 
     /**
@@ -63,13 +67,12 @@ export class BoardsListPage {
             buttons: [
                 {
                     text: 'Отмена',
-                    onClick: () => modal.close(),
-                    type: 'danger'
+                    onClick: () => modal.close()
                 },
                 {
                     text: 'Создать',
                     onClick: () => this.handleCreateBoardConfirm(modal),
-                    type: 'agreement'
+                    type: 'success'
                 }
             ],
             onClose: () => {

@@ -1,13 +1,15 @@
 {
   "name": "2025_2_pochtivpraime",
   "version": "1.0.0",
-  "type": "module", 
+  "type": "module",
   "description": "Репозиторий фронтенда команды \"Почти в Прайме\"",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server/server.js",
-    "precompile:hbs": "node precompile_hbs.js"
+    "precompile:hbs": "node precompile_hbs.js",
+    "build": "npm run precompile:hbs && webpack --mode production",
+    "dev": "npm run precompile:hbs && webpack serve"
   },
   "repository": {
     "type": "git",
@@ -27,8 +29,24 @@
     "handlebars": "^4.7.8"
   },
   "devDependencies": {
+    "@babel/core": "^7.28.5",
+    "@babel/preset-env": "^7.28.5",
     "@eslint/js": "^9.36.0",
+    "autoprefixer": "^10.4.21",
+    "babel-loader": "^10.0.0",
+    "clean-webpack-plugin": "^4.0.0",
+    "copy-webpack-plugin": "^13.0.1",
+    "css-loader": "^7.1.2",
     "eslint": "^9.36.0",
-    "globals": "^16.4.0"
+    "globals": "^16.4.0",
+    "html-webpack-plugin": "^5.6.4",
+    "postcss": "^8.5.6",
+    "postcss-loader": "^8.2.0",
+    "sass": "^1.93.3",
+    "sass-loader": "^16.0.6",
+    "style-loader": "^4.0.0",
+    "webpack": "^5.102.1",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.2"
   }
 }

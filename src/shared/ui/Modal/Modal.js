@@ -1,5 +1,6 @@
 import template from './Modal.precompiled.js';
 import { Button } from '../Button/Button.js';
+import './Modal.scss';
 
 /**
  * Класс компонента - модальное окно. Содержит заголовок, текст и кнопки действий.
@@ -35,7 +36,7 @@ export class Modal {
         this.element = div.firstElementChild;
         
         // Добавляем кнопки через компонент Button
-        const buttonsContainer = this.element.querySelector('#modal-buttons-container');
+        const buttonsContainer = this.element.querySelector('.modal__buttons');
         this.buttons.forEach(buttonConfig => {
             const button = new Button(
                 buttonConfig.text, 
@@ -44,7 +45,7 @@ export class Modal {
             );
             if (buttonConfig.type) {
                 const buttonElement = button.render();
-                buttonElement.classList.add(`button-${buttonConfig.type}`);
+                buttonElement.classList.add(`btn--${buttonConfig.type}`);
                 buttonsContainer.appendChild(buttonElement);
             } else {
                 buttonsContainer.appendChild(button.render());
@@ -52,7 +53,7 @@ export class Modal {
         });
         
         // Добавляем обработчик на кнопку закрытия
-        const closeButton = this.element.querySelector('.modal-close');
+        const closeButton = this.element.querySelector('.modal__close');
         closeButton.addEventListener('click', () => {
             this.close();
         });

@@ -20,13 +20,18 @@ export class LoginPage {
      * @returns {HTMLElement}
      */
     render() {
-        document.body.className = 'login-page';
+        const pageContainer = document.createElement('div');
+        pageContainer.className = 'login-page';
+
+        const loginWrapper = document.createElement('div');
+        loginWrapper.className = 'login-page__wrapper';
+
+        const formCard = document.createElement('div');
+        formCard.className = 'login-page__form-card';
 
         const loginInput = new Input('username', 'Имя пользователя', '', 'login');
         const passwordInput = new Input('password', 'Пароль', '', 'password');
-
         const submitButton = new Button('Войти', () => {});
-
         const form = new Form(
             [loginInput, passwordInput],
             submitButton,
@@ -39,14 +44,7 @@ export class LoginPage {
             "Вход",
             true
         );
-
-        const pageContainer = document.createElement('div');
-        pageContainer.className = 'login-page-wrapper';
-        const loginWrapper = document.createElement('div');
-        loginWrapper.className = 'login-wrapper';
-
-        pageContainer.appendChild(loginWrapper);
-        loginWrapper.appendChild(form.render());
+        formCard.appendChild(form.render())
 
         const link = document.createElement('p');
         link.className = 'login-page__link';
@@ -55,7 +53,10 @@ export class LoginPage {
             e.preventDefault();
             this.onGoToRegisterPage();
         });
-        loginWrapper.appendChild(link);
+        formCard.appendChild(link);
+        loginWrapper.appendChild(formCard);
+
+        pageContainer.appendChild(loginWrapper);
 
         return pageContainer;
     }

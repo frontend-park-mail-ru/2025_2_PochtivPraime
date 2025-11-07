@@ -1,0 +1,120 @@
+@use '../../../../app/style.scss' as *;
+.list-card {
+    background: #32769D;
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    color: var(--standart-text-color);
+    flex: 0 0 calc((100vw - 120px) / 5); /* 5 списков в ширину с учётом отступов */
+    max-width: 300px;
+
+    &__header {
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
+        position: relative;
+        flex: 1;
+
+        &:hover{
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+    &__title-editing {
+        display: flex;
+        align-items: flex-start;
+        gap: 5px;
+        flex: 1;
+        min-width: 0;
+        max-width: calc(100% - 15px);
+    }
+    &__title {
+        @include heading(1.2rem, 600, 1.3);
+        flex: 1;
+        word-break: break-word;
+        overflow-wrap: break-word;
+        min-width: 0;
+
+    }
+    &__title-input {
+        flex: 1;
+        @include form-field(
+            $bg: transparent,
+            $color: var(--standart-text-color),
+            $radius: 8px,
+            $padding: 8px 12px,
+            $border: var(--focus-color)
+        );
+        @include text(1.2rem);
+        outline: none;
+        resize: none;
+        min-height: 1.3em;
+        line-height: 1.3;
+
+        &:focus {
+            border-color: var(--focus-color);
+        }
+    }
+
+    &__edit,
+    &__delete,
+    &__save {
+        flex: 0 0 auto;
+        background: none;
+        border: none;
+        color: var(--standart-text-color);
+        font-size: 1.2rem;
+        cursor: pointer;
+        padding: 4px;
+        border-radius: 4px;
+
+        &:hover {
+            color: var(--standart-text-color);
+        }
+    }
+    &__delete:hover {
+        color: var(--warning-color);
+    }
+
+    &__add {
+        width: 100%;
+        background-color: var(--secondary-color);
+        border: none;
+        border-radius: 8px;
+        padding: 12px;
+        cursor: pointer;
+        color: var(--standart-text-color);
+        font-size: 1rem;
+
+        &:hover {
+            background-color: var(--secondary-focus-color);
+        }
+    }
+
+    &__footer {
+        margin-top: auto;
+    }
+
+    &__tasks {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+}
+
+.list-card__header:hover .list-card__edit {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+.list-card__edit {
+    opacity: 0;
+    visibility: hidden;
+}
+
+
+

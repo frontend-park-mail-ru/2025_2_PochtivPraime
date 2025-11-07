@@ -1,0 +1,43 @@
+@use '../../../app/style.scss' as *;
+.menu {
+    position: fixed;
+    background: var(--standart-bg-color);
+    border-radius: 12px;
+    width: 280px;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    color: var(--standart-text-color);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    z-index: 1002;
+    pointer-events: auto;
+    
+    &__header {
+        @include flex-between();
+        padding: 12px 16px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    &__title {
+        @include heading(16px, 600);
+    }
+
+    &__close {
+        background: none;
+        border: none;
+        color: var(--secondary-text-color);
+        font-size: 1.2rem;
+        cursor: pointer;
+        padding: 4px;
+        border-radius: 4px;
+    }
+
+    &__actions {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding: 12px 16px;
+      max-height: 60vh;
+      overflow-y: auto;
+    }
+}

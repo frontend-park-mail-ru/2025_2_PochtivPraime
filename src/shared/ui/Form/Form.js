@@ -1,4 +1,5 @@
 import template from './Form.precompiled.js';
+import './Form.scss';
 
 /**
  * Класс Form — управляет набором полей ввода и кнопкой. Поддерживает отображение ошибок от сервера.
@@ -57,6 +58,23 @@ export class Form {
     } else {
         errorContainer.textContent = '';
         errorContainer.hidden = true;
+    }
+}
+
+  /**
+   * Отображает успех от сервера
+   * @param {string} message - текст успеха
+   */
+  setServerSucess(message) {
+    if (!this.element) return;
+    const sucessContainer = this.element.querySelector('.form__sucess');
+    
+    if (message) {
+        sucessContainer.textContent = message;
+        sucessContainer.hidden = false;
+    } else {
+        sucessContainer.textContent = '';
+        sucessContainer.hidden = true;
     }
 }
 

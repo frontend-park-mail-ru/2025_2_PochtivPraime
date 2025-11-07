@@ -20,7 +20,13 @@ export class RegisterPage {
      * @returns {HTMLElement}
      */
     render() {
-        document.body.className = 'register-page';
+        const pageContainer = document.createElement('div');
+        pageContainer.className = 'register-page';
+
+        const registerWrapper = document.createElement('div');
+        pageContainer.className = 'register-page__wrapper';
+        const formCard = document.createElement('div');
+        formCard.className = 'register-page__form-card';
 
         const loginInput = new Input('username', 'Имя пользователя', '', 'login');
         const emailInput = new Input('email', 'Почта', '', 'email');
@@ -32,8 +38,8 @@ export class RegisterPage {
         const form = new Form(
             [loginInput, emailInput, passwordInput, confirmPasswordInput],
             submitButton,
-            async (values) => {
-                const errorMessage = await this.onRegister(values);
+            (values) => {
+                const errorMessage = this.onRegister(values);
                 if (errorMessage) {
                     form.setServerError(errorMessage);
                 }
@@ -41,14 +47,7 @@ export class RegisterPage {
             "Регистрация",
             true
         );
-
-        const pageContainer = document.createElement('div');
-        pageContainer.className = 'register-page-wrapper';
-        const registerWrapper = document.createElement('div');
-        registerWrapper.className = 'register-wrapper';
-
-        pageContainer.appendChild(registerWrapper);
-        registerWrapper.appendChild(form.render());
+        formCard.appendChild(form.render())
 
         const link = document.createElement('p');
         link.className = 'register-page__link';
@@ -57,7 +56,10 @@ export class RegisterPage {
             e.preventDefault();
             this.onGoToLoginPage();
         });
-        registerWrapper.appendChild(link);
+
+        formCard.appendChild(link);
+        registerWrapper.appendChild(formCard);
+        pageContainer.appendChild(registerWrapper);
 
         return pageContainer;
     }

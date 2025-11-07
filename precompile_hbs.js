@@ -1,4 +1,3 @@
-// precompile_hbs.js
 import fs from 'fs';
 import path from 'path';
 import Handlebars from 'handlebars';
@@ -34,13 +33,17 @@ function precompileTemplates(relativePath) {
         const templateSource = fs.readFileSync(hbsFile, 'utf8');
         const precompiled = Handlebars.precompile(templateSource);
         
-        // Убираем импорт, используем глобальный Handlebars
-        const moduleContent = `export default Handlebars.template(${precompiled});\n`;
+        const moduleContent = `
+    import Handlebars from 'handlebars/runtime.js';
+    export default Handlebars.template(${precompiled});
+`;
 
-        fs.writeFileSync(precompiledFile, moduleContent, 'utf8');
+        fs.writeFileSync(precompiledFile, moduleContent.trim() + '\n', 'utf8');
     }
 }
 
 precompileTemplates('shared/ui');
 precompileTemplates('widgets');
 precompileTemplates('entities/Board/ui');
+precompileTemplates('entities/List/ui');
+precompileTemplates('entities/Task/ui');

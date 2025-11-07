@@ -1,0 +1,28 @@
+@use '../../../app/style.scss' as *;
+
+.input-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 4px;
+
+    &__input {
+        @include form-field();
+        box-sizing: border-box;
+    }
+
+    &--confirm-password {
+        border-color: var(--secondary-color);
+    }
+
+    &__error {
+        display: none;
+        color: var(--warning-color);
+        padding: 4px 8px;
+        border-radius: 4px;
+    }
+
+    &__error:not(:empty) {
+        display: block;
+    }
+}

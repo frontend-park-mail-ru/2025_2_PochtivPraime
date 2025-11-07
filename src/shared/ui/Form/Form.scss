@@ -1,0 +1,62 @@
+@use '../../../app/style.scss' as *;
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+
+    &__logo{
+        text-align: center;
+        margin-bottom: 8px;
+    }
+    &__logo-img {
+        height: 60px;
+        display: inline-block;
+    }
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    gap: 20px;
+
+    &__title {
+        text-align: center;
+        @include heading();
+    }
+    
+    &__inputs {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    &__actions {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    &__error,
+    &__success {
+        display: none;
+        padding: 10px;
+        border-radius: 6px;
+        font-size: 14px;
+        text-align: center;
+    }
+
+    &__error:not([hidden]) {
+        display: block;
+        background: rgba(244, 67, 54, 0.15);
+        color: var(--warning-color);
+    }
+
+    &__sucess:not([hidden]) {
+        display: block;
+        background: rgba(54, 244, 86, 0.15);
+        color: var(--correct-color);
+    }
+}

@@ -1,4 +1,5 @@
 import template from './Pagination.precompiled.js';
+import './Pagination.scss';
 import { Button } from '../Button/Button.js';
 
 /**
@@ -48,8 +49,8 @@ export class Pagination {
             this.isLastPage
         );
 
-        const prevContainer = this.element.querySelector('#pagination-prev-container');
-        const nextContainer = this.element.querySelector('#pagination-next-container');
+        const prevContainer = this.element.querySelector('.pagination__prev');
+        const nextContainer = this.element.querySelector('.pagination__next');
 
         if (prevContainer) prevContainer.appendChild(prevButton.render());
         if (nextContainer) nextContainer.appendChild(nextButton.render());

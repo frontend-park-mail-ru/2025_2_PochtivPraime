@@ -1,0 +1,37 @@
+@use '../../app/style.scss' as *;
+.boards-list {
+    margin-bottom: 2rem;
+    background: rgba(123, 178, 209, 0.5); 
+    backdrop-filter: blur(4px); 
+    border-radius: 16px;
+    padding: 24px;
+
+    &__header {
+        @include flex-between();
+        margin-bottom: 1.5rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid var(--standart-text-color);
+    }
+    &__header-actions {
+        @include flex-center();
+    }
+    &__content--hidden {
+        display: none;
+    }
+    &__grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
+    &__pagination {
+        margin-top: 24px;
+    }
+    &__empty {
+        text-align: center;
+        @include text(1.2rem, var(--standart-text-color));
+    }
+    &__title {
+        @include heading(24px, 600, var(--standart-text-color));
+    }
+}

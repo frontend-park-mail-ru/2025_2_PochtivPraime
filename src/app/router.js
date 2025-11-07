@@ -11,7 +11,12 @@ export class Router {
             '/': 'LoginPage',
             '/login': 'LoginPage',
             '/register': 'RegisterPage', 
-            '/boards': 'BoardsListPage'
+            '/boards': 'BoardsListPage',
+            '/profile': 'ProfilePage',
+            '/profile/edit': 'EditProfilePage',
+            '/profile/change-password': 'EditPasswordPage',
+            '/board/:boardId': 'BoardPage',
+            '/board/:boardId/task/:taskId': 'TaskWindow'
         };
     }
     
@@ -38,5 +43,19 @@ export class Router {
     navigate(path) {
         window.history.pushState({}, '', path);
         window.dispatchEvent(new PopStateEvent('popstate'));
+    }
+
+    /**
+     * Метод для извлечения параметров (boardId, taskId) из текущего пути
+     * @param {string} [path=window.location.pathname] - путь для парсинга
+     * @returns {{boardId: string|null, taskId: string|null}} - объект с параметрами
+     */
+    parseParams(path = window.location.pathname) {
+        const boardMatch = path.match(/\/board\/([^/]+)/);
+        const taskMatch = path.match(/\/task\/([^/]+)/);
+        return {
+            boardId: boardMatch ? boardMatch[1] : null,
+            taskId: taskMatch ? taskMatch[1] : null,
+        };
     }
 }

@@ -2,8 +2,8 @@
   
   <form class="form">
     {{#if display_logo}}
-      <div class="logo">
-        <img src="/images/logo.svg" alt="Логотип" class="logo-img">
+      <div class="form-container__logo">
+        <img src="/images/logo.svg" alt="Логотип" class="form-container__logo-img">
       </div>
     {{/if}}
     {{#if title}}
@@ -11,6 +11,7 @@
     {{/if}}
     <div class="form__inputs"></div>
     <div class="form__error" hidden></div>
+    <div class="form__sucess" hidden></div>
     
     <div class="form__actions"></div>
   </form>

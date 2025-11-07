@@ -1,4 +1,5 @@
 import template from './BoardsList.precompiled.js';
+import './BoardsList.scss';
 import { Button } from '../../shared/ui/Button/Button.js';
 import { BoardCard } from '../../entities/Board/ui/BoardCard/BoardCard.js';
 import { Pagination } from '../../shared/ui/Pagination/Pagination.js';
@@ -21,6 +22,7 @@ export class BoardsList {
         this.title = options.title;
         this.boards = options.boards || [];
         this.isArchived = options.isArchived || false;
+        this.onOpen = options.onOpen;
         this.onHeaderButtonClick = options.onHeaderButtonClick;
         this.onRestoreBoard = options.onRestoreBoard;
         this.onDeleteBoard = options.onDeleteBoard;
@@ -53,14 +55,17 @@ export class BoardsList {
         // Добавляем кнопку в заголовок
         this.addHeaderButton();
         
-        // Добавляем карточки досок
-        this.renderBoards();
-        
-        // Добавляем обработчики пагинации
-        if (this.totalPages > 1) {
-            this.renderPagination();
+        const content = this.element.querySelector('.boards-list__content');
+        if (!this.isArchived && this.boards.length === 0) {
+            content.innerHTML = `<p class="boards-list__empty">У вас пока нет досок... Создайте новую!</p>`;
+        } else {
+            this.renderBoards();
+            if (this.totalPages > 1) {
+                this.renderPagination();
+            }
         }
         
+
         return this.element;
     }
     
@@ -68,7 +73,7 @@ export class BoardsList {
      * Добавление кнопки в заголовок
      */
     addHeaderButton() {
-        const headerActionsContainer = this.element.querySelector('#header-actions-container');
+        const headerActionsContainer = this.element.querySelector('.boards-list__header-actions');
         
         let buttonText, buttonType;
         
@@ -91,7 +96,7 @@ export class BoardsList {
         });
         
         const buttonElement = headerButton.render();
-        buttonElement.classList.add(`button-${buttonType}`);
+        buttonElement.classList.add(`btn-${buttonType}`);
         headerActionsContainer.appendChild(buttonElement);
     }
     
@@ -99,7 +104,7 @@ export class BoardsList {
      * Рендер карточек досок
      */
     renderBoards() {
-        const boardsGridContainer = this.element.querySelector('#boards-grid-container');
+        const boardsGridContainer = this.element.querySelector('.boards-list__grid');
         boardsGridContainer.innerHTML = '';
         
         const startIndex = (this.currentPage - 1) * this.boardsPerPage;
@@ -109,6 +114,7 @@ export class BoardsList {
         boardsToShow.forEach(board => {
             const boardCard = new BoardCard(
                 board,
+                this.onOpen,
                 this.onRestoreBoard,
                 this.onDeleteBoard
             );
@@ -144,7 +150,7 @@ export class BoardsList {
      * Рендер пагинации через компонент Pagination
      */
     renderPagination() {
-        const paginationContainer = this.element.querySelector('#pagination-container');
+        const paginationContainer = this.element.querySelector('.boards-list__pagination');
         if (!paginationContainer) return;
 
         // Удаляем старую пагинацию (если есть)
