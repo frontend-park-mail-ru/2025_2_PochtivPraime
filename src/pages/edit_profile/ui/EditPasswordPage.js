@@ -36,16 +36,18 @@ export class EditPasswordPage {
 
         const header = new Header(this.userData, this.onLogout, this.onNavigate);
 
-        const oldPasswordInput = new Input('password', 'Старый пароль', '', 'old-password');
-        const newPasswordInput = new Input('password', 'Новый пароль', '', 'new-password');
-        const confirmPasswordInput = new Input('password', 'Подтвердите новый пароль', '', 'confirm-password');
+        const oldPasswordInput = new Input('password', 'Старый пароль', '', 'oldPassword');
+        const newPasswordInput = new Input('password', 'Новый пароль', '', 'newPassword');
+        const confirmPasswordInput = new Input('password', 'Подтвердите новый пароль', '', 'confirmPassword');
 
         const submitButton = new Button('Сохранить изменения', () => {});
 
-        const form = new Form(
+       const form = new Form(
             [oldPasswordInput, newPasswordInput, confirmPasswordInput],
             submitButton,
             (values) => {
+                values.oldPassword = oldPasswordInput.getValue();
+                values.newPassword = newPasswordInput.getValue();
                 const errorMessage = this.onChangePassword(values);
                 if (errorMessage) {
                     form.setServerError(errorMessage);

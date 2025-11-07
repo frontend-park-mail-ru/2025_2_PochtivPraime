@@ -98,11 +98,20 @@ export class ListCard {
 
         container.innerHTML = '';
         this.tasks.forEach(task => {
-            const isNew = task.title.trim() === '';
+            const isNew = !task.id;
             const taskCard = new TaskCard(
                 task,
-                (taskId, newTitle) => {
-                    if (this.onUpdateTask) this.onUpdateTask(this.listData.id, taskId, newTitle);
+                (taskDataOrId, title) => {
+                    // если задача новая, taskDataOrId это объект
+                    if (!taskDataOrId.id) {
+                        const created = this.onAddTask(this.listData.id, taskDataOrId);
+                        if (created && created.id) {
+                            taskDataOrId.id = created.id;
+                            console.log(`Синхронизировано: ${created.id}`);
+                        }
+                    } else if (this.onUpdateTask) {
+                        this.onUpdateTask(this.listData.id, taskDataOrId, title);
+                    }
                     this.renderTasks();
                 },
                 (taskId) => this.removeTask(taskId),
@@ -189,20 +198,10 @@ export class ListCard {
      * Добавляет новую задачу в список.
      */
     addNewTask() {
-        const newTask = { id: `temp-${Date.now()}`, title: '', isCompleted: false };
+        const newTask = { title: '', isCompleted: false };
         this.tasks.push(newTask);
         this.renderTasks();
 
-        if (this.onAddList) {
-            const created = this.onAddTask(this.listData.id, newTask);
-            if (created && created.id) {
-                const taskIndex = this.tasks.findIndex(t => t.id === newTask.id);
-                if (taskIndex !== -1) {
-                    this.tasks[taskIndex].id = created.id;
-                    console.log(`Обновлен ID списка: ${newTask.id} -> ${created.id}`);
-                }
-            }
-        }
         // автоматически включаем редактирование
         setTimeout(() => {
             const tasksContainer = this.element.querySelector('.list-card__tasks');

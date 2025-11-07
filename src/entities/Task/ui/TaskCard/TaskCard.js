@@ -140,20 +140,27 @@ export class TaskCard {
      * Сохранение изменений задачи
      * @param {string|null} newTitle - новое название задачи
      */
-    saveEdit(newTitle=null) {
+    saveEdit(newTitle = null) {
         if (newTitle === null) {
             const input = this.element.querySelector('.task-card__input');
             newTitle = input ? input.value.trim() : '';
         }
-        
 
-        if (newTitle) {
-            this.taskData.title = newTitle;
-            if (this.onSave) this.onSave(this.taskData.id, newTitle);
-            this.isNew = false;
-        } else if (this.isNew) {
+        if (!newTitle && this.isNew) {
             this.deleteTask();
             return;
+        }
+
+        this.taskData.title = newTitle;
+
+        if (this.isNew && this.onSave) {
+            const created = this.onSave(this.taskData); 
+            if (created && created.id) {
+                this.taskData.id = created.id;
+            }
+            this.isNew = false;
+        } else if (this.onSave) {
+            this.onSave(this.taskData.id, newTitle);
         }
 
         this.isEditing = false;

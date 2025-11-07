@@ -6,8 +6,8 @@ import { Input } from '../../../shared/ui/Input/Input.js';
 export class BoardsListPage {
     constructor(userData, activeBoards, archivedBoards, onLogout, onOpen, onRestoreBoard, onDeleteBoard, onCreateBoard, onNavigate) {
         this.userData = userData;
-        this.activeBoards = activeBoards;
-        this.archivedBoards = archivedBoards;
+        this.activeBoards = activeBoards || [];
+        this.archivedBoards = archivedBoards || [];
         this.onLogout = onLogout;
         this.onOpen = onOpen;
         this.onRestoreBoard = onRestoreBoard;
@@ -25,7 +25,7 @@ export class BoardsListPage {
         content.className = 'boards-list-page__content';
         
         const header = new Header(this.userData, this.onLogout, this.onNavigate);
-
+        console.log(this.activeBoards, this.activeBoards)
         const activeBoardsList = new BoardsList({
             title: 'Мои доски',
             boards: this.activeBoards,

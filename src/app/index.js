@@ -134,11 +134,11 @@ async function loadPage() {
                         router.navigate('/login');
                         return;
                     }
-
+                    console.log(boardsData)
                     const boardsPage = new BoardsListPage(
                         userData,
-                        boardsData.activeBoards || [],
-                        boardsData.archivedBoards || [],
+                        boardsData.active_boards || [],
+                        boardsData.archived_boards || [],
                         handleLogoutAndRedirect,
                         (boardId) => router.navigate(`/board/${boardId}`),
                         (boardId) => handleActionWithReload(BoardsHandlers.handleRestoreBoard(boardId)),

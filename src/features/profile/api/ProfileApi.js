@@ -2,10 +2,11 @@ import { apiClient } from '../../../shared/api/ApiClient.js';
 
 export const ProfileApi = {
     async updateProfile(data) {
-        return apiClient.put('/user/profile', data);
+
+        return apiClient.put('/user/profile', {username: data.text, email: data.email});
     },
 
-    async updatePassword(data) {
-        return apiClient.put('/user/password', data);
+    async updatePassword({oldPassword: oldPassword, newPassword: newPassword}) {
+        return apiClient.put('/user/password', {oldPassword: oldPassword, newPassword: newPassword});
     }
 };
