@@ -218,8 +218,13 @@ export class ListCard {
      * @param {string} taskId - ID задачи для удаления.
      */
     removeTask(taskId) {
-        this.tasks = this.tasks.filter(t => t.id !== taskId);
-        if (this.onUpdateTask) this.onUpdateTask(this.listData.id, taskId, null, null, 'delete');
-        this.renderTasks();
+        if (taskId === null) {
+            this.tasks = this.tasks.filter(t => t.id); // удаляем только те без id
+        } else {
+            this.tasks = this.tasks.filter(t => t.id !== taskId);
+            if (this.onUpdateTask) {
+                this.onUpdateTask(this.listData.id, taskId, null, null, 'delete');
+            }
+        }
     }
 }

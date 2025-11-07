@@ -254,7 +254,8 @@ async function handleAddListWithSync(boardId, newList) {
 }
 
 async function handleAddTaskWithSync(boardId, listId, newTask) {
-    const created = await TasksHandlers.handleCreateTask(boardId, listId, newTask.title);
+    console.log(newTask.content)
+    const created = await TasksHandlers.handleCreateTask(boardId, listId, newTask.content);
     if (created && created.id) {
         console.log(`Задача синхронизирована: ${created.id}`);
         return created;

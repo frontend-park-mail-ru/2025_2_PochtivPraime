@@ -26,7 +26,7 @@ export class TaskCard {
         this.isEditing = isNew;
         this.isNew = isNew;
         this.isCompleted = taskData.isCompleted || false;
-        this.title = taskData.title || '';
+        this.title = taskData.content || '';
     }
 
     /**
@@ -36,7 +36,7 @@ export class TaskCard {
     render() {
         const html = template({
             id: this.taskData.id,
-            title: this.title,
+            title: this.taskData.content,
             isCompleted: this.isCompleted,
             isEditing: this.isEditing
         });
@@ -146,15 +146,22 @@ export class TaskCard {
             newTitle = input ? input.value.trim() : '';
         }
 
-        if (!newTitle && this.isNew) {
-            this.deleteTask();
+        if (this.isNew && !newTitle) {
+            if (this.element && this.element.parentNode) {
+                this.element.parentNode.removeChild(this.element);
+            }
+
+            if (this.onDelete) {
+                this.onDelete(null); // null — чтобы ListCard знал, что это локальное удаление
+            }
             return;
         }
 
-        this.taskData.title = newTitle;
+        this.taskData.content = newTitle;
+        this.title = this.taskData.content;
 
         if (this.isNew && this.onSave) {
-            const created = this.onSave(this.taskData); 
+            const created = this.onSave(this.taskData);
             if (created && created.id) {
                 this.taskData.id = created.id;
             }
@@ -177,7 +184,7 @@ export class TaskCard {
                     this.taskData = { ...updatedTask };
                     console.log(this.taskData);
                     if (this.saveEdit)
-                        this.saveEdit(this.taskData.title);
+                        this.saveEdit(this.taskData.content);
                 }
             },
             onDelete: (taskId) => {

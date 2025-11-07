@@ -22,7 +22,7 @@ export class TaskWindow {
         this.options = options; 
         this.isEditing = false;
         this.isCompleted = taskData.isCompleted || false;
-        this.title = taskData.title || '';
+        this.title = taskData.content || '';
     }
 
     /**
@@ -161,7 +161,7 @@ export class TaskWindow {
         const input = this.element.querySelector('.task-window__input');
         const newTitle = input ? input.value.trim() : '';
         if (newTitle) {
-            this.taskData.title = input.value;
+            this.taskData.content = input.value;
             this.title = input.value;
         }
         this.isEditing = false;
