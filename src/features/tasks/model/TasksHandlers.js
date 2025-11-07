@@ -7,9 +7,10 @@ import { TasksApi } from '../api/TasksApi.js';
  * @param {string} taskName - Название задачи
  * @returns {string|undefined} - Сообщение об ошибке или undefined при успешном создании задачи
  */
-export async function handleCreateTask(boardId, listId, taskName) {
+export async function handleCreateTask(boardId, listId, content) {
     try {
-        const createdTask = await TasksApi.createTask(boardId, listId, { content: taskName });
+        const createdTask = await TasksApi.createTask(boardId, listId, {content: content});
+        console.log(createdTask)
         return createdTask;
     } catch (error) {
         console.error('Create task error:', error);
@@ -39,6 +40,7 @@ export async function handleDeleteTask(boardId, listId, taskId) {
  * @param {object} data - данные для обновления задачи
  */
 export async function handleUpdateTask(boardId, listId, taskId, data) {
+    console.log(data);
     try {
         await TasksApi.updateTask(boardId, listId, taskId, data);
     } catch (error) {

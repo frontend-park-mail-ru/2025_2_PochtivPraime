@@ -134,7 +134,9 @@ export class TaskWindow {
                     onClick: () => {
                         menu.close();
                         if (this.options.onDelete) this.options.onDelete(this.taskData.id);
-                        this.close();
+                        if (this.element && this.element.parentNode) {
+                            this.element.parentNode.removeChild(this.element);
+                        }
                     }
                 }
             ]
@@ -157,13 +159,34 @@ export class TaskWindow {
     /**
      * Сохранение изменений задачи
      */
-    saveEdit() {
+    async saveEdit() {
         const input = this.element.querySelector('.task-window__input');
         const newTitle = input ? input.value.trim() : '';
-        if (newTitle) {
-            this.taskData.content = input.value;
-            this.title = input.value;
+
+        const isNew = this.taskData._isNew;
+
+        if (isNew && !newTitle) {
+            if (this.element?.parentNode) this.element.parentNode.removeChild(this.element);
+            if (this.options.onDelete) await this.options.onDelete(null);
+            return;
         }
+
+        this.taskData.content = newTitle;
+        this.title = newTitle;
+
+        if (isNew && this.options.onSave) {
+            const createdTask = await this.options.onSave(this.taskData);
+            if (createdTask?.id) {
+                this.taskData.id = createdTask.id;
+                this.taskData._isNew = false;
+            } else {
+                console.error('Сервер не вернул id новой задачи!');
+                return;
+            }
+        } else if (this.options.onSave) {
+            await this.options.onSave(this.taskData.id, newTitle);
+        }
+
         this.isEditing = false;
         this.rerender();
     }

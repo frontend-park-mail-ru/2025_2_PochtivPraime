@@ -33,8 +33,9 @@ export class BoardPage {
             (boardId, listId, title) => this.options.onRenameList(boardId, listId, title),
             (boardId, listId) => this.options.onDeleteList(boardId, listId),
             (boardId, listId, newTask) => this.options.onAddTask(boardId, listId, newTask),
-            (boardId, listId, taskId, newTitle, isCompleted, action) =>
-                this.options.onUpdateTask(boardId, listId, taskId, newTitle, isCompleted, action)
+            (boardId, listId, taskId, data) =>
+                this.options.onUpdateTask(boardId, listId, taskId, data),
+            (listId, taskId) => this.options.onDeleteTask(this.boardData.id, listId, taskId)
         );
 
         const boardHeader = new BoardHeader(

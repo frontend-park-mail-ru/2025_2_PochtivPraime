@@ -19,6 +19,7 @@ async function loadPage() {
     try {
         switch (path) {
             case '/': {
+                console.log('here')
                 const userData = await AuthHandlers.handleCurrentUser();
                 if (userData) {
                     router.navigate('/boards');
@@ -175,8 +176,9 @@ async function loadPage() {
                     onAddList: (boardId, newList) => handleAddListWithSync(boardId, newList),
                     onRenameList: ListsHandlers.handleRenameList,
                     onDeleteList: ListsHandlers.handleDeleteList,
-                    onAddTask: (boardId, listId, newTask) => handleAddTaskWithSync(boardId, listId, newTask),
+                    onAddTask: handleAddTaskWithSync,
                     onUpdateTask: TasksHandlers.handleUpdateTask,
+                    onDeleteTask: TasksHandlers.handleDeleteTask,
                     onRenameBoard: BoardHandlers.handleRenameBoard,
                     onCloseBoard: BoardHandlers.handleCloseBoard,
                     onNavigate: (path) => router.navigate(path)
@@ -253,16 +255,15 @@ async function handleAddListWithSync(boardId, newList) {
     }
 }
 
-async function handleAddTaskWithSync(boardId, listId, newTask) {
-    console.log(newTask.content)
-    const created = await TasksHandlers.handleCreateTask(boardId, listId, newTask.content);
+async function handleAddTaskWithSync(boardId, listId, taskData) {
+    // taskData — объект с временным id и content
+    console.log(listId)
+    const created = await TasksHandlers.handleCreateTask(boardId, listId, taskData.content);
+    console.log("created", created)
     if (created && created.id) {
-        console.log(`Задача синхронизирована: ${created.id}`);
-        return created;
-    } else {
-        console.warn('Ошибка при создании задачи, оффлайн режим');
-        return null;
+        return created; // вернём объект с реальным id
     }
+    return null;
 }
 
 

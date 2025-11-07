@@ -19,13 +19,14 @@ export class ListCardsList {
      * @param {function} onAddTask - обработчик добавления задачи
      * @param {function} onUpdateTask - обработчик обновления задачи
      */
-    constructor(boardData, onAddList, onRenameList, onDeleteList, onAddTask, onUpdateTask) {
+    constructor(boardData, onAddList, onRenameList, onDeleteList, onAddTask, onUpdateTask, onDeleteTask) {
         this.boardData = boardData;
         this.onAddList = onAddList;
         this.onRenameList = onRenameList;
         this.onDeleteList = onDeleteList;
         this.onAddTask = onAddTask;
         this.onUpdateTask = onUpdateTask;
+        this.onDeleteTask = onDeleteTask;
         
         this.lists = boardData.lists || [];
         this.backgroundImage = boardData.backgroundImage || '/images/default-board-bg.jpg';
@@ -89,21 +90,23 @@ export class ListCardsList {
                     this.rerender();
                 },
                 (listId, newTask) => {
-                    if (this.onAddTask) this.onAddTask(this.boardData.id, listId, newTask);
+                    console.log(listId)
+                    if (this.onAddTask) return this.onAddTask(this.boardData.id, listId, newTask);
+                    
                 },
-                (listId, taskId, newTitle, isCompleted, action) => {
-                    if (this.onUpdateTask) this.onUpdateTask(this.boardData.id, listId, taskId, newTitle, isCompleted, action);
+                (listId, taskId, data) => {
+                    if (this.onUpdateTask) this.onUpdateTask(this.boardData.id, listId, taskId, data);
                     const listIndex = this.lists.findIndex(l => l.id === listId);
                     if (listIndex !== -1) {
                         const taskIndex = this.lists[listIndex].tasks.findIndex(t => t.id === taskId);
                         if (taskIndex !== -1) {
-                            if (newTitle !== undefined && newTitle !== null) this.lists[listIndex].tasks[taskIndex].title = newTitle;
-                            if (isCompleted !== undefined) this.lists[listIndex].tasks[taskIndex].isCompleted = isCompleted;
-                            if (action === 'delete') this.lists[listIndex].tasks.splice(taskIndex, 1);
+                            if (data.content !== undefined && data.content !== null) this.lists[listIndex].tasks[taskIndex].content = data.content;
+                            if (data.isCompleted !== undefined) this.lists[listIndex].tasks[taskIndex].isCompleted = data.isCompleted;
                         }
                     }
                     this.rerender();
-                }
+                },
+                (listId, taskId) => this.onDeleteTask(listId, taskId)
             );
             listsContainer.appendChild(listCard.render());
         });

@@ -15,12 +15,13 @@ export class ListCard {
     * @param {Function} onAddTask - колбэк при добавлении задачи (listId, taskData)
     * @param {Function} onUpdateTask - колбэк при обновлении задачи (listId, taskId, newTitle, isCompleted, action)
     */
-    constructor(listData, onRename, onDelete, onAddTask, onUpdateTask) {
+    constructor(listData, onRename, onDelete, onAddTask, onUpdateTask, onDeleteTask) {
         this.listData = listData;
         this.onRename = onRename;
         this.onDelete = onDelete;
         this.onAddTask = onAddTask;
         this.onUpdateTask = onUpdateTask;
+        this.onDeleteTask = onDeleteTask;
 
         this.isEditingTitle = false;
         this.title = listData.title || 'Список';
@@ -98,29 +99,51 @@ export class ListCard {
 
         container.innerHTML = '';
         this.tasks.forEach(task => {
-            const isNew = !task.id;
             const taskCard = new TaskCard(
                 task,
-                (taskDataOrId, title) => {
-                    // если задача новая, taskDataOrId это объект
-                    if (typeof taskDataOrId === 'object' && !taskDataOrId.id) {
-                        const created = this.onAddTask(this.listData.id, taskDataOrId);
-                        if (created && created.id) {
-                            taskDataOrId.id = created.id;
-                            console.log(`Синхронизировано: ${created.id}`);
+                (taskDataOrId, newContent) => {
+                    // если новая задача
+                    console.log('taskDateOrId', taskDataOrId)
+                    if (!taskDataOrId.id) {
+                        if (this.onAddTask) {
+                            console.log(this.listData.id);
+                            this.onAddTask(this.listData.id, taskDataOrId);
                         }
-                    } else if (this.onUpdateTask) {
-                    this.onUpdateTask(this.listData.id, taskDataOrId, title);
-                }
+                    } else {
+                        // существующая задача
+                        if (this.onUpdateTask) {
+                            console.log("зашло")
+                            this.onUpdateTask(this.listData.id, taskDataOrId.id, { content: taskDataOrId.content });
+                        }
+                    }
+
+                    // обновляем локально
+                    this.tasks = this.tasks.map(t =>
+                        t.id === taskDataOrId.id ? { ...t, content: taskDataOrId.content } : t
+                    );
+
+                    // 🔹 ререндерим задачи
                     this.renderTasks();
                 },
                 (taskId) => this.removeTask(taskId),
                 (taskId, isCompleted) => {
-                    if (this.onUpdateTask) this.onUpdateTask(this.listData.id, taskId, null, isCompleted);
+                    if (this.onUpdateTask) this.onUpdateTask(this.listData.id, taskId, { isCompleted });
+                    this.tasks = this.tasks.map(t => t.id === taskId ? { ...t, isCompleted } : t);
                     this.renderTasks();
                 },
-                isNew
+                task._isNew
             );
+
+            // 🔹 колбэк для ререндеринга родителя после saveEdit
+            taskCard.onRerenderParent = (updatedTask) => {
+                if (updatedTask) {
+                    this.tasks = this.tasks.map(t =>
+                        t._isNew && !updatedTask._isNew ? { ...updatedTask } : t
+                    );
+                }
+                this.renderTasks();
+            };
+
             container.appendChild(taskCard.render());
         });
     }
@@ -198,11 +221,12 @@ export class ListCard {
      * Добавляет новую задачу в список.
      */
     addNewTask() {
-        const newTask = { title: '', isCompleted: false };
+        const tempId = `temp-${Date.now()}`; // временный локальный ID
+        const newTask = { id: null, content: '', isCompleted: false, _isNew: true };
         this.tasks.push(newTask);
         this.renderTasks();
 
-        // автоматически включаем редактирование
+        // сразу начинаем редактирование
         setTimeout(() => {
             const tasksContainer = this.element.querySelector('.list-card__tasks');
             const lastTaskCard = tasksContainer.lastElementChild;
@@ -222,9 +246,11 @@ export class ListCard {
             this.tasks = this.tasks.filter(t => t.id); // удаляем только те без id
         } else {
             this.tasks = this.tasks.filter(t => t.id !== taskId);
-            if (this.onUpdateTask) {
-                this.onUpdateTask(this.listData.id, taskId, null, null, 'delete');
+            if (this.onDeleteTask) {
+                console.log(taskId)
+                this.onDeleteTask(this.listData.id, taskId);
             }
         }
+        this.renderTasks();
     }
 }

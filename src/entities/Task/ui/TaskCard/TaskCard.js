@@ -140,38 +140,45 @@ export class TaskCard {
      * Сохранение изменений задачи
      * @param {string|null} newTitle - новое название задачи
      */
-    saveEdit(newTitle = null) {
+    async saveEdit(newTitle = null) {
         if (newTitle === null) {
             const input = this.element.querySelector('.task-card__input');
             newTitle = input ? input.value.trim() : '';
         }
 
-        if (this.isNew && !newTitle) {
-            if (this.element && this.element.parentNode) {
-                this.element.parentNode.removeChild(this.element);
-            }
-
-            if (this.onDelete) {
-                this.onDelete(null); // null — чтобы ListCard знал, что это локальное удаление
-            }
+        // если новая задача и пустое название — удаляем
+        if (this.taskData._isNew && !newTitle) {
+            if (this.element?.parentNode) this.element.parentNode.removeChild(this.element);
+            if (this.onDelete) this.onDelete(null);
             return;
         }
 
         this.taskData.content = newTitle;
-        this.title = this.taskData.content;
+        this.title = newTitle;
 
-        if (this.isNew && this.onSave) {
-            const created = this.onSave(this.taskData);
-            if (created && created.id) {
+        if (this.taskData._isNew && this.onSave) {
+            console.log("new")
+            const created = await this.onSave(this.taskData); // сохраняем на сервер
+            console.log(created);
+            if (created?.id){
                 this.taskData.id = created.id;
+                this.taskData._isNew = false;
             }
-            this.isNew = false;
         } else if (this.onSave) {
-            this.onSave(this.taskData.id, newTitle);
+            console.log("not new")
+            await this.onSave(this.taskData, newTitle);
         }
 
-        this.isEditing = false;
-        this.rerender();
+        this.isEditing = false; // отключаем режим редактирования
+        this.isNew = false;
+        this.taskData._isNew = false;
+
+        // обновляем родителя, но передаём уже обновлённую задачу
+        if (this.onRerenderParent) {
+            this.onRerenderParent(this.taskData); 
+        } else {
+            this.rerender();
+        }
     }
 
     /**
@@ -180,15 +187,20 @@ export class TaskCard {
     openTaskWindow() {
         const taskWindow = new TaskWindow(this.taskData, {
             onClose: (updatedTask) => {
-                if (updatedTask) {
+                console.log(!updatedTask.content==this.taskData.content);
+                if (!(updatedTask==this.taskData)) {
                     this.taskData = { ...updatedTask };
                     console.log(this.taskData);
-                    if (this.saveEdit)
+                    console.log(this.taskData.content)
+                    if (this.saveEdit && this.taskData.content)
                         this.saveEdit(this.taskData.content);
                 }
             },
-            onDelete: (taskId) => {
-                if (this.deleteTask) this.deleteTask(taskId);
+            onDelete: async () => {
+                await this.onDelete?.(this.taskData.id);
+                if (this.element?.parentNode) {
+                    this.element.parentNode.removeChild(this.element);
+                }
             },
             onToggleComplete: (taskId, isCompleted) => {
                 if (this.onToggleComplete)
@@ -216,5 +228,6 @@ export class TaskCard {
         if (oldElement && oldElement.parentNode) {
             oldElement.parentNode.replaceChild(newElement, oldElement);
         }
+        this.element = newElement;
     }
 }
