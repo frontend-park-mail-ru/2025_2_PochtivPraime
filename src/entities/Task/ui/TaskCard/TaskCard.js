@@ -116,7 +116,6 @@ export class TaskCard {
         this.isCompleted = !this.isCompleted;
         this.taskData.isCompleted = this.isCompleted;
         if (this.onToggleComplete) {
-            console.log("your", this.task)
             this.onToggleComplete(this.taskData.id, this.isCompleted);
         }
         this.rerender();
@@ -158,15 +157,12 @@ export class TaskCard {
         this.title = newTitle;
 
         if (this.taskData._isNew && this.onSave) {
-            console.log("new")
             const created = await this.onSave(this.taskData); // сохраняем на сервер
-            console.log(created);
             if (created?.id){
                 this.taskData.id = created.id;
                 this.taskData._isNew = false;
             }
         } else if (this.onSave) {
-            console.log("not new")
             await this.onSave(this.taskData, newTitle);
         }
 
@@ -188,12 +184,9 @@ export class TaskCard {
     openTaskWindow() {
         const taskWindow = new TaskWindow(this.taskData, {
             onClose: (updatedTask) => {
-                console.log(!updatedTask.content==this.taskData.content);
                 if (updatedTask.content !== this.taskData.content ||
                 updatedTask.isCompleted !== this.taskData.isCompleted)  {
                     this.taskData = { ...updatedTask };
-                    console.log(this.taskData);
-                    console.log(this.taskData.content)
                     if (this.saveEdit && this.taskData.content)
                         this.saveEdit(this.taskData.content);
                 }

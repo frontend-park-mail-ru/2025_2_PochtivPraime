@@ -90,7 +90,6 @@ export class ListCardsList {
                     this.rerender();
                 },
                 (listId, newTask) => {
-                    console.log(listId)
                     if (this.onAddTask) return this.onAddTask(this.boardData.id, listId, newTask);
                     
                 },

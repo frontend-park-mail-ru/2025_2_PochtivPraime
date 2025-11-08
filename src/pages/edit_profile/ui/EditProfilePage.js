@@ -51,7 +51,6 @@ export class EditProfilePage {
                     form.setServerSucess('Профиль успешно обновлён!');
                     this.userData.username = values.text;
                     this.userData.email = values.email;
-                    console.log(values)
                     const newHeader = new Header(this.userData, this.onLogout, this.onNavigate);
                     pageContainer.replaceChild(
                         newHeader.render(),

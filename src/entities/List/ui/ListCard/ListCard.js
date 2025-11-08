@@ -103,16 +103,13 @@ export class ListCard {
                 task,
                 (taskDataOrId, newContent) => {
                     // если новая задача
-                    console.log('taskDateOrId', taskDataOrId)
                     if (!taskDataOrId.id) {
                         if (this.onAddTask) {
-                            console.log(this.listData.id);
                             return this.onAddTask(this.listData.id, taskDataOrId);
                         }
                     } else {
                         // существующая задача
                         if (this.onUpdateTask) {
-                            console.log("зашло")
                             return this.onUpdateTask(this.listData.id, taskDataOrId.id, { content: taskDataOrId.content });
                         }
                     }
@@ -247,7 +244,6 @@ export class ListCard {
         } else {
             this.tasks = this.tasks.filter(t => t.id !== taskId);
             if (this.onDeleteTask) {
-                console.log(taskId)
                 this.onDeleteTask(this.listData.id, taskId);
             }
         }

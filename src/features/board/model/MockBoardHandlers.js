@@ -5,7 +5,6 @@ let currentBoard = { ...mockBoard };
 let currentUser = { ...mockUser };
 
 export async function handleGetBoard(boardId) {
-    console.log('Mock: get board', boardId);
     if (boardId === currentBoard.id) {
         return structuredClone(currentBoard);
     }

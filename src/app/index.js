@@ -19,7 +19,6 @@ async function loadPage() {
     try {
         switch (path) {
             case '/': {
-                console.log('here')
                 const userData = await AuthHandlers.handleCurrentUser();
                 if (userData) {
                     router.navigate('/boards');
@@ -135,7 +134,6 @@ async function loadPage() {
                         router.navigate('/login');
                         return;
                     }
-                    console.log(boardsData)
                     const boardsPage = new BoardsListPage(
                         userData,
                         boardsData.active_boards || [],
@@ -248,7 +246,6 @@ async function handleActionWithReload(actionPromise) {
 async function handleAddListWithSync(boardId, newList) {
     const created = await ListsHandlers.handleCreateList(boardId, newList.title);
     if (created && created.id) {
-        console.log(`Список создан на сервере: ${created.id}`);
         return created;
     } else {
         console.warn('Ошибка при создании списка, останется локально');
@@ -258,9 +255,7 @@ async function handleAddListWithSync(boardId, newList) {
 
 async function handleAddTaskWithSync(boardId, listId, taskData) {
     // taskData — объект с временным id и content
-    console.log(listId)
     const created = await TasksHandlers.handleCreateTask(boardId, listId, taskData.content);
-    console.log("created", created)
     if (created && created.id) {
         return created; // вернём объект с реальным id
     }

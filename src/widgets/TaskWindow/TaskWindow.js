@@ -199,7 +199,7 @@ export class TaskWindow {
             this.element.parentNode.removeChild(this.element);
         }
         if (this.options.onClose) {
-            console.log(this.taskData)
+            (this.taskData)
             this.options.onClose(this.taskData); // передаём обновлённую задачу
         }
     }

@@ -25,7 +25,6 @@ export class BoardsListPage {
         content.className = 'boards-list-page__content';
         
         const header = new Header(this.userData, this.onLogout, this.onNavigate);
-        console.log(this.activeBoards, this.activeBoards)
         const activeBoardsList = new BoardsList({
             title: 'Мои доски',
             boards: this.activeBoards,

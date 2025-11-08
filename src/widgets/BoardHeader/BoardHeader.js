@@ -84,7 +84,7 @@ export class BoardHeader {
                     type: 'danger'
                 }
             ],
-            onClose: () => console.log('Меню доски закрыто')
+            onClose: () => {}
         });
 
         menu.show();
