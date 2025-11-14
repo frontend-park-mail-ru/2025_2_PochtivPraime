@@ -116,6 +116,13 @@ export class Form {
         }
     });
 
+    form.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            form.requestSubmit(); // вызывает submit и onSubmit
+        }
+    });
+
     return this.element; // возвращаем .form-container
     }
 }

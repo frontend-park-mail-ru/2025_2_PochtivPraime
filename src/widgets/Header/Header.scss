@@ -29,11 +29,19 @@
     }
     &__username {
         font-weight: 500;
+        cursor: pointer;
+        &:hover {
+            color: white;
+        }
     }
     &__avatar {
         width: 32px;
         height: 32px;
         border-radius: 50%;
         object-fit: cover;
+        cursor: pointer;
+        &:hover {
+            opacity: 0.70;
+        }
     }
 }

@@ -64,6 +64,16 @@ export class Modal {
                 this.close();
             }
         });
+
+        this.element.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                const primary = this.element.querySelector('.btn--success') 
+                    || this.element.querySelector('.modal__buttons button');
+                if (primary) {
+                    primary.click();
+                }
+            }
+        });
         
         return this.element;
     }

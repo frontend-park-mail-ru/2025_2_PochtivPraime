@@ -48,6 +48,11 @@
         @include text(1rem);
         word-break: break-word;
         white-space: pre-wrap;
+
+        &:hover {
+            color: var(--focus-color);
+        }
+
     }
     &__input {
         width: 100%;

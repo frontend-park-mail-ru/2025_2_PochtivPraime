@@ -48,14 +48,18 @@ export class EditProfilePage {
                 if (errorMessage) {
                     form.setServerError("Ошибка изменения данных пользователя");
                 } else {
-                    form.setServerSucess('Профиль успешно обновлён!');
-                    this.userData.username = values.text;
-                    this.userData.email = values.email;
-                    const newHeader = new Header(this.userData, this.onLogout, this.onNavigate);
-                    pageContainer.replaceChild(
-                        newHeader.render(),
-                        pageContainer.querySelector('.header')
-                    );
+                    if(this.userData.username==values.text && this.userData.email==values.email) {
+                        form.setServerError("Данные не были изменены");
+                    } else {
+                        form.setServerSucess('Профиль успешно обновлён!');
+                        this.userData.username = values.text;
+                        this.userData.email = values.email;
+                        const newHeader = new Header(this.userData, this.onLogout, this.onNavigate);
+                        pageContainer.replaceChild(
+                            newHeader.render(),
+                            pageContainer.querySelector('.header')
+                        );
+                    }
                 }
             })
             .catch((err) => {

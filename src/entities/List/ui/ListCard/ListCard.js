@@ -45,7 +45,11 @@ export class ListCard {
 
         this.bindEvents();
         this.renderTasks();
-
+        const addTaskBtn = this.element.querySelector('.list-card__add');
+        if (addTaskBtn) {
+            const hasNewTask = this.tasks.some(t => t._isNew);
+            addTaskBtn.disabled = hasNewTask;
+        }
         return this.element;
     }
 
@@ -96,6 +100,12 @@ export class ListCard {
     renderTasks() {
         const container = this.element.querySelector('.list-card__tasks');
         if (!container) return;
+
+        const addTaskBtn = this.element.querySelector('.list-card__add');
+        if (addTaskBtn) {
+            const hasNewTask = this.tasks.some(t => t._isNew);
+            addTaskBtn.disabled = hasNewTask;
+        }
 
         container.innerHTML = '';
         this.tasks.forEach(task => {

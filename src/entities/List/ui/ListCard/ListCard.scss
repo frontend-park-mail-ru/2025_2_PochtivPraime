@@ -91,6 +91,10 @@
         &:hover {
             background-color: var(--secondary-focus-color);
         }
+        &:disabled {
+            color: var(--secondary-text-color);
+            cursor: not-allowed;
+        }
     }
 
     &__footer {

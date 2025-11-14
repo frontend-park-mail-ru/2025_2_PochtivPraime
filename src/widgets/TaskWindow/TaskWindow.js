@@ -106,6 +106,14 @@ export class TaskWindow {
             textarea.addEventListener('input', autoResize);
             setTimeout(autoResize, 0);
         }
+        if (textarea) {
+            textarea.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    this.saveEdit();
+                }
+            });
+        }
     }
 
     /**

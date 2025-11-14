@@ -65,6 +65,14 @@ export class TaskCard {
             textarea.addEventListener('input', autoResize);
             setTimeout(autoResize, 0);
         }
+        if (textarea) {
+            textarea.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    this.saveEdit();
+                }
+            });
+        }
 
         // кнопка сохранить
         const saveButton = this.element.querySelector('.task-card__save');
