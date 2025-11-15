@@ -4,9 +4,9 @@ export async function handleCreateSupportForm(data) {
   const mappedData = {
     username: data.username,
     contact_email: data.email,
-    form_type: data.category,
+    form_type: "Открыто",
     text: data.description,
-    form_status: "Открыто"
+    form_status: "В работе"
   };
 
   try {
