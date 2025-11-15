@@ -1,3 +1,4 @@
+import { SupportRequestWindow } from "../SupportRequestWindow/SupportRequestWindow.js";
 export class SupportRequestCard {
   constructor(request, onDelete) {
     this.request = request;
