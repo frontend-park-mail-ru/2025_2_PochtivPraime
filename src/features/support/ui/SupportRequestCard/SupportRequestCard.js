@@ -37,15 +37,14 @@ export class SupportRequestCard {
 
     if (!this.element) return document.createElement('div');
 
-    // Обработчик клика по карточке
+
     this.element.addEventListener('click', (e) => {
-      // Предотвращаем закрытие, если клик по кнопке в будущем (сейчас не нужно, но на всякий)
       e.stopPropagation();
 
       const window = new SupportRequestWindow({
         request: this.request,
         onDelete: this.onDelete,
-        onClose: () => {} // опционально
+        onClose: () => {} 
       });
       window.show();
     });

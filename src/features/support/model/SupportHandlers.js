@@ -1,13 +1,21 @@
 import { SupportApi } from '../api/SupportApi.js';
 
 export async function handleCreateSupportForm(data) {
-    try {
-        await SupportApi.createForm(data);
-        return null; // ошибки нет
-    } catch (err) {
-        console.error('Create form error:', err);
-        return err?.message || 'Не удалось отправить обращение';
-    }
+  const mappedData = {
+    username: data.username,
+    contact_email: data.email,
+    form_type: data.category,
+    text: data.description,
+    form_status: "Открыто"
+  };
+
+  try {
+    await SupportApi.createForm(mappedData);
+    return null;
+  } catch (err) {
+    console.error('Create form error:', err);
+    return err?.message || 'Не удалось отправить обращение';
+  }
 }
 
 export async function handleGetMyForms() {
