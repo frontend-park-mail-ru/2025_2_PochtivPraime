@@ -19,8 +19,7 @@ export class SupportWidget {
     const categories = [
       { value: 'bug', label: 'Баг' },
       { value: 'feature', label: 'Предложение' },
-      { value: 'access', label: 'Продуктовая жалоба' },
-      { value: 'other', label: 'Другое' }
+      { value: 'access', label: 'Продуктовая жалоба' }
     ];
 
     const html = template({
@@ -53,7 +52,6 @@ export class SupportWidget {
     usernameContainer.appendChild(inputEl);
     emailContainer.appendChild(this.emailInput.render());
 
-    // --- Выбор категории ---
     this.categorySelect = this.element.querySelector('select[name="category"]');
 
     // --- Описание ---

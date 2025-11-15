@@ -66,7 +66,7 @@ export class SupportRequestWindow {
     const fields = [
       { key: 'username', value: this.request.username, containerClass: '.support-request-window__username-input' },
       { key: 'email', value: this.request.email, containerClass: '.support-request-window__email-input' },
-      { key: 'category', value: this.this.request.category, containerClass: '.support-request-window__category-input' },
+      { key: 'category', value: this.request.category, containerClass: '.support-request-window__category-input' },
     ];
 
     fields.forEach(field => {
@@ -81,9 +81,7 @@ export class SupportRequestWindow {
     const deleteButtonWrapper = this.element.querySelector('.support-request-window__delete-button-wrapper');
     if (deleteButtonWrapper) {
       const deleteBtn = new Button('Удалить запрос', () => {
-        if (confirm('Вы уверены, что хотите удалить это обращение?')) {
           this.handleDelete();
-        }
       });
       deleteButtonWrapper.appendChild(deleteBtn.render());
     }
@@ -105,7 +103,7 @@ export class SupportRequestWindow {
 
   handleDelete() {
     this.onDelete(this.request.id);
-    this.close(); // после удаления — закрываем окно
+    this.close();
   }
 
   close() {

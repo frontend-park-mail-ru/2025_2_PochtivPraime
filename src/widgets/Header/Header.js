@@ -66,16 +66,13 @@ export class Header {
 
         const self = this;
 
-        // Добавляем класс и иконку
         menuButtonElement.classList.add('header__menu-btn');
         menuButtonElement.innerHTML = `
             <img src="/images/menu-icon.svg" alt="Меню" class="header__menu-icon">
         `;
 
-        // Добавляем кнопку в DOM
         buttonContainer.appendChild(menuButtonElement);
 
-        // Обработчик клика — как в BoardHeader
         menuButtonElement.addEventListener('click', (e) => {
             e.stopPropagation();
 
@@ -85,34 +82,35 @@ export class Header {
                     {
                         text: 'Обращение в техподдержку',
                         onClick: () => {
-                            self.openSupportWidget();
+                            self.openSupportWidget('/support');
                             menu.close()
                         }
                     },
                     {
                         text: 'Посмотреть мои обращения',
-                        onClick: () => menu.close()
+                        onClick: () => {
+                            self.openSupportWidget('/support/requests');
+                            menu.close()
+                        } 
                     }
                 ],
                 onClose: () => {}
             });
 
-            menu.show(); // ← должен добавить меню в DOM (обычно в body)
+            menu.show();
 
             const menuEl = menu.element;
             if (!menuEl) return;
 
-            // Позиционируем как в BoardHeader: по правому краю кнопки
             const btnRect = menuButtonElement.getBoundingClientRect();
             const right = window.innerWidth - btnRect.right;
-            const top = btnRect.bottom + 8; // небольшой отступ вниз
+            const top = btnRect.bottom + 8;
 
             menuEl.style.right = right + 'px';
             menuEl.style.top = top + 'px';
             menuEl.style.position = 'fixed';
             menuEl.style.zIndex = '1002';
 
-            // Закрытие при клике вне меню
             const handleClickOutside = (event) => {
                 if (!menuEl.contains(event.target) && event.target !== menuButtonElement) {
                     menu.close();
@@ -124,7 +122,7 @@ export class Header {
         });
     }
 
-    openSupportWidget() {
+    openSupportWidget(path) {
 
         let existingWrapper = document.getElementById('support-wrapper');
         if (existingWrapper) {
@@ -147,7 +145,7 @@ export class Header {
 
         const iframe = document.createElement('iframe');
         iframe.id = 'support-iframe';
-        iframe.src = '/support';
+        iframe.src = path;
         iframe.style.cssText = `
             width: 100%;
             height: 100%;
@@ -185,10 +183,9 @@ export class Header {
             window.removeEventListener('message', closeHandler);
         };
 
-        // --- закрытие кнопкой ---
+
         closeBtn.addEventListener('click', removeWidget);
 
-        // --- закрытие кликом вне ---
         const handleClickOutside = (event) => {
             if (!wrapper.contains(event.target)) {
                 removeWidget();
@@ -199,7 +196,6 @@ export class Header {
             document.addEventListener('click', handleClickOutside);
         }, 0);
 
-        // --- закрытие из iframe ---
         const closeHandler = (e) => {
             if (e.data?.type === 'SUPPORT_CLOSE') {
                 removeWidget();

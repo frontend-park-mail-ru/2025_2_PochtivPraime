@@ -194,6 +194,9 @@ body.page--support {
   padding: 0 40px 40px;
   box-sizing: border-box;
 }
+body.page--support-requests {
+  background: var(--second-transparent-bg-color);
+}
 
 .support-requests-page__title {
   font-size: 1.75rem;

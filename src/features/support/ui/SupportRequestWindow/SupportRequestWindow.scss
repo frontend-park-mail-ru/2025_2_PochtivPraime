@@ -8,18 +8,16 @@
   z-index: 1003; // выше, чем у Menu (1002)
   background: var(--standart-bg-color);
   border-radius: 12px;
-  width: 600px;
+  width: 300px;
   max-width: 95vw;
   max-height: 90vh;
   overflow-y: auto;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
   color: var(--standart-text-color);
   pointer-events: auto;
   padding: 24px;
   display: flex;
   flex-direction: column;
 
-  // Запрет прокрутки фона
   &:focus {
     outline: none;
   }
