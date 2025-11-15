@@ -1,0 +1,51 @@
+@use '../../../../app/style.scss' as *;
+
+.support-request-card {
+  width: 100%;
+  background: var(--standart-bg-color);
+  border: 1px solid var(--secondary-color);
+  border-radius: 8px;
+  padding: 16px 20px;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s;
+  box-sizing: border-box;
+
+  &:hover {
+    background: var(--hover-bg-color);
+    border-color: var(--focus-color);
+  }
+
+  &__content {
+    @include flex-between();
+    align-items: center;
+    width: 100%;
+  }
+
+  &__id {
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--standart-text-color);
+  }
+
+  &__status {
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+
+    &--open {
+      background: rgba(54, 244, 86, 0.15);
+      color: var(--correct-color);
+    }
+
+    &--in_progress {
+      background: rgba(255, 193, 7, 0.15);
+      color: var(--warning-color);
+    }
+
+    &--closed {
+      background: rgba(158, 158, 158, 0.15);
+      color: #9e9e9e;
+    }
+  }
+}

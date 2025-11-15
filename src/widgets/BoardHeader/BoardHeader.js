@@ -72,14 +72,12 @@ export class BoardHeader {
                     text: 'Изменить название',
                     onClick: () => {
                         menu.close();
-                        this.showRenameModal();
                     }
                 },
                 {
                     text: 'Закрыть доску',
                     onClick: () => {
                         menu.close();
-                        this.showCloseConfirmation();
                     },
                     type: 'danger'
                 }

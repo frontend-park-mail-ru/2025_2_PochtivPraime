@@ -1,0 +1,90 @@
+@use '../../../../app/style.scss' as *;
+
+.support-widget {
+  padding: 40px;
+  border-radius: 8px;
+  width: 600px;
+  margin: 0 auto;
+  color: var(--standart-text-color);
+
+  &__title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1.25rem;
+    text-align: center;
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  &__label {
+    font-size: 0.95rem;
+    font-weight: 500;
+  }
+  
+
+  &__select {
+    padding: 10px 12px;
+    border: 1px solid var(--secondary-color);
+    border-radius: 6px;
+    background: var(--standart-bg-color);
+    color: var(--standart-text-color);
+    font-family: $font-family;
+    font-size: 16px;
+    &:focus {
+      outline: none;
+      border-color: var(--focus-color);
+    }
+  }
+
+  &__textarea {
+    padding: 10px 12px;
+    font-size: 1rem;
+    border: 1px solid var(--secondary-color);
+    border-radius: 6px;
+    background: var(--standart-bg-color);
+    color: var(--standart-text-color);
+    resize: vertical;
+    min-height: 40px;
+    overflow-y: auto;
+
+    &:focus {
+      outline: none;
+      border-color: var(--focus-color);
+    }
+  }
+
+  &__submit-button-wrapper {
+    @include flex-center;
+  }
+  &__error, &__success {
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 14px;
+    margin-bottom: 1rem;
+    text-align: center;
+    display: none;
+  }
+
+  &__error:not([hidden]) {
+    display: block;
+    background: rgba(244, 67, 54, 0.15);
+    color: var(--warning-color);
+  }
+
+  &__success:not([hidden]) {
+    display: block;
+    background: rgba(54, 244, 86, 0.15);
+    color: var(--correct-color);
+  }
+
+  &__link {
+    color: var(--focus-color);
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}

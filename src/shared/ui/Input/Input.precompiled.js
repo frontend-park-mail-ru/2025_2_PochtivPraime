@@ -1,6 +1,8 @@
 import Handlebars from 'handlebars/runtime.js';
     export default Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
     return " input-wrapper--confirm-password";
+},"3":function(container,depth0,helpers,partials,data) {
+    return "readonly class=\"input-wrapper__input--readonly\"";
 },"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=container.hooks.helperMissing, alias3="function", alias4=container.escapeExpression, lookupProperty = container.lookupProperty || function(parent, propertyName) {
         if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
@@ -19,7 +21,9 @@ import Handlebars from 'handlebars/runtime.js';
     + alias4(((helper = (helper = lookupProperty(helpers,"value") || (depth0 != null ? lookupProperty(depth0,"value") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"value","hash":{},"data":data,"loc":{"start":{"line":6,"column":11},"end":{"line":6,"column":20}}}) : helper)))
     + "\"\n    name=\""
     + alias4(((helper = (helper = lookupProperty(helpers,"name") || (depth0 != null ? lookupProperty(depth0,"name") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"name","hash":{},"data":data,"loc":{"start":{"line":7,"column":10},"end":{"line":7,"column":18}}}) : helper)))
-    + "\"\n  />\n  <span class=\"input-wrapper__error\">"
-    + alias4(((helper = (helper = lookupProperty(helpers,"error") || (depth0 != null ? lookupProperty(depth0,"error") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"error","hash":{},"data":data,"loc":{"start":{"line":9,"column":37},"end":{"line":9,"column":46}}}) : helper)))
+    + "\"\n    "
+    + ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"isReadonly") : depth0),{"name":"if","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":8,"column":4},"end":{"line":8,"column":76}}})) != null ? stack1 : "")
+    + "\n  />\n  <span class=\"input-wrapper__error\">"
+    + alias4(((helper = (helper = lookupProperty(helpers,"error") || (depth0 != null ? lookupProperty(depth0,"error") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"error","hash":{},"data":data,"loc":{"start":{"line":10,"column":37},"end":{"line":10,"column":46}}}) : helper)))
     + "</span>\n</div>";
 },"useData":true});

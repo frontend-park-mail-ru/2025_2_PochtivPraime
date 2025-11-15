@@ -47,3 +47,4 @@ precompileTemplates('widgets');
 precompileTemplates('entities/Board/ui');
 precompileTemplates('entities/List/ui');
 precompileTemplates('entities/Task/ui');
+precompileTemplates('features/support/ui');

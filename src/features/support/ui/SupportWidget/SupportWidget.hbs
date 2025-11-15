@@ -1,0 +1,37 @@
+<div class="support-widget">
+  <h2 class="support-widget__title">{{title}}</h2>
+
+  <div class="support-widget__field">
+    <label class="support-widget__label">Ваш логин</label>
+    <div class="support-widget__username-input"></div>
+  </div>
+
+  <div class="support-widget__field">
+    <label class="support-widget__label">С чем связано обращение?</label>
+    <select class="support-widget__select" name="category">
+      {{#each categories}}
+        <option value="{{value}}">{{label}}</option>
+      {{/each}}
+    </select>
+  </div>
+
+  <div class="support-widget__field">
+    <label class="support-widget__label">Опишите проблему</label>
+    <textarea 
+      class="support-widget__textarea" 
+      name="description" 
+      placeholder="Напишите здесь детали проблемы…"
+      rows="4"
+    ></textarea>
+  </div>
+
+  <div class="support-widget__field">
+    <label class="support-widget__label">Почта для связи</label>
+    <div class="support-widget__email-input"></div>
+  </div>
+
+  <div class="support-widget__error" hidden></div>
+  <div class="support-widget__success" hidden></div>
+  
+  <div class="support-widget__submit-button-wrapper"></div>
+</div>

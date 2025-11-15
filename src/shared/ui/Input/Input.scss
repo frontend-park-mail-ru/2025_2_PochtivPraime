@@ -25,4 +25,10 @@
     &__error:not(:empty) {
         display: block;
     }
+    &--readonly {
+        background-color: var(--secondary-color);
+        border-color: var(--secondary-focus-color);
+        cursor: not-allowed;
+
+    }
 }

@@ -150,7 +150,14 @@ body {
 [style*="pointer-events"] {
   pointer-events: auto !important;
 }
-
+body.page--support {
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--second-transparent-bg-color);
+}
 body.page--login {
   background-image: url('/images/login-page-background.jpg');
 }
@@ -163,7 +170,8 @@ body.page--boards,
 body.page--profile,
 body.page--edit-profile,
 body.page--edit-password,
-body.page--board {
+body.page--board,
+body.page--support {
   background-image: url('/images/boards-page-background.jpg');
 }
 
@@ -173,11 +181,46 @@ body.page--boards,
 body.page--profile,
 body.page--edit-profile,
 body.page--edit-password,
-body.page--board {
+body.page--board,
+body.page--support {
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
   background-repeat: no-repeat;
+}
+
+.support-requests-page {
+  width: 100%;
+  padding: 0 40px 40px;
+  box-sizing: border-box;
+}
+
+.support-requests-page__title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin: 32px 0 24px;
+  color: var(--standart-text-color);
+  text-align: center;
+}
+.support-requests-page__cards {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 32px;
+  width: 100%;
+}
+
+.support-requests-page__empty {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--secondary-text-color);
+  font-style: italic;
+}
+.support-requests-page__pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
 }
 
 

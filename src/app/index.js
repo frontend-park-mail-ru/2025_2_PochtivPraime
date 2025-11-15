@@ -187,6 +187,67 @@ async function loadPage() {
                 appElement.appendChild(boardPage.render());
                 break;
             }
+            case '/support/requests': {
+                try {
+                    const userData = await AuthHandlers.handleCurrentUser();
+                    if (!userData) {
+                        router.navigate('/login');
+                        return;
+                    }
+
+                    const { SupportRequestsPage } = await import('../pages/support/ui/SupportRequestsPage.js');
+                    const { handleGetMyForms, handleDeleteForm } = await import('../features/support/model/SupportHandlers.js');
+
+                    const forms = await handleGetMyForms();
+
+                    const requests = forms || [];
+
+                    const page = new SupportRequestsPage({
+                        requests,
+                        currentPage: 1,
+                        totalPages: 1,
+                        onDelete: async (id) => {
+                            const ok = await handleDeleteForm(id);
+                            if (ok) loadPage();
+                        },
+                        onPageChange: () => {}
+                    });
+
+                    document.body.className = 'page--support-requests';
+                    appElement.innerHTML = '';
+                    appElement.appendChild(page.render());
+
+                } catch (err) {
+                    console.error('Ошибка загрузки списка обращений:', err);
+                    router.navigate('/login');
+                }
+                break;
+            }
+            case '/support': {
+                try {
+                    const userData = await AuthHandlers.handleCurrentUser();
+                    if (!userData) {
+                        router.navigate('/login');
+                        return;
+                    }
+
+                    const { SupportFormPage } = await import('../pages/support/ui/SupportFormPage.js');
+                    const { handleCreateSupportForm } = await import('../features/support/model/SupportHandlers.js');
+
+                    const supportPage = new SupportFormPage(
+                        userData,
+                        (data) => handleCreateSupportForm(data) // НЕТ async
+                    );
+
+                    document.body.className = 'page--support';
+                    appElement.innerHTML = '';
+                    appElement.appendChild(supportPage.render());
+                } catch (err) {
+                    console.error('Ошибка загрузки страницы поддержки:', err);
+                    router.navigate('/login');
+                }
+                break;
+            }
 
             default:
                 router.navigate('/login');

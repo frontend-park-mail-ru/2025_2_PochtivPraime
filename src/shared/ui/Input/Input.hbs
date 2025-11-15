@@ -5,6 +5,7 @@
     placeholder="{{placeholder}}"
     value="{{value}}"
     name="{{name}}"
+    {{#if isReadonly}}readonly class="input-wrapper__input--readonly"{{/if}}
   />
   <span class="input-wrapper__error">{{error}}</span>
 </div>

@@ -1,0 +1,101 @@
+@use '../../../../app/style.scss' as *;
+
+.support-request-window {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1003; // выше, чем у Menu (1002)
+  background: var(--standart-bg-color);
+  border-radius: 12px;
+  width: 600px;
+  max-width: 95vw;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+  color: var(--standart-text-color);
+  pointer-events: auto;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+
+  // Запрет прокрутки фона
+  &:focus {
+    outline: none;
+  }
+
+  &__header {
+    @include flex-between();
+    margin-bottom: 20px;
+  }
+
+  &__title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  &__close {
+    background: none;
+    border: none;
+    color: var(--secondary-text-color);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    line-height: 1;
+    &:hover {
+      color: var(--standart-text-color);
+    }
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  &__label {
+    font-size: 0.95rem;
+    font-weight: 500;
+  }
+
+  &__text {
+    padding: 10px 12px;
+    background: var(--standart-bg-color);
+    border: 1px solid var(--secondary-color);
+    border-radius: 6px;
+    color: var(--standart-text-color);
+    font-size: 16px;
+    font-family: $font-family;
+    word-break: break-word;
+    white-space: pre-wrap;
+  }
+
+  &__status {
+    padding: 10px 12px;
+    border-radius: 6px;
+    font-weight: 500;
+
+    &--open {
+      background: rgba(54, 244, 86, 0.15);
+      color: var(--correct-color);
+    }
+
+    &--in_progress {
+      background: rgba(255, 193, 7, 0.15);
+      color: var(--warning-color);
+    }
+
+    &--closed {
+      background: rgba(158, 158, 158, 0.15);
+      color: #9e9e9e;
+    }
+  }
+
+  &__delete-button-wrapper {
+    @include flex-center();
+    margin-top: 12px;
+  }
+}

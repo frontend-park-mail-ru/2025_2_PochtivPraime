@@ -16,7 +16,8 @@ export class Router {
             '/profile/edit': 'EditProfilePage',
             '/profile/change-password': 'EditPasswordPage',
             '/board/:boardId': 'BoardPage',
-            '/board/:boardId/task/:taskId': 'TaskWindow'
+            '/board/:boardId/task/:taskId': 'TaskWindow',
+            '/support': 'SupportFormPage'
         };
     }
     

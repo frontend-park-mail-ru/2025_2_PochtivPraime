@@ -13,7 +13,7 @@ export class Input {
    * @param {string} [value=''] - значение поля
    * @param {string} [name=''] - имя поля для формы и автозаполнения
    */
-  constructor(type = 'text', placeholder = '', value = '', name='') {
+  constructor(type = 'text', placeholder = '', value = '', name='', isReadonly = false) {
     this.type = type;
     this.placeholder = placeholder;
     this.value = value;
@@ -22,6 +22,7 @@ export class Input {
     this.wrapper = null;
     this.element = null;
     this.name = name;
+    this.isReadonly = isReadonly;
   }
 
   /**
@@ -29,6 +30,7 @@ export class Input {
    * @returns {boolean} true, если значение корректное.
    */
   validate() {
+    if (this.isReadonly) return true;
     this.error = '';
 
     if (!this.value.trim()) {
@@ -87,7 +89,8 @@ export class Input {
       name: this.name,
       isValid: this.error === '',
       isInvalid: this.error !== '',
-      isConfirmPassword: this.name === 'confirm-password'
+      isConfirmPassword: this.name === 'confirm-password',
+      isReadonly: this.isReadonly
     });
 
     const div = document.createElement('div');
@@ -105,6 +108,18 @@ export class Input {
       this.touched = true;
       this.validate();
     });
+
+    if (!this.isReadonly) {
+      this.element.addEventListener('input', (e) => {
+        this.value = e.target.value;
+        this.touched = true;
+        this.validate();
+      });
+      this.element.addEventListener('blur', () => {
+        this.touched = true;
+        this.validate();
+      });
+    }
 
     return this.wrapper;
   }

@@ -1,0 +1,38 @@
+<div class="support-request-window">
+  <div class="support-request-window__header">
+    <h2 class="support-request-window__title">{{title}}</h2>
+    <button class="support-request-window__close" type="button">&times;</button>
+  </div>
+
+  <div class="support-request-window__field">
+    <label class="support-request-window__label">Логин</label>
+    <div class="support-request-window__username-input"></div>
+  </div>
+
+  <div class="support-request-window__field">
+    <label class="support-request-window__label">Email</label>
+    <div class="support-request-window__email-input"></div>
+  </div>
+
+  <div class="support-request-window__field">
+    <label class="support-request-window__label">Категория</label>
+    <div class="support-request-window__category-input"></div>
+  </div>
+
+  <div class="support-request-window__field">
+    <label class="support-request-window__label">Описание</label>
+    <div class="support-request-window__text">{{description}}</div>
+  </div>
+
+  <div class="support-request-window__field">
+    <label class="support-request-window__label">Создано</label>
+    <div class="support-request-window__text">{{createdAt}}</div>
+  </div>
+
+  <div class="support-request-window__field">
+    <label class="support-request-window__label">Статус</label>
+    <div class="support-request-window__status {{statusClass}}">{{statusLabel}}</div>
+  </div>
+
+  <div class="support-request-window__delete-button-wrapper"></div>
+</div>
